@@ -15,9 +15,9 @@ public class GeoPlace extends Place {
     @Setter(AccessLevel.NONE)
     private double longitude;
 
-    public GeoPlace(String code, String name_RU, String name_EN, double latitude, double longitude) {
+    public GeoPlace(String code, String name_RU, String name_EN, double latitude, double longitude, Place parent) {
 
-        super(code, name_RU, name_EN, null);
+        super(code, name_RU, name_EN, parent);
         this.latitude = latitude;
         this.longitude = longitude;
 

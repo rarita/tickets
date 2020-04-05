@@ -16,6 +16,16 @@ public class UnirestConfig {
     private static final String TPAY_ACCESS_TOKEN = "ec37b767477b0a047511f2d4bffb5108";
 
     @Bean
+    @Qualifier("clean")
+    public UnirestInstance getCleanUnirestInstance() {
+        var instance = Unirest.spawnInstance();
+        // Accept gzip
+        instance.config().addDefaultHeader("accept-encoding", "gzip, deflate");
+
+        return instance;
+    }
+
+    @Bean
     @Qualifier("skyscanner")
     public UnirestInstance skyScannerUnirestInstance() {
         var instance = Unirest.spawnInstance();
