@@ -1,7 +1,8 @@
 package ru.griga.tickets.repository;
 
 import org.springframework.data.neo4j.repository.Neo4jRepository;
-import ru.griga.tickets.model.Place;
+import ru.griga.tickets.model.place.base.Place;
 
-public interface TravelRepository extends Neo4jRepository<Place, Long> {
+public interface TravelRepository extends Neo4jRepository<Place, String> {
+
 }

@@ -1,9 +1,13 @@
 package ru.griga.tickets.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import kong.unirest.GetRequest;
+import kong.unirest.HttpResponse;
 import kong.unirest.UnirestException;
 import kong.unirest.UnirestInstance;
 import org.springframework.beans.factory.annotation.Value;
+import ru.griga.tickets.model.Itinerary;
 import ru.griga.tickets.model.SearchParams;
 
 public class QuotaSkyscannerDataService implements BaseSkyscannerDataService {
@@ -13,9 +17,11 @@ public class QuotaSkyscannerDataService implements BaseSkyscannerDataService {
             "{country}/{currency}/{locale}/{originPlace}/{destinationPlace}/{outboundPartialDate}";
 
     private final UnirestInstance unirestInstance;
+    private final ObjectMapper objectMapper;
 
-    public QuotaSkyscannerDataService(UnirestInstance unirestInstance) {
+    public QuotaSkyscannerDataService(UnirestInstance unirestInstance, ObjectMapper objectMapper) {
         this.unirestInstance = unirestInstance;
+        this.objectMapper = objectMapper;
     }
 
     private GetRequest buildRequest(SearchParams searchParams) {
@@ -30,9 +36,13 @@ public class QuotaSkyscannerDataService implements BaseSkyscannerDataService {
     }
 
     @Override
-    public Object fetchData(SearchParams searchParams) throws UnirestException {
+    public Object fetchData(SearchParams searchParams) throws UnirestException, JsonProcessingException {
         GetRequest quotaRequest = buildRequest(searchParams);
-        return quotaRequest.asString();
+        HttpResponse<String> response = quotaRequest.asString();
+
+        String responseString = response.getBody();
+
+        return objectMapper.readValue(responseString, Itinerary[].class);
     }
 
 }
