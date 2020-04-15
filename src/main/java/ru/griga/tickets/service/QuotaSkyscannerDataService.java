@@ -7,10 +7,10 @@ import kong.unirest.HttpResponse;
 import kong.unirest.UnirestException;
 import kong.unirest.UnirestInstance;
 import org.springframework.beans.factory.annotation.Value;
-import ru.griga.tickets.model.Itinerary;
+import ru.griga.tickets.model.itinerary.Itinerary;
 import ru.griga.tickets.model.SearchParams;
 
-public class QuotaSkyscannerDataService implements BaseSkyscannerDataService {
+public class QuotaSkyscannerDataService implements BaseDataService {
 
     @Value("${skyscanner.get_quotas_url}")
     private final String GET_QUOTAS_URL = "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/" +
@@ -32,7 +32,7 @@ public class QuotaSkyscannerDataService implements BaseSkyscannerDataService {
                 .routeParam("locale", searchParams.getLocale())
                 .routeParam("originPlace", searchParams.getOriginCode())
                 .routeParam("destinationPlace", searchParams.getDestinationCode())
-                .routeParam("outboundPartialDate", searchParams.getOutboundDate().toString());
+                .routeParam("outboundPartialDate", searchParams.getOutboundDateFrom().toString());
     }
 
     @Override

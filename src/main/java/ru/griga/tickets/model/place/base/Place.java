@@ -4,9 +4,6 @@ import lombok.*;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
-import ru.griga.tickets.model.Itinerary;
-
-import java.util.Set;
 
 @Data
 @NodeEntity
@@ -24,6 +21,7 @@ public abstract class Place {
     private String name_EN;
 
     @Relationship(type = "IS_IN")
+    @EqualsAndHashCode.Exclude
     private Place parent;
 
 }

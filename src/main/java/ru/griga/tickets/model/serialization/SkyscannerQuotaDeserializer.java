@@ -4,11 +4,9 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import ru.griga.tickets.model.place.Airport;
-import ru.griga.tickets.model.Itinerary;
+import ru.griga.tickets.model.itinerary.Itinerary;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 
 public class SkyscannerQuotaDeserializer extends StdDeserializer<Itinerary[]> {
 

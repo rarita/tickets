@@ -5,9 +5,11 @@ import kong.unirest.UnirestException;
 import org.springframework.stereotype.Service;
 import ru.griga.tickets.model.SearchParams;
 
-@Service
-public interface BaseSkyscannerDataService {
+import java.io.IOException;
 
-    Object fetchData(SearchParams searchParams) throws UnirestException, JsonProcessingException;
+@Service
+public interface BaseDataService {
+
+    Object fetchData(SearchParams searchParams) throws UnirestException, IOException;
 
 }

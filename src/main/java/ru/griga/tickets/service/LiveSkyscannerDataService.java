@@ -4,7 +4,7 @@ import kong.unirest.*;
 import org.springframework.beans.factory.annotation.Value;
 import ru.griga.tickets.model.SearchParams;
 
-public class LiveSkyscannerDataService implements BaseSkyscannerDataService {
+public class LiveSkyscannerDataService implements BaseDataService {
 
     @Value("${skyscanner.create_session_url}")
     private final String CREATE_SESSION_URL = "https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/v1.0";
@@ -22,7 +22,7 @@ public class LiveSkyscannerDataService implements BaseSkyscannerDataService {
                 .field("locale", sp.getLocale())
                 .field("originPlace", sp.getOriginCode())
                 .field("destinationPlace", sp.getDestinationCode())
-                .field("outboundDate", sp.getOutboundDate().toString())
+                .field("outboundDate", sp.getOutboundDateFrom().toString())
                 .field("adults", Integer.toString(sp.getAdultsCount()));
     }
 
@@ -34,7 +34,7 @@ public class LiveSkyscannerDataService implements BaseSkyscannerDataService {
 
     private String createSession(SearchParams searchParams) throws UnirestException {
 
-        HttpResponse response = buildRequest(searchParams).asString();
+        HttpResponse<String> response = buildRequest(searchParams).asString();
 
         if (response.getStatus() != 201)
             throw new IllegalStateException("Server responded with non-OK code: " +

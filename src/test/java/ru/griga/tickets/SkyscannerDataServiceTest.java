@@ -3,21 +3,20 @@ package ru.griga.tickets;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import kong.unirest.HttpResponse;
 import kong.unirest.UnirestException;
 import kong.unirest.UnirestInstance;
 import org.junit.Test;
-import ru.griga.tickets.configuration.JacksonConfig;
 import ru.griga.tickets.configuration.UnirestConfig;
-import ru.griga.tickets.model.Itinerary;
+import ru.griga.tickets.model.ItineraryType;
+import ru.griga.tickets.model.itinerary.Itinerary;
 import ru.griga.tickets.model.SearchParams;
 import ru.griga.tickets.model.serialization.SkyscannerQuotaDeserializer;
-import ru.griga.tickets.service.BaseSkyscannerDataService;
+import ru.griga.tickets.service.BaseDataService;
 import ru.griga.tickets.service.LiveSkyscannerDataService;
 import ru.griga.tickets.service.QuotaSkyscannerDataService;
 
+import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 
 public class SkyscannerDataServiceTest {
@@ -28,8 +27,10 @@ public class SkyscannerDataServiceTest {
             "ru-RU",
             "LED-sky",
             "KGD-sky",
-            LocalDate.of(2020, 5, 1),
-            1);
+            LocalDate.now(),
+            LocalDate.now().plusDays(1),
+            1, 0, 0,
+            List.of(ItineraryType.AIRCRAFT));
 
     private final UnirestInstance unirestInstance =
         new UnirestConfig().skyScannerUnirestInstance();
@@ -37,19 +38,19 @@ public class SkyscannerDataServiceTest {
     private final ObjectMapper objectMapper = new ObjectMapper()
             .registerModule(new SimpleModule().addDeserializer(Itinerary[].class, new SkyscannerQuotaDeserializer ()));
 
-    private final BaseSkyscannerDataService liveSDS =
+    private final BaseDataService liveSDS =
         new LiveSkyscannerDataService(unirestInstance);
 
-    private final BaseSkyscannerDataService quotaSDS =
+    private final BaseDataService quotaSDS =
         new QuotaSkyscannerDataService(unirestInstance, objectMapper);
 
     @Test
-    public void testLiveRequest() throws UnirestException, JsonProcessingException {
+    public void testLiveRequest() throws UnirestException, IOException {
          liveSDS.fetchData(searchParams);
     }
 
     @Test
-    public void testQuotaSearch() throws UnirestException, JsonProcessingException {
+    public void testQuotaSearch() throws UnirestException, IOException {
             Itinerary[] result = (Itinerary[]) quotaSDS.fetchData(searchParams);
             for (Itinerary item : result)
                 System.out.println(item.toString());

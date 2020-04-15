@@ -1,4 +1,4 @@
-package ru.griga.tickets.model.serialization;
+package ru.griga.tickets.model.serialization.travel_payouts;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -19,6 +19,8 @@ import ru.griga.tickets.model.place.base.Place;
 import java.io.IOException;
 import java.util.List;
 
+import static ru.griga.tickets.Utils.getNodeValue;
+
 public class TravelPayoutsGeoDataDeserializer extends StdDeserializer<Place> {
 
     public TravelPayoutsGeoDataDeserializer() {
@@ -31,16 +33,6 @@ public class TravelPayoutsGeoDataDeserializer extends StdDeserializer<Place> {
                 return parent;
         }
         return null;
-    }
-
-    private String getNodeValue(TreeNode tree, String key, String defaultValue) {
-
-        TreeNode targetNode = tree.get(key);
-        if ((targetNode instanceof ValueNode) && !((ValueNode) targetNode).isNull()) {
-            return ((ValueNode) targetNode).asText();
-        }
-        return defaultValue;
-
     }
 
     @Override
