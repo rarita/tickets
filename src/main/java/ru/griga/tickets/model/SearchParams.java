@@ -1,24 +1,39 @@
 package ru.griga.tickets.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class SearchParams {
 
-    private final String countryCode;
-    private final String currencyCode;
-    private final String locale;
-    private final String originCode;
-    private final String destinationCode;
-    private final LocalDate outboundDateFrom;
-    private final LocalDate outboundDateTo;
+    private String countryCode;
+    private String currencyCode;
+    private String locale;
+    private String originCode;
+    private String destinationCode;
 
-    private final int adultsCount;
-    private final int childrenCount;
-    private final int infantsCount;
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    private LocalDate outboundDateFrom;
 
-    private final List<ItineraryType> typesAllowed;
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    private LocalDate outboundDateTo;
+
+    private int adultsCount;
+    private int childrenCount;
+    private int infantsCount;
+
+    private List<ItineraryType> typesAllowed;
 
 }

@@ -3,9 +3,8 @@ package ru.griga.tickets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import ru.griga.tickets.model.SearchParams;
 import ru.griga.tickets.model.place.Airport;
 import ru.griga.tickets.model.place.base.Place;
 import ru.griga.tickets.repository.TravelRepository;
@@ -14,6 +13,7 @@ import ru.griga.tickets.service.TravelPayoutsGeoService;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
@@ -61,6 +61,10 @@ public class MainController {
 
     }
 
+    /**
+     * Запрос на заливку в базу авиаперевозчиков / авиакомпаний
+     * @return статус заливки
+     */
     @GetMapping("/populate/carriers")
     @ResponseBody
     public ResponseEntity<Map<String, String>> populateCarriers() {
@@ -78,5 +82,11 @@ public class MainController {
 
     }
 
+    @PostMapping("/load/itineraries")
+    @ResponseBody
+    public ResponseEntity<Map<String, String>> loadItineraries
+            (@RequestBody List<SearchParams> searchParamsList) {
+        return ResponseEntity.ok(Map.of("data", searchParamsList.toString()));
+    }
 
 }
