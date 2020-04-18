@@ -23,7 +23,8 @@ public class SkyPickerItinerary extends Itinerary {
     private String fareFamily;
 
     private int flightNumber;
-    private String aircraftInfo; // -> equipment
+    @EqualsAndHashCode.Exclude
+    private String aircraftInfo; // -> equipment, иногда не приходит из скайпикера (Non) поэтому выкидываем из EAHC
 
     private String airlineCode;
 

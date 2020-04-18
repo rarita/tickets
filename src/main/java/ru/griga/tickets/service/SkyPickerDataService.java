@@ -80,7 +80,8 @@ public class SkyPickerDataService implements BaseDataService {
         HttpResponse<String> response = rq.asString();
 
         if (!response.isSuccess())
-            throw new IOException("Request to SkyPicker was unsuccessful: " + response.getStatus());
+            throw new IOException("Request to SkyPicker was unsuccessful: " + response.getStatus() +
+                    "\nFailed with a message: " + response.getBody());
 
         String itineraryDataTree = objectMapper.readTree(response.getBody())
                 .get("data")
@@ -98,17 +99,10 @@ public class SkyPickerDataService implements BaseDataService {
 
         var start = System.currentTimeMillis();
         // Логика сохранения через ItineraryRepository (с удалением пажылых нод)
-        // - Чистим перелеты уже сдохшие по ttl todo возможно сделать это на базе если будет не впадлу (а это вряд-ли)
 
-        // - Получаем уже сохранённые перелеты из базы
+        // - Получаем уже сохранённые перелеты из базы, перед этим зачистив базу от устаревших моментов
+        itineraryRepository.removeObsoleteItineraries();
         var savedItineraries = itineraryRepository.findItinerariesBetween(searchParams.getOriginCode(), searchParams.getDestinationCode());
-
-        itineraryRepository.deleteAll(savedItineraries.stream()
-                .filter(Itinerary::isObsolete).collect(Collectors.toSet()));
-
-        // - Перезагружаем данные из базы
-        // -- Боже, какое же уебанство(((
-        savedItineraries = itineraryRepository.findItinerariesBetween(searchParams.getOriginCode(), searchParams.getDestinationCode());
 
         // Удаляем все пересекающиеся с найденными, т.к. найденные будут свежеé
         savedItineraries.retainAll(itineraries); // мутирует savedItineraries так что больше этот сет не юзаем
@@ -121,7 +115,9 @@ public class SkyPickerDataService implements BaseDataService {
 
         return Map.of(
                 "status", "OK",
-                "entities-loaded", String.valueOf(itineraries.size() - savedItineraries.size()),
+                "rq", searchParams.toString(),
+                "entities-updated", String.valueOf(savedItineraries.size()),
+                "entities-saved", String.valueOf(itineraries.size() - savedItineraries.size()),
                 "time-spent-saving", (end - start) + " ms.");
     }
 
