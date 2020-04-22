@@ -49,7 +49,7 @@ public class TravelPayoutsGeoService {
         return response.getBody();
     }
 
-    private <T extends Place> Place[] deserializeListOf(Class clazz,
+    private <T extends Place> Place[] deserializeListOf(Class<?> clazz,
                                                         String json,
                                                         String parentNodeName,
                                                         List<T> parents) throws JsonProcessingException {

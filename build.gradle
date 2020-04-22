@@ -23,8 +23,13 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    // Spring Cloud dependencies
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter', version: '2.2.2.RELEASE'
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-eureka-server
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-eureka-server', version: '2.2.2.RELEASE'
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-neo4j
     implementation 'org.springframework.boot:spring-boot-starter-data-neo4j'
     compileOnly 'org.projectlombok:lombok'
