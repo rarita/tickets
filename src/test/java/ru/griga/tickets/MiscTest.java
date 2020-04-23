@@ -3,10 +3,9 @@ package ru.griga.tickets;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
-import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
-import ru.griga.tickets.model.ItineraryType;
-import ru.griga.tickets.model.SearchParams;
-import ru.griga.tickets.model.itinerary.SkyPickerItinerary;
+import ru.griga.tickets.shared.model.ItineraryType;
+import ru.griga.tickets.shared.model.SearchParams;
+import ru.griga.tickets.shared.model.itinerary.SkyPickerItinerary;
 
 import java.time.LocalDate;
 import java.util.List;
