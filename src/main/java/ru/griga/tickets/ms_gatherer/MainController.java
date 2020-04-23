@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 
-@Controller
+@RestController
 @RequestMapping("/")
 public class MainController {
 
@@ -40,13 +40,11 @@ public class MainController {
     }
 
     @GetMapping("/save")
-    @ResponseBody
     public ResponseEntity<String> save() {
         return ResponseEntity.ok("Service unused");
     }
 
     @GetMapping("/populate/geo")
-    @ResponseBody
     public ResponseEntity<Map<String, String>> populateGeo() {
 
         try {
@@ -67,7 +65,6 @@ public class MainController {
      * @return статус заливки
      */
     @GetMapping("/populate/carriers")
-    @ResponseBody
     public ResponseEntity<Map<String, String>> populateCarriers() {
 
         try {
@@ -84,7 +81,6 @@ public class MainController {
     }
 
     @PostMapping("/load/itineraries")
-    @ResponseBody
     public ResponseEntity<?> loadItineraries
             (@RequestBody List<SearchParams> searchParamsList) {
 

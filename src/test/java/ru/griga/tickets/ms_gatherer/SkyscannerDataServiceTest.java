@@ -43,7 +43,10 @@ public class SkyscannerDataServiceTest {
     private final BaseDataService quotaSDS =
         new QuotaSkyscannerDataService(unirestInstance, objectMapper);
 
-    @Test
+    /**
+     * Ожидаем 404 так как этот эндпоинт закрыли и больше не планируют использовать
+     */
+    @Test(expected = IllegalStateException.class)
     public void testLiveRequest() throws UnirestException, IOException {
          liveSDS.fetchData(searchParams);
     }

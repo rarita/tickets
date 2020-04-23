@@ -1,4 +1,4 @@
-package ru.griga.tickets.ms_gatherer;
+package ru.griga.tickets.ms_pathfinder;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -6,24 +6,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.junit4.SpringRunner;
-import ru.griga.tickets.ms_gatherer.service.TravelPayoutsGeoService;
 
 import java.io.IOException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @TestPropertySource("classpath:ms_gatherer.properties")
 @SpringBootTest
-public class TravelPayoutsGeoServiceTest {
+public class TPPopularDirectionsTest {
 
     @Autowired
-    private TravelPayoutsGeoService tpgs;
+    private PathDiscoveryService pathDiscoveryService;
 
     @Test
-    public void requestLocations() throws IOException {
-        var locations = tpgs.getLocations();
-        assert locations.size() > 5000;
-    }
+    public void testPopularDirectionsFetching() throws IOException {
+        var result = pathDiscoveryService.getPopularDirectionsFromPlace("KGD");
 
+        assert result.size() == 10;
+        assert result.stream().allMatch((it) -> it.length() == 3);
+
+    }
 
 }

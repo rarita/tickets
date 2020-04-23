@@ -1,4 +1,4 @@
-package ru.griga.tickets.ms_gatherer;
+package ru.griga.tickets.ms_pathfinder;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,12 +10,12 @@ import javax.annotation.PostConstruct;
 import java.util.TimeZone;
 
 @SpringBootApplication(scanBasePackages = {
-        "ru.griga.tickets.ms_gatherer",
+        "ru.griga.tickets.ms_pathfinder",
         "ru.griga.tickets.shared"})
 @EntityScan("ru.griga.tickets.shared.model")
 @EnableNeo4jRepositories("ru.griga.tickets.shared.repository")
 @EnableDiscoveryClient
-public class TicketsGathererApplication {
+public class PathFinderApplication {
 
     /**
      * В базе все таймштампы берутся от UTC+0
@@ -28,8 +28,8 @@ public class TicketsGathererApplication {
     }
 
     public static void main(String[] args) {
-        System.setProperty("spring.config.name", "ms_gatherer");
-        SpringApplication.run(TicketsGathererApplication.class, args);
+        System.setProperty("spring.config.name", "ms_pathfinder");
+        SpringApplication.run(ru.griga.tickets.ms_gatherer.TicketsGathererApplication.class, args);
     }
 
 }

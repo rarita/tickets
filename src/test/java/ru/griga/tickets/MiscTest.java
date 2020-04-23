@@ -20,8 +20,8 @@ public class MiscTest {
             "ru-RU",
             "LED",
             "KGD",
-            targetDate,
-            targetDate, //.plusDays(1),
+            LocalDate.of(2020, 4, 17),
+            LocalDate.of(2020, 4, 17), //.plusDays(1),
             1, 0, 0,
             List.of(ItineraryType.AIRCRAFT, ItineraryType.BUS, ItineraryType.TRAIN));
 
