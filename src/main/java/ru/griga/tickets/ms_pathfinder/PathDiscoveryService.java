@@ -1,70 +1,69 @@
 package ru.griga.tickets.ms_pathfinder;
 
-import com.fasterxml.jackson.core.TreeNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.sun.source.tree.Tree;
-import kong.unirest.GetRequest;
-import kong.unirest.HttpResponse;
-import kong.unirest.UnirestInstance;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.griga.tickets.shared.repository.ItineraryRepository;
+import ru.griga.tickets.shared.repository.TravelRepository;
 
 import java.io.IOException;
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
+/**
+ * Определяет возможные соединения нод графа
+ * по которым впоследствии будут строиться маршруты с пересадками
+ */
 @Service
 public class PathDiscoveryService {
 
-    private static final String ORIGIN_URL = "http://api.travelpayouts.com/v1/city-directions";
-
     private final ItineraryRepository itineraryRepository;
-    private final UnirestInstance unirestInstance;
-    private final ObjectMapper objectMapper;
+    private final TravelPayoutsPopularDirectionsService tppds;
 
-    public PathDiscoveryService(ItineraryRepository itineraryRepository,
-                                @Qualifier("travel-payouts") UnirestInstance unirestInstance,
-                                ObjectMapper objectMapper) {
-
+    public PathDiscoveryService(ItineraryRepository itineraryRepository, TravelPayoutsPopularDirectionsService tppds) {
         this.itineraryRepository = itineraryRepository;
-        this.unirestInstance = unirestInstance;
-        this.objectMapper = objectMapper;
-
-    }
-
-    private GetRequest buildRQ(String originCode) {
-        return unirestInstance.get(ORIGIN_URL)
-                .queryString("origin", originCode)
-                .queryString("currency", "rub");
+        this.tppds = tppds;
     }
 
     /**
-     * Получить от Travel Payouts список популярных направлений
-     * из указанной точки
-     * @param placeCode - IATA-код места отправления (страна или город)
-     * @return список IATA-кодов популярных городов из этого места.
-     * Это позволяет гарантировать, что между двумя точками резонно искать перемещения
+     * Раскрывает возможные пути перемещения из точки отправления
+     * на заданном числе прыжков. Данные берутся из популярных направлений по городам
+     * @param originCode IATA-код города отправления
+     * @param hops Количество прыжков из отправной точки
+     * @return Статус-объект
+     * @throws IOException если не вернулся ответ из сети
      */
-    Set<String> getPopularDirectionsFromPlace(String placeCode) throws IOException {
-        HttpResponse<String> response = buildRQ(placeCode).asString();
+    public Map<String, String> discoverPathsFrom(String originCode, int hops) throws IOException {
 
-        if (!response.isSuccess())
-            throw new IOException("Request to Travel Payouts popular directions was unsuccessful: " +
-                    response.getStatus() +
-                    "\nFailed with a message: " + response.getBody());
+        Set<String> targets = new TreeSet<>();
+        targets.add(originCode);
 
-        TreeNode tree = objectMapper.readTree(response.getBody());
-        ObjectNode data = (ObjectNode) tree.get("data");
+        int rqCount = 0;
+        int pathsWritten = 0;
 
-        Set<String> placeCodes = new TreeSet<>();
-        data.fieldNames().forEachRemaining(placeCodes::add);
-        return placeCodes;
+        for (int i = 0; i < hops; i++) {
+            Set<String> nextTargets = new TreeSet<>();
 
+            for (String targetCode : targets) {
+                // Если для этого города уже найдены возможные пути
+                if (itineraryRepository.countPossibleWaysFrom(targetCode) >= 10)
+                    continue;
+
+                Set<String> waysFromTarget = tppds.getPopularDirectionsFromPlace(targetCode);
+                rqCount ++;
+
+                for (String destCode : waysFromTarget) {
+                    itineraryRepository.makeWay(targetCode, destCode);
+                    pathsWritten ++;
+                }
+
+                nextTargets.addAll(waysFromTarget);
+            }
+            targets = nextTargets;
+        }
+
+        return Map.of("status", "OK",
+                    "web-requests-sent", String.valueOf(rqCount),
+                    "paths-saved-db", String.valueOf(pathsWritten));
     }
 
 }

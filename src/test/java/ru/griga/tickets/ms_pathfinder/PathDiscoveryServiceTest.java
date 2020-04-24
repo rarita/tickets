@@ -12,18 +12,15 @@ import java.io.IOException;
 @RunWith(SpringJUnit4ClassRunner.class)
 @TestPropertySource("classpath:ms_gatherer.properties")
 @SpringBootTest
-public class TPPopularDirectionsTest {
+public class PathDiscoveryServiceTest {
 
     @Autowired
-    private TravelPayoutsPopularDirectionsService travelPayoutsPopularDirectionsService;
+    private PathDiscoveryService pds;
 
     @Test
-    public void testPopularDirectionsFetching() throws IOException {
-        var result = travelPayoutsPopularDirectionsService.getPopularDirectionsFromPlace("KGD");
-
-        assert result.size() == 10;
-        assert result.stream().allMatch((it) -> it.length() == 3);
-
+    public void testPathDiscovery() throws IOException {
+        var res = pds.discoverPathsFrom("LED", 2);
+        assert res.get("status").equals("OK");
     }
 
 }

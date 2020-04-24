@@ -29,4 +29,14 @@ public interface ItineraryRepository extends Neo4jRepository<Itinerary, Long> {
             "delete e;")
     void removeObsoleteItineraries();
 
+    @Query("match (e:City)-[c:HAS_WAY]-(x:City) where e.code=$0 return count(c);")
+    int countPossibleWaysFrom(String sourcePlaceCode);
+
+    @Query("match (src:City),(dst:City) where src.code=$0 and dst.code=$1 " +
+            "with point({latitude:src.latitude, longitude:src.longitude}) as s_loc, " +
+            "point({latitude:dst.latitude, longitude:dst.longitude}) as d_loc, " +
+            "src, dst " +
+            "merge (src)-[:HAS_WAY{distance: distance(s_loc, d_loc)}]-(dst);")
+    void makeWay(String sourcePlaceCode, String destPlaceCode);
+
 }
