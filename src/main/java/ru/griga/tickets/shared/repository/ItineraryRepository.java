@@ -76,4 +76,23 @@ public interface ItineraryRepository extends Neo4jRepository<Itinerary, Long> {
             "date($searchParams.outboundDateFrom), date(datetime(e.departureTime)) >= date($searchParams.outboundDateFrom)  limit 1;")
     List<Map<?, ?>> testQuery(SearchParams searchParams);
 
+    @Query("match (e:City)-[:IS_IN]->(x:Country) \n" +
+            "\n" +
+            "where toLower(e.name_EN) contains toLower($0) or\n" +
+            "(exists(e.name_RU) and toLower(e.name_RU) contains toLower($0)) " +
+            "or (e.code contains toUpper($0))\n" +
+            "return e.code as id,\n" +
+            "case\n" +
+            "when (exists(e.name_RU))\n" +
+            "then e.name_RU\n" +
+            "else e.name_EN\n" +
+            "end + ', ' +\n" +
+            "case\n" +
+            "when (exists(x.name_RU))\n" +
+            "then x.name_RU\n" +
+            "else x.name_EN\n" +
+            "end as value\n" +
+            "order by size(value) limit 5")
+    List<Map<String, String>> getAutocompletionData(String query);
+
 }
