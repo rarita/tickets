@@ -14,7 +14,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SearchParams {
+public class SearchParams implements Cloneable {
 
     private String countryCode;
     private String currencyCode;
@@ -35,5 +35,22 @@ public class SearchParams {
     private int infantsCount;
 
     private List<ItineraryType> typesAllowed;
+
+    @Override
+    public SearchParams clone() {
+        return new SearchParams(
+                countryCode,
+                currencyCode,
+                locale,
+                originCode,
+                destinationCode,
+                outboundDateFrom,
+                outboundDateTo,
+                adultsCount,
+                childrenCount,
+                infantsCount,
+                List.copyOf(typesAllowed)
+        );
+    }
 
 }

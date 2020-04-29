@@ -1,6 +1,7 @@
 package ru.griga.tickets.shared.model.place;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +16,7 @@ public class Airport extends GeoPlace {
 
     @Getter
     @Setter
+    @JsonIgnore
     @EqualsAndHashCode.Exclude
     @Relationship(type = "CAN_GO")
     private Set<Itinerary> itineraries;

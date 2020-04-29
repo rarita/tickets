@@ -1,10 +1,10 @@
-package ru.griga.tickets.ms_pathfinder;
+package ru.griga.tickets.ms_pathfinder.service;
 
 import org.springframework.stereotype.Service;
 import ru.griga.tickets.shared.repository.ItineraryRepository;
-import ru.griga.tickets.shared.repository.TravelRepository;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -48,15 +48,15 @@ public class PathDiscoveryService {
                 if (itineraryRepository.countPossibleWaysFrom(targetCode) >= 10)
                     continue;
 
-                Set<String> waysFromTarget = tppds.getPopularDirectionsFromPlace(targetCode);
+                Map<String, BigDecimal> waysFromTarget = tppds.getPopularDirectionsFromPlace(targetCode);
                 rqCount ++;
 
-                for (String destCode : waysFromTarget) {
-                    itineraryRepository.makeWay(targetCode, destCode);
+                for (Map.Entry<String, BigDecimal> destEntry : waysFromTarget.entrySet()) {
+                    itineraryRepository.makeWay(targetCode, destEntry.getKey(), destEntry.getValue().toString());
                     pathsWritten ++;
                 }
 
-                nextTargets.addAll(waysFromTarget);
+                nextTargets.addAll(waysFromTarget.keySet());
             }
             targets = nextTargets;
         }

@@ -1,4 +1,4 @@
-package ru.griga.tickets.ms_pathfinder;
+package ru.griga.tickets.ms_pathfinder.service;
 
 import com.fasterxml.jackson.core.TreeNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,9 +8,13 @@ import kong.unirest.HttpResponse;
 import kong.unirest.UnirestInstance;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import ru.griga.tickets.shared.Utils;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 @Service
@@ -32,7 +36,7 @@ public class TravelPayoutsPopularDirectionsService {
     private GetRequest buildRQ(String originCode) {
         return unirestInstance.get(ORIGIN_URL)
                 .queryString("origin", originCode)
-                .queryString("currency", "rub");
+                .queryString("currency", "eur");
     }
 
     /**
@@ -42,7 +46,7 @@ public class TravelPayoutsPopularDirectionsService {
      * @return список IATA-кодов популярных городов из этого места.
      * Это позволяет гарантировать, что между двумя точками резонно искать перемещения
      */
-    Set<String> getPopularDirectionsFromPlace(String placeCode) throws IOException {
+    public Map<String, BigDecimal> getPopularDirectionsFromPlace(String placeCode) throws IOException {
         HttpResponse<String> response = buildRQ(placeCode).asString();
 
         if (!response.isSuccess())
@@ -53,9 +57,14 @@ public class TravelPayoutsPopularDirectionsService {
         TreeNode tree = objectMapper.readTree(response.getBody());
         ObjectNode data = (ObjectNode) tree.get("data");
 
-        Set<String> placeCodes = new TreeSet<>();
-        data.fieldNames().forEachRemaining(placeCodes::add);
-        return placeCodes;
+        Map<String, BigDecimal> placeData = new TreeMap<>();
+
+        data.fieldNames()
+                .forEachRemaining((code) -> placeData.put(
+                        code,
+                        new BigDecimal(Utils.getNodeValue(data.get(code), "price", null))));
+
+        return placeData;
 
     }
 

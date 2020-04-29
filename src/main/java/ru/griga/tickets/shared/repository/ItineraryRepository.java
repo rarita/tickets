@@ -1,11 +1,13 @@
 package ru.griga.tickets.shared.repository;
 
+import io.micrometer.core.instrument.search.Search;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.stereotype.Repository;
+import ru.griga.tickets.shared.model.SearchParams;
 import ru.griga.tickets.shared.model.itinerary.Itinerary;
 
-import java.util.Set;
+import java.util.*;
 
 @Repository
 public interface ItineraryRepository extends Neo4jRepository<Itinerary, Long> {
@@ -19,7 +21,7 @@ public interface ItineraryRepository extends Neo4jRepository<Itinerary, Long> {
             "return *;")
     Set<Itinerary> findEveryItinerary();
 
-    @Query("MATCH (src:Place)-[itin:CAN_GO]->(dest:Place) " +
+    @Query("MATCH (src:City)<-[:IS_IN]-(a_src:Airport)-[itin:CAN_GO]->(a_dest:Airport)-[:IS_IN]->(dest:City) " +
             "where src.code=$0 AND dest.code=$1 " +
             "return *;")
     Set<Itinerary> findItinerariesBetween(String sourcePlaceCode, String destPlaceCode);
@@ -36,7 +38,42 @@ public interface ItineraryRepository extends Neo4jRepository<Itinerary, Long> {
             "with point({latitude:src.latitude, longitude:src.longitude}) as s_loc, " +
             "point({latitude:dst.latitude, longitude:dst.longitude}) as d_loc, " +
             "src, dst " +
-            "merge (src)-[:HAS_WAY{distance: distance(s_loc, d_loc)}]-(dst);")
-    void makeWay(String sourcePlaceCode, String destPlaceCode);
+            "merge (src)-[way:HAS_WAY{distance: distance(s_loc, d_loc), price: $2}]-(dst)" +
+            "return id(way);")
+    long makeWay(String sourcePlaceCode, String destPlaceCode, String price);
+
+    @Query("match (p:City {code: $0}),(b:City {code: $1}) " +
+            "RETURN EXISTS( (p)-[:HAS_WAY]-(b) )")
+    boolean hasWay(String sourcePlaceCode, String destPlaceCode);
+
+    @Query("match ()-[e:HAS_WAY]-() where e.id=$0 delete e;")
+    void deleteWay(long wayID);
+
+    // Максимум прыжков всегда будет 2
+    // UNWIND на cl_batch не работает
+    @Query("match q=((src:City {code: $0})-[way:HAS_WAY*..2]-(dst:City {code: $1})) " +
+            "with [x in relationships(q) | [ startNode(x).code, endNode(x).code]] as batch, " +
+            "apoc.coll.sum([x in relationships(q) | x.distance]) as dist, " +
+            "apoc.coll.sum([x in relationships(q) | toFloat(x.price)]) as price " +
+            "with DISTINCT dist, head(collect(batch)) as cl_batch, head(collect(price)) as price " +
+            "return cl_batch ORDER BY dist,price LIMIT 3;")
+    List<List<List<String>>> findViableWays(String sourcePlaceCode, String destPlaceCode);
+
+    // Передаем searchParams и получаем доступ наподобие $searchParams.prop
+    // НЕ используем local-datetime так как у нас все должно быть в UTC-0
+    @Query("match p=(c_src:City {code: $searchParams.originCode})<-[:IS_IN]-(src:Airport)-[itin:CAN_GO*..3]->(dst:Airport)-[:IS_IN]->(c_dst:City) " +
+            "where last(nodes(p)).code = $searchParams.destinationCode and none(idx in range(0, size(itin) - 2) " +
+            "where datetime(itin[idx].arrivalTime) >= datetime(itin[idx+1].departureTime)) " +
+            "and all(i in itin " +
+            "where i.type in $searchParams.typesAllowed and " + // and
+            "(date(datetime(i.departureTime)) >= date($searchParams.outboundDateFrom) " +
+            "and date(datetime(i.departureTime)) <= date($searchParams.outboundDateTo))" + // тут про дату
+            ") " +
+            "return c_src, src, itin, dst, c_dst;")
+    List<Map<?, ?>> findItinerariesBySearchParams(SearchParams searchParams);
+
+    @Query("match ()-[e:CAN_GO]-() return date(datetime(e.departureTime)), $searchParams.outboundDateFrom, " +
+            "date($searchParams.outboundDateFrom), date(datetime(e.departureTime)) >= date($searchParams.outboundDateFrom)  limit 1;")
+    List<Map<?, ?>> testQuery(SearchParams searchParams);
 
 }
