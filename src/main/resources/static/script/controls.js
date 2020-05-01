@@ -15,12 +15,18 @@ $(document).ready(function() {
 
     $("#spinner_a").spinner({
         max: 5,
-        min: 1
+        min: 1,
+        stop: function () {
+            $("#adultsCount").val($(this).val());
+        }
     }).val(1);
 
     $("#spinner_c").spinner({
         max: 5,
-        min: 0
+        min: 0,
+        stop: function () {
+            $("#childrenCount").val($(this).val());
+        }
     }).val(0);
 
     $(".ui-spinner").css({
@@ -32,8 +38,19 @@ $(document).ready(function() {
             complexRouteGUI(true);
         else
             complexRouteGUI(false);
+        if ($(this).val() === 'round')
+            toggleHideSecondDatepicker(false)
+        else if ($(this).val() === '1-way')
+            toggleHideSecondDatepicker(true);
     });
 
+    // Так как начинаем в режиме 1-way сразу скроем второй дэйтпикер
+    toggleHideSecondDatepicker(true);
+
+    // Назначить действие на кнопку "Найти"
+    $($(".Button_button_6a0ab").get(0)).click(function () {
+
+    });
 });
 
 function assignAutocomplete(target) {
@@ -54,10 +71,14 @@ function assignAutocomplete(target) {
 
         },
         select: function (event, ui) {
-            if (event.target.placeholder.startsWith('откуда:'))
+            if (event.target.placeholder.startsWith('откуда:')) {
                 itemFrom = ui.item;
-            else
+                $("#originCode").val(ui.item.id);
+            }
+            else {
                 itemWhere = ui.item;
+                $("#destinationCode").val(ui.item.id);
+            }
 
             console.dir(ui);
         }
@@ -67,10 +88,31 @@ function assignAutocomplete(target) {
 function assignDatepicker(target) {
     target.datepicker({
         minDate: 0,
-        dateFormat: "d MM, yy",
+        dateFormat: "yy-mm-dd",
         monthNames : ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
-        dayNamesMin : ['Вс','Пн','Вт','Ср','Чт','Пт','Сб']
+        dayNamesMin : ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
+        defaultDate: 0,
+        onSelect: function (dateText) {
+            if ($(this).parent().parent().attr("class") === "datepicker-1")
+                $("#outboundDateFrom").val(dateText);
+            else
+                $("#outboundDateTo").val(dateText);
+
+            $("#outboundDateTo").val(dateText);
+        }
     });
+    const today = new Date().toISOString().substr(0, 10);
+    $(target).val(today);
+
+    console.dir($(target).parent().parent().attr("class"));
+
+    if ($(target).parent().parent().attr("class") === "datepicker-1")
+        $("#outboundDateFrom").val(today);
+    else
+        $("#outboundDateTo").val(today);
+
+    $("#outboundDateTo").val(today);
+
 }
 
 /* When the user clicks on the button,
@@ -140,13 +182,24 @@ function cloneForm() {
 }
 
 // state - булеан true - on, false - off
+function toggleHideSecondDatepicker(state) {
+    if (state) {
+        // Убираем второй дейтпикер и раздвигаем первый
+        $(".datepicker-2").css({'display': 'none'});
+        $(".ar4_ast_2Xr6l").css({'width': '100%'});
+    }
+    else {
+        $(".datepicker-2").css({'display': 'inline-block'});
+        $(".ar4_ast_2Xr6l").css({'width': 'calc(100%-60px)'});
+    }
+}
+
+// state - булеан true - on, false - off
 function complexRouteGUI(state) {
     if (state) {
         $("#MainHeroUsps-Usps").css({'display': 'none'}); // скрыть сердечко и текст
 
-        // Убираем второй дейтпикер и раздвигаем первый
-        $(".datepicker-2").css({'display': 'none'});
-        $(".ar4_ast_2Xr6l").css({'width': '100%'});
+        toggleHideSecondDatepicker(true);
 
         // Кнопка "Добавить ещё перелет"
         let btn_add = $(".Button_button_6a0ab").clone();
@@ -166,8 +219,7 @@ function complexRouteGUI(state) {
     else {
         // Развернуть все обратно
         $("#MainHeroUsps-Usps").css({'display': 'block'});
-        $(".datepicker-2").css({'display': 'inline-block'});
-        $(".ar4_ast_2Xr6l").css({'width': 'calc(100%-60px)'});
+        toggleHideSecondDatepicker(false);
 
         // Убрать лишние формы и контролы
         $(".m_form").slice(1).remove();

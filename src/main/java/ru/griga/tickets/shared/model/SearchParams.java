@@ -7,6 +7,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -24,17 +25,20 @@ public class SearchParams implements Cloneable {
 
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate outboundDateFrom;
 
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate outboundDateTo;
 
     private int adultsCount;
     private int childrenCount;
     private int infantsCount;
 
-    private List<ItineraryType> typesAllowed;
+    private List<ItineraryType> typesAllowed
+            = List.of(ItineraryType.AIRCRAFT, ItineraryType.BUS, ItineraryType.TRAIN);
 
     @Override
     public SearchParams clone() {
