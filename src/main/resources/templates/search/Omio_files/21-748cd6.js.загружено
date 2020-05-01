@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[21],{570:function(o){o.exports=JSON.parse('{"DATETIME":{"DAY":"воскресенье,понедельник,вторник,среда,четверг,пятница,суббота","MONTH":"января,февраля,марта,апреля,мая,июня,июля,августа,сентября,октября,ноября,декабря","SHORTDAY":"вс,пн,вт,ср,чт,пт,сб","SHORTMONTH":"янв.,февр.,мар.,апр.,мая,июн.,июл.,авг.,сент.,окт.,нояб.,дек.","shortTime":"H:mm"},"NUMBERS":{"DECIMAL_SEP":",","GROUP_SEP":" ","GROUP_SIZE":"3"}}')}}]);
+//# sourceMappingURL=_system/21-748cd6.js.map
