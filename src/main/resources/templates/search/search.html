@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="outbounds-page"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -31,6 +31,7 @@
             th:src="@{script/search_ajax.js}"></script>
 
     <link rel="stylesheet" href="../../static/res/cyrillic-font-swap.css" th:href="@{res/cyrillic-font-swap.css}" media="all">
+    <link rel="stylesheet" href="../../static/res/jquery-ui.min.css" th:href="@{res/jquery-ui.min.css}">
     <link href="../../static/res/search/GoEuroVendors-5d3c87.css" th:href="@{res/search/GoEuroVendors-5d3c87.css}" rel="stylesheet">
     <link href="../../static/res/search/vendors-44f439.css" th:href="@{res/search/vendors-44f439.css}" rel="stylesheet">
     <link href="../../static/res/search/ui-c3bf02.css" th:href="@{res/search/ui-c3bf02.css}" rel="stylesheet">
@@ -48,410 +49,64 @@
                         <div class="container___34Zmo">
                             <!-- Правая часть из Omio, но у нас она левая -->
                             <aside class="right___3No3t">
-                                <div class="filtersPanel___4H06-" role="presentation" data-e2e="filters">
-                                    <div class="allFilters___RwCYZ">
-                                        <div class="filtersWrapper___2U7D4">
-                                            <div class="allFilters___qUGIb">
-                                                <div>
-                                                    <div class="section___1D5c4">
-                                                        <div class="header___24jYh">
-                                                            <span class="title___2U3dv"><span>stops</span></span>
-                                                        </div>
-                                                        <div class="content___24K_H">
-                                                            <ul class="elementsList___1RW8I">
-                                                                <li>
-                                                                    <div class="stopsFilterItemEnabled___37r7V stopsFilterItem___2Iah0" role="presentation">
-                                                                        <div class="itemName___lKt4y" data-e2e="stopsFilterInfinity"><span>Any</span></div>
-                                                                        <div class="bestOfferBlock___3Fzpk">
-                                                                            <div class="itemBestOffer___3ml35">
-                                                                                <span><span>US$39</span> • <span>1<span>h</span>55</span></span>
-                                                                            </div>
-                                                                            <div class="sc-fzqARJ fIbJwZ">
-                                                                                <div class="sc-fznWqX ktDWKY"></div>
-                                                                                <label class="sc-fzoiQi ozSmQ"><input type="radio" name="Infinity" checked="" /></label>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="stopsFilterItemEnabled___37r7V stopsFilterItem___2Iah0" role="presentation">
-                                                                        <div class="itemName___lKt4y" data-e2e="stopsFilter0"><span>Non Stop</span></div>
-                                                                        <div class="bestOfferBlock___3Fzpk">
-                                                                            <div class="itemBestOffer___3ml35">
-                                                                                <span><span>US$39</span> • <span>1<span>h</span>55</span></span>
-                                                                            </div>
-                                                                            <div class="sc-fzqARJ PdPHQ">
-                                                                                <div class="sc-fznWqX ktDWKY"></div>
-                                                                                <label class="sc-fzoiQi ozSmQ"><input type="radio" name="0" /></label>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="stopsFilterItemEnabled___37r7V stopsFilterItem___2Iah0" role="presentation">
-                                                                        <div class="itemName___lKt4y" data-e2e="stopsFilter1"><span>1 change max.</span></div>
-                                                                        <div class="bestOfferBlock___3Fzpk">
-                                                                            <div class="itemBestOffer___3ml35">
-                                                                                <span><span>US$39</span> • <span>1<span>h</span>55</span></span>
-                                                                            </div>
-                                                                            <div class="sc-fzqARJ PdPHQ">
-                                                                                <div class="sc-fznWqX ktDWKY"></div>
-                                                                                <label class="sc-fzoiQi ozSmQ"><input type="radio" name="1" /></label>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div data-e2e="departureStationsFilter">
-                                                        <div class="section___1D5c4">
-                                                            <div class="header___24jYh">
-                                    <span class="title___2U3dv">
-                                        <span data-e2e="stationsFilterTitle"><span>airports - Moscow</span></span>
-                                    </span>
-                                                            </div>
-                                                            <div class="content___24K_H">
-                                                                <div>
-                                                                    <ul class="elementsList___1RW8I">
-                                                                        <li>
-                                                                            <div class="sc-fzoNJl idyvyl">
-                                                                                <div class="sc-fzpmMD fpVDsQ">
-                                                                                    <div class="stationsFilterItem___JB7mK">
-                                                                                        <div class="transportIcon___3cF-P">
-                                                                                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                                                <title>Flight</title>
-                                                                                                <g fill="none" fill-rule="evenodd">
-                                                                                                    <path fill-rule="nonzero" d="M0 0h24v24H0z"></path>
-                                                                                                    <path
-                                                                                                            d="M13.875 14.5c0 1.375-.25 2.75-.5 4l1.875 1.75c.25.25.5.625.5 1V22L12 21.125 8.25 22v-.75c0-.375.125-.75.5-1l1.875-1.75c-.375-1.25-.5-2.625-.5-4L2 16.5v-1.125c0-.5.125-.875.5-1.25l7.625-5.375v-5l.75-1.25c.25-.25.625-.5 1.125-.5s.875.25 1.125.5l.75 1.25v5l7.625 5.375c.375.375.5.75.5 1.25V16.5l-8.125-2zM12 3.375c-.375 0-.625.25-.75.5l-.125.75h1.75l-.125-.75c0-.375-.375-.5-.75-.5z"
-                                                                                                            fill="currentColor"
-                                                                                                    ></path>
-                                                                                                </g>
-                                                                                            </svg>
-                                                                                        </div>
-                                                                                        <div class="itemName___G86Jn">
-                                                                                            <span data-e2e="stationName"><span>All</span></span>
-                                                                                        </div>
-                                                                                        <div class="itemBestPrice___1YIJI"><span>US$39</span></div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="sc-fzoXWK dqTQks">
-                                                                                    <div>
-                                                                                        <div aria-checked="false" tabindex="0" role="checkbox" class="sc-fzqNqU jvcNJz"></div>
-                                                                                        <input type="checkbox" class="sc-fzoyTs jZUSDr" />
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li>
-                                                                            <div class="sc-fzoNJl idyvyl">
-                                                                                <div class="sc-fzpmMD fpVDsQ">
-                                                                                    <div class="stationsFilterItem___JB7mK">
-                                                                                        <div class="transportIcon___3cF-P">
-                                                                                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                                                <title>Flight</title>
-                                                                                                <g fill="none" fill-rule="evenodd">
-                                                                                                    <path fill-rule="nonzero" d="M0 0h24v24H0z"></path>
-                                                                                                    <path
-                                                                                                            d="M13.875 14.5c0 1.375-.25 2.75-.5 4l1.875 1.75c.25.25.5.625.5 1V22L12 21.125 8.25 22v-.75c0-.375.125-.75.5-1l1.875-1.75c-.375-1.25-.5-2.625-.5-4L2 16.5v-1.125c0-.5.125-.875.5-1.25l7.625-5.375v-5l.75-1.25c.25-.25.625-.5 1.125-.5s.875.25 1.125.5l.75 1.25v5l7.625 5.375c.375.375.5.75.5 1.25V16.5l-8.125-2zM12 3.375c-.375 0-.625.25-.75.5l-.125.75h1.75l-.125-.75c0-.375-.375-.5-.75-.5z"
-                                                                                                            fill="currentColor"
-                                                                                                    ></path>
-                                                                                                </g>
-                                                                                            </svg>
-                                                                                        </div>
-                                                                                        <div class="itemName___G86Jn"><span data-e2e="stationName">Moscow Vnukovo Airport (VKO)</span></div>
-                                                                                        <div class="itemBestPrice___1YIJI"><span>US$39</span></div>
-                                                                                    </div>
-                                                                                    <div class="stationDistance___3cvWE" data-e2e="station-distance"><span>26 km from Moscow</span></div>
-                                                                                </div>
-                                                                                <div class="sc-fzoXWK dqTQks">
-                                                                                    <div>
-                                                                                        <div aria-checked="false" tabindex="0" role="checkbox" class="sc-fzqNqU jvcNJz"></div>
-                                                                                        <input type="checkbox" class="sc-fzoyTs jZUSDr" />
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li>
-                                                                            <div class="sc-fzoNJl idyvyl">
-                                                                                <div class="sc-fzpmMD fpVDsQ">
-                                                                                    <div class="stationsFilterItem___JB7mK">
-                                                                                        <div class="transportIcon___3cF-P">
-                                                                                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                                                <title>Flight</title>
-                                                                                                <g fill="none" fill-rule="evenodd">
-                                                                                                    <path fill-rule="nonzero" d="M0 0h24v24H0z"></path>
-                                                                                                    <path
-                                                                                                            d="M13.875 14.5c0 1.375-.25 2.75-.5 4l1.875 1.75c.25.25.5.625.5 1V22L12 21.125 8.25 22v-.75c0-.375.125-.75.5-1l1.875-1.75c-.375-1.25-.5-2.625-.5-4L2 16.5v-1.125c0-.5.125-.875.5-1.25l7.625-5.375v-5l.75-1.25c.25-.25.625-.5 1.125-.5s.875.25 1.125.5l.75 1.25v5l7.625 5.375c.375.375.5.75.5 1.25V16.5l-8.125-2zM12 3.375c-.375 0-.625.25-.75.5l-.125.75h1.75l-.125-.75c0-.375-.375-.5-.75-.5z"
-                                                                                                            fill="currentColor"
-                                                                                                    ></path>
-                                                                                                </g>
-                                                                                            </svg>
-                                                                                        </div>
-                                                                                        <div class="itemName___G86Jn"><span data-e2e="stationName">Moscow Sheremetyevo International Airport (SVO)</span></div>
-                                                                                        <div class="itemBestPrice___1YIJI"><span>US$97</span></div>
-                                                                                    </div>
-                                                                                    <div class="stationDistance___3cvWE" data-e2e="station-distance"><span>27 km from Moscow</span></div>
-                                                                                </div>
-                                                                                <div class="sc-fzoXWK dqTQks">
-                                                                                    <div>
-                                                                                        <div aria-checked="false" tabindex="0" role="checkbox" class="sc-fzqNqU jvcNJz"></div>
-                                                                                        <input type="checkbox" class="sc-fzoyTs jZUSDr" />
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                        <li>
-                                                                            <div class="sc-fzoNJl idyvyl">
-                                                                                <div class="sc-fzpmMD fpVDsQ">
-                                                                                    <div class="stationsFilterItem___JB7mK">
-                                                                                        <div class="transportIcon___3cF-P">
-                                                                                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                                                <title>Flight</title>
-                                                                                                <g fill="none" fill-rule="evenodd">
-                                                                                                    <path fill-rule="nonzero" d="M0 0h24v24H0z"></path>
-                                                                                                    <path
-                                                                                                            d="M13.875 14.5c0 1.375-.25 2.75-.5 4l1.875 1.75c.25.25.5.625.5 1V22L12 21.125 8.25 22v-.75c0-.375.125-.75.5-1l1.875-1.75c-.375-1.25-.5-2.625-.5-4L2 16.5v-1.125c0-.5.125-.875.5-1.25l7.625-5.375v-5l.75-1.25c.25-.25.625-.5 1.125-.5s.875.25 1.125.5l.75 1.25v5l7.625 5.375c.375.375.5.75.5 1.25V16.5l-8.125-2zM12 3.375c-.375 0-.625.25-.75.5l-.125.75h1.75l-.125-.75c0-.375-.375-.5-.75-.5z"
-                                                                                                            fill="currentColor"
-                                                                                                    ></path>
-                                                                                                </g>
-                                                                                            </svg>
-                                                                                        </div>
-                                                                                        <div class="itemName___G86Jn"><span data-e2e="stationName">Moscow Domodedovo International Airport (DME)</span></div>
-                                                                                        <div class="itemBestPrice___1YIJI"><span>US$92</span></div>
-                                                                                    </div>
-                                                                                    <div class="stationDistance___3cvWE" data-e2e="station-distance"><span>42 km from Moscow</span></div>
-                                                                                </div>
-                                                                                <div class="sc-fzoXWK dqTQks">
-                                                                                    <div>
-                                                                                        <div aria-checked="false" tabindex="0" role="checkbox" class="sc-fzqNqU jvcNJz"></div>
-                                                                                        <input type="checkbox" class="sc-fzoyTs jZUSDr" />
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div data-e2e="arrivalStationsFilter">
-                                                        <div class="section___1D5c4">
-                                                            <div class="header___24jYh">
-                                    <span class="title___2U3dv">
-                                        <span data-e2e="stationsFilterTitle"><span>airports - Kaliningrad</span></span>
-                                    </span>
-                                                            </div>
-                                                            <div class="content___24K_H">
-                                                                <div>
-                                                                    <ul class="elementsList___1RW8I">
-                                                                        <li>
-                                                                            <div class="sc-fzoNJl idyvyl">
-                                                                                <div class="sc-fzpmMD fpVDsQ">
-                                                                                    <div class="stationsItemDisabled___2mt4e stationsFilterItem___JB7mK">
-                                                                                        <div class="transportIcon___3cF-P">
-                                                                                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                                                                <title>Flight</title>
-                                                                                                <g fill="none" fill-rule="evenodd">
-                                                                                                    <path fill-rule="nonzero" d="M0 0h24v24H0z"></path>
-                                                                                                    <path
-                                                                                                            d="M13.875 14.5c0 1.375-.25 2.75-.5 4l1.875 1.75c.25.25.5.625.5 1V22L12 21.125 8.25 22v-.75c0-.375.125-.75.5-1l1.875-1.75c-.375-1.25-.5-2.625-.5-4L2 16.5v-1.125c0-.5.125-.875.5-1.25l7.625-5.375v-5l.75-1.25c.25-.25.625-.5 1.125-.5s.875.25 1.125.5l.75 1.25v5l7.625 5.375c.375.375.5.75.5 1.25V16.5l-8.125-2zM12 3.375c-.375 0-.625.25-.75.5l-.125.75h1.75l-.125-.75c0-.375-.375-.5-.75-.5z"
-                                                                                                            fill="currentColor"
-                                                                                                    ></path>
-                                                                                                </g>
-                                                                                            </svg>
-                                                                                        </div>
-                                                                                        <div class="itemName___G86Jn"><span data-e2e="stationName">Kaliningrad Khrabrovo Airport (KGD)</span></div>
-                                                                                        <div class="itemBestPrice___1YIJI"><span>US$39</span></div>
-                                                                                    </div>
-                                                                                    <div class="stationDistance___3cvWE" data-e2e="station-distance"><span>19 km from Kaliningrad</span></div>
-                                                                                </div>
-                                                                                <div class="sc-fzoXWK dqTQks">
-                                                                                    <div>
-                                                                                        <div disabled="" aria-checked="true" tabindex="0" role="checkbox" class="sc-fzqNqU dFPOsC"></div>
-                                                                                        <input type="checkbox" class="sc-fzoyTs jZUSDr" checked="" />
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="section___1D5c4">
-                                                        <div class="header___24jYh">
-                                                            <span class="title___2U3dv"><span>Price</span></span>
-                                                        </div>
-                                                        <div class="content___24K_H">
-                                                            <div>
-                                                                <div class="subTitle___2VGgh">
-                                                                    <span>US$39</span> - <span data-e2e="filterMaxPrice"><span>US$254</span></span>
-                                                                </div>
-                                                                <div class="slider___3QFBq" data-e2e="priceSlider">
-                                                                    <div class="rc-slider sc-fznxKY kfRyXm">
-                                                                        <div class="rc-slider-rail"></div>
-                                                                        <div class="rc-slider-track rc-slider-track-1" style="left: 0%; right: auto; width: 100%;"></div>
-                                                                        <div class="rc-slider-step"></div>
-                                                                        <div
-                                                                                tabindex="0"
-                                                                                class="rc-slider-handle rc-slider-handle-1"
-                                                                                role="slider"
-                                                                                aria-valuemin="39"
-                                                                                aria-valuemax="254"
-                                                                                aria-valuenow="39"
-                                                                                aria-disabled="false"
-                                                                                style="left: 0%; right: auto; transform: translateX(-50%);"
-                                                                        ></div>
-                                                                        <div
-                                                                                tabindex="0"
-                                                                                class="rc-slider-handle rc-slider-handle-2"
-                                                                                role="slider"
-                                                                                aria-valuemin="39"
-                                                                                aria-valuemax="254"
-                                                                                aria-valuenow="254"
-                                                                                aria-disabled="false"
-                                                                                style="left: 100%; right: auto; transform: translateX(-50%);"
-                                                                        ></div>
-                                                                        <div class="rc-slider-mark"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="section___1D5c4">
-                                                        <div class="header___24jYh">
-                                                            <span class="title___2U3dv"><span>Duration</span></span>
-                                                        </div>
-                                                        <div class="content___24K_H">
-                                                            <div>
-                                                                <div class="subTitle___2VGgh">
-                                                                    <span>1<span>h</span>55</span> - <span data-e2e="filterMaxPrice"><span>29<span>h</span>20</span></span>
-                                                                </div>
-                                                                <div class="slider___3QFBq" data-e2e="durationSlider">
-                                                                    <div class="rc-slider sc-fznxKY kfRyXm">
-                                                                        <div class="rc-slider-rail"></div>
-                                                                        <div class="rc-slider-track rc-slider-track-1" style="left: 0%; right: auto; width: 100%;"></div>
-                                                                        <div class="rc-slider-step"></div>
-                                                                        <div
-                                                                                tabindex="0"
-                                                                                class="rc-slider-handle rc-slider-handle-1"
-                                                                                role="slider"
-                                                                                aria-valuemin="115"
-                                                                                aria-valuemax="1760"
-                                                                                aria-valuenow="115"
-                                                                                aria-disabled="false"
-                                                                                style="left: 0%; right: auto; transform: translateX(-50%);"
-                                                                        ></div>
-                                                                        <div
-                                                                                tabindex="0"
-                                                                                class="rc-slider-handle rc-slider-handle-2"
-                                                                                role="slider"
-                                                                                aria-valuemin="115"
-                                                                                aria-valuemax="1760"
-                                                                                aria-valuenow="1760"
-                                                                                aria-disabled="false"
-                                                                                style="left: 100%; right: auto; transform: translateX(-50%);"
-                                                                        ></div>
-                                                                        <div class="rc-slider-mark"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div>
-                                                        <div data-e2e="departureTimeFilter">
-                                                            <div class="section___1D5c4">
-                                                                <div class="header___24jYh">
-                                        <span class="title___2U3dv">
-                                            <span><span>Departure</span><span> - Moscow</span></span>
-                                        </span>
-                                                                </div>
-                                                                <div class="content___24K_H">
-                                                                    <div class="slotsContainer___1BgQD">
-                                                                        <div role="presentation" class="slot___Az2Rk" data-e2e="morning">
-                                                                            <div class="slotTitle___3DCu2"><span>Early</span></div>
-                                                                            <div class="timeRange___2_8U6"><span>00:00</span> - <span>07:00</span></div>
-                                                                            <div class="price___2KKtE"><span>US$81</span></div>
-                                                                        </div>
-                                                                        <div role="presentation" class="slot___Az2Rk" data-e2e="afternoon">
-                                                                            <div class="slotTitle___3DCu2"><span>Daytime</span></div>
-                                                                            <div class="timeRange___2_8U6"><span>07:00</span> - <span>19:00</span></div>
-                                                                            <div class="price___2KKtE"><span>US$39</span></div>
-                                                                        </div>
-                                                                        <div role="presentation" class="disabledSlot___1tB3p slot___Az2Rk" data-e2e="evening">
-                                                                            <div class="slotTitle___3DCu2"><span>Late</span></div>
-                                                                            <div class="timeRange___2_8U6"><span>19:00</span> - <span>00:00</span></div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div data-e2e="arrivalTimeFilter">
-                                                            <div class="section___1D5c4">
-                                                                <div class="header___24jYh">
-                                        <span class="title___2U3dv">
-                                            <span><span>Arrival</span><span> - Kaliningrad</span></span>
-                                        </span>
-                                                                </div>
-                                                                <div class="content___24K_H">
-                                                                    <div class="slotsContainer___1BgQD">
-                                                                        <div role="presentation" class="disabledSlot___1tB3p slot___Az2Rk" data-e2e="morning">
-                                                                            <div class="slotTitle___3DCu2"><span>Early</span></div>
-                                                                            <div class="timeRange___2_8U6"><span>00:00</span> - <span>07:00</span></div>
-                                                                        </div>
-                                                                        <div role="presentation" class="slot___Az2Rk" data-e2e="afternoon">
-                                                                            <div class="slotTitle___3DCu2"><span>Daytime</span></div>
-                                                                            <div class="timeRange___2_8U6"><span>07:00</span> - <span>19:00</span></div>
-                                                                            <div class="price___2KKtE"><span>US$39</span></div>
-                                                                        </div>
-                                                                        <div role="presentation" class="disabledSlot___1tB3p slot___Az2Rk" data-e2e="evening">
-                                                                            <div class="slotTitle___3DCu2"><span>Late</span></div>
-                                                                            <div class="timeRange___2_8U6"><span>19:00</span> - <span>00:00</span></div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div data-e2e="companiesFilter">
-                                                        <div class="section___1D5c4">
-                                                            <div class="header___24jYh">
-                                    <span class="title___2U3dv">
-                                        <span data-e2e="companiesFilterTitle"><span>Airlines</span></span>
-                                    </span>
-                                                                <div data-e2e="expandSection" class="icon___1cA1_">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 15">
-                                                                        <path fill="currentColor" fill-rule="evenodd" d="M13 10.2L3.4.6c-.8-.8-2-.8-2.8 0-.8.8-.8 2 0 2.8l11 11c.4.4.9.6 1.4.6.5 0 1-.2 1.4-.6l11-11c.8-.8.8-2 0-2.8-.8-.8-2-.8-2.8 0L13 10.2z"></path>
-                                                                    </svg>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                 <div style="width: 100%; padding-left: 5px; padding-right: 5px">
+                                     <!-- Здесь будут фильтры -->
+                                     <h2>Фильтры</h2>
+                                     <span>Здесь вы можете отфильтровать результаты поиска</span>
+                                     <!-- Слайдер цены -->
+                                     <p>
+                                         <label for="amount">Диапазон цен:</label>
+                                         <input type="text" id="amount" readonly style="border:0; color:#fa6b6b; font-weight:bold; float: right; width: 115px">
+                                     </p>
+                                     <div id="price-slider"></div>
+                                     <!-- Слайдер времени вылета (время идет с шагом в 10 минут) -->
+                                     <p>
+                                         <label for="amount-time">Время отправления:</label>
+                                         <input type="text" id="amount-time" readonly style="border:0; color:#fa6b6b; font-weight:bold; float: right; width: 90px">
+                                     </p>
+                                     <div id="time-slider"></div>
+                                     <!-- Слайдер времени в полете (время идет с шагом в 10 минут) -->
+                                     <p>
+                                         <label for="amount-onboard-time">Время в пути:</label>
+                                         <input type="text" id="amount-onboard-time" readonly style="border:0; color:#fa6b6b; font-weight:bold; float: right; width: 90px">
+                                     </p>
+                                     <div id="time-onboard-slider"></div>
+                                     <!-- Чекбокс им. прямых перелетов -->
+                                     <p>
+                                         <label for="amount-time">Только прямые рейсы</label>
+                                         <input type="checkbox" id="direct-flights" readonly style="border:0; color:#fa6b6b; font-weight:bold;">
+                                     </p>
+                                     <!-- Группа чекбоксов модальных маршрутов -->
+                                     <fieldset>
+                                         <legend>Параметры мультимодальных перевозок</legend>
+                                        <div class="modal-control-group" style="width: 50%; margin: 0 auto">
+                                            <div style="height: 5px"></div>
+                                            <span>Включить в поиск:</span><div style="height: 10px"></div>
+                                            <label for="train">Поезда</label>
+                                            <input type="checkbox" name="train" id="train">
+                                            <label for="air">Самолёты</label>
+                                            <input type="checkbox" name="air" id="air">
+                                            <label for="bus">Автобусы</label>
+                                            <input type="checkbox" name="bus" id="bus">
                                         </div>
-                                    </div>
-                                </div>
+                                     </fieldset>
+                                 </div>
                             </aside>
                             <div role="main" class="left___2XsEr">
                                 <div role="main" class="left">
                                     <ul data-selected-tab="train" data-e2e="tabsPanel" class="tabs___38X9J">
-                                        <li data-e2e="trainTab activeTab">
-                                            <div class="tab___2Xr85" role="button" tabindex="-1">
+                                        <li class="flightTab menu-tab menu-tab-active">
+                                            <div class="tab___2Xr85" role="button" tabindex="-1" style="min-width: 25%;">
                                                 <div class="tabIcon___9iujF">
                                                     <svg viewBox="10 -20 184 66" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M 15.71 14.17 L 23.34 10.97 L 58.01 11.46 L 81.03 2.52 L 81.03 2.52 C 82.58 1.87 83.95 1.4 85.19 1.04 C 86.44 0.68 87.02 0.48 88.46 0.38 C 89.88 0.25 92.06 0 93.72 0.28 C 95.33 0.5 97.3 1.01 98.21 1.93 C 99.12 2.89 100 4.42 99.04 5.87 C 98.01 7.25 98.13 7.75 92.19 10.29 C 86.19 12.83 76.83 16.31 63.56 20.97 L 63.56 20.97 L 51.04 39.53 L 39.22 44 L 46.66 26.9 L 28.91 32.34 L 28.91 32.34 C 22.49 30.54 17.15 28.75 12.57 26.99 C 7.98 25.19 3.41 23.22 1.69 21.74 C 0 20.27 1.4 18.8 2.45 18.25 C 3.5 17.7 3.76 17.59 7.9 18.46 C 12.06 19.29 18.35 20.91 27.09 23.31 L 27.09 23.31 L 38.64 19.42 L 38.64 19.42 C 30.99 17.69 23.35 15.93 15.71 14.17 L 15.71 14.17 Z" fill="red" fill-rule="evenodd"></path>
+                                                        <path d="M 15.71 14.17 L 23.34 10.97 L 58.01 11.46 L 81.03 2.52 L 81.03 2.52 C 82.58 1.87 83.95 1.4 85.19 1.04 C 86.44 0.68 87.02 0.48 88.46 0.38 C 89.88 0.25 92.06 0 93.72 0.28 C 95.33 0.5 97.3 1.01 98.21 1.93 C 99.12 2.89 100 4.42 99.04 5.87 C 98.01 7.25 98.13 7.75 92.19 10.29 C 86.19 12.83 76.83 16.31 63.56 20.97 L 63.56 20.97 L 51.04 39.53 L 39.22 44 L 46.66 26.9 L 28.91 32.34 L 28.91 32.34 C 22.49 30.54 17.15 28.75 12.57 26.99 C 7.98 25.19 3.41 23.22 1.69 21.74 C 0 20.27 1.4 18.8 2.45 18.25 C 3.5 17.7 3.76 17.59 7.9 18.46 C 12.06 19.29 18.35 20.91 27.09 23.31 L 27.09 23.31 L 38.64 19.42 L 38.64 19.42 C 30.99 17.69 23.35 15.93 15.71 14.17 L 15.71 14.1 7 Z" fill="currentColor" fill-rule="evenodd"></path>
                                                     </svg>
                                                 </div>
-                                                <div class="travelModeName___HuG32"><span>Поезда</span></div>
+                                                <div class="travelModeName___HuG32"><span>Самолёты</span></div>
                                                 <div class="price___183db" data-e2e="minPrice"><span>4&nbsp;546&nbsp;₽</span></div>
-                                                <div class="duration___yLY-s"><span>3<span>ч</span>39</span>
-                                                </div>
                                             </div>
                                         </li>
-                                        <li data-e2e="busTab">
+                                        <li class="busTab menu-tab" style="min-width: 25%;">
                                             <div class="tab___2Xr85" role="button" tabindex="-1">
                                                 <div class="tabIcon___9iujF">
                                                     <svg viewBox="0 0 124 94" xmlns="http://www.w3.org/2000/svg">
@@ -460,27 +115,25 @@
                                                 </div>
                                                 <div class="travelModeName___HuG32"><span>Автобусы</span></div>
                                                 <div class="price___183db" data-e2e="minPrice"><span>2&nbsp;847&nbsp;₽</span></div>
-                                                <div class="duration___yLY-s"><span>8<span>ч</span>40</span>
-                                                </div>
                                             </div>
                                         </li>
-                                        <li data-e2e="flightTab">
+                                        <!-- Полоска активности -->
+                                        <div class="line___1F-Hx" style="width: 25%;">
+                                            <hr>
+                                        </div>
+                                        <li class="trainTab menu-tab" style="min-width: 25%;">
                                             <div class="tab___2Xr85" role="button" tabindex="-1">
                                                 <div class="tabIcon___9iujF">
                                                     <svg viewBox="-15 0 124 94" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M 28.35 6.98 C 26.44 6.97 24.87 5.41 24.87 3.5 C 24.87 1.57 26.44 0 28.35 0.02 C 30.29 0 31.86 1.56 31.84 3.49 C 31.86 5.41 30.29 6.97 28.35 6.98 L 28.35 6.98 Z M 37.65 6.98 C 39.57 6.97 41.13 5.41 41.13 3.5 C 41.13 1.57 39.56 0.01 37.65 0.03 C 35.71 0.01 34.14 1.57 34.16 3.5 C 34.15 5.41 35.71 6.97 37.65 6.98 L 37.65 6.98 Z M 51.5 77.29 C 56.34 76.49 61.16 71.45 61.15 65.31 L 61.15 20.43 C 61.16 14.1 55.81 8.28 48.56 8.29 L 33.05 8.29 L 17.49 8.29 C 10.2 8.28 4.85 14.1 4.86 20.43 L 4.86 65.31 C 4.85 71.46 9.67 76.49 14.51 77.29 L 0 99 L 8.39 99 L 18.75 83.78 L 33 83.78 L 47.25 83.78 L 57.66 99 L 66 99 L 51.5 77.29 Z M 24.82 12.92 C 24.82 11.79 25.78 10.87 26.88 10.85 L 33 10.85 L 39.12 10.85 C 40.23 10.87 41.19 11.79 41.19 12.92 L 41.19 16.45 C 41.19 17.56 40.28 18.51 39.12 18.51 L 33 18.51 L 26.88 18.51 C 25.72 18.51 24.82 17.56 24.82 16.45 L 24.82 12.92 Z M 17.18 70.74 C 14.14 70.72 11.67 68.26 11.67 65.2 C 11.66 62.17 14.14 59.7 17.18 59.71 C 20.25 59.69 22.72 62.16 22.74 65.2 C 22.73 68.26 20.25 70.72 17.18 70.74 Z M 17.89 41.58 C 14.4 41.56 11.56 39.18 11.57 35.28 L 11.57 27.22 C 11.59 23.85 13.77 20.93 17.89 20.92 L 33 20.92 L 48.11 20.92 C 52.24 20.93 54.41 23.85 54.43 27.22 L 54.43 35.28 C 54.44 39.18 51.6 41.56 48.11 41.58 L 33 41.58 L 17.89 41.58 Z M 43.16 65.2 C 43.15 62.17 45.62 59.7 48.66 59.71 C 51.73 59.69 54.2 62.16 54.22 65.2 C 54.2 68.25 51.73 70.72 48.66 70.74 C 45.62 70.72 43.15 68.26 43.16 65.2 Z" fill="currentColor" fill-rule="evenodd"></path>
                                                     </svg>
                                                 </div>
-                                                <div class="travelModeName___HuG32"><span>Самолеты</span></div>
+                                                <div class="travelModeName___HuG32"><span>Поезда</span></div>
                                                 <div class="price___183db" data-e2e="minPrice"><span>4&nbsp;079&nbsp;₽</span></div>
-                                                <div class="duration___yLY-s"><span>1<span>ч</span>10</span>
-                                                </div>
                                             </div>
                                         </li>
-                                        <div class="line___1F-Hx" style="width: 33.3333%;">
-                                            <hr>
-                                        </div>
-                                        <li data-e2e="trainTab activeTab">
+
+                                        <li class="compoundTab menu-tab" style="min-width: 25%;">
                                             <div class="tab___2Xr85" role="button" tabindex="-1">
                                                 <div class="tabIcon___9iujF">
                                                     <svg viewBox="0 0 124 84" xmlns="http://www.w3.org/2000/svg">
@@ -489,17 +142,13 @@
                                                 </div>
                                                 <div class="travelModeName___HuG32"><span>Смешанные</span></div>
                                                 <div class="price___183db" data-e2e="minPrice"><span>4&nbsp;546&nbsp;₽</span></div>
-                                                <div class="duration___yLY-s"><span>3<span>ч</span>39</span>
-                                                </div>
+
                                             </div>
                                         </li>
                                     </ul>
                                     <div class="sortPanel___3Hh1K">
                                         <div>
                                             <div class="sortLabel___3bpIJ"><span>Сортировать по</span></div>
-                                        </div>
-                                        <div>
-                                            <button class="filterButton___2iRqN" data-e2e="filterButton" type="button"><span class="title___2nFyN"><span>фильтр</span></span><span class="icon___D6Nhb"><svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M-2-2h16v16H-2z"></path><path d="M0 9.333v1.334h4V9.333H0zm0-8v1.334h6.667V1.333H0zM6.667 12v-1.333H12V9.333H6.667V8H5.333v4h1.334zm-4-8v1.333H0v1.334h2.667V8H4V4H2.667zM12 6.667V5.333H5.333v1.334H12zM8 4h1.333V2.667H12V1.333H9.333V0H8v4z" fill="currentColor" fill-rule="nonzero"></path></g></svg></span></button>
                                         </div>
                                     </div>
                                     <div class="mobileTicket___tHrMo"></div>
@@ -585,585 +234,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <div data-e2e="resultCellWrapper" class="cell___16tDr">
-                                        <div class="Container_container_98308">
-                                            <a class="link___2H3sm" href="https://www.omio.ru/search-frontend/journey/train/-177230730/ECC2D3235449B4DD59F51D8FC862DC459/-3380341026543760137?locale=ru">
-                                                <div class="slimContainerSection___30GVK">
-                                                    <div class="container___msmDb" data-e2e="resultCell">
-                                                        <div class="indicators___U9uwV">
-                                                            <div class="tripFeatures___2rD-K">
-                                                                <div class="labelsContainer___2fv3m">
-                                                                    <ul class="sortLabels___AFigW">
-                                                                        <li class="labelRecommended___IscZd" data-e2e="resultLabel"><span>2й самый быстрый </span></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="companiesContainer___10R6U">
-                                                                    <div class="logos___L5Uuv">
-                                                                        <div class="logoContainer___1pUKz"><img src="./Omio_files/italo.webp" height="15" alt="Italo" data-e2e="provider" class="sc-AxjAm lmzjeI"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="iconsContainer___3os4q">
-                                                                <div class="featureIcon___uvWYe">
-                                                                    <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                                                                        <g fill="currentColor" fill-rule="evenodd">
-                                                                            <path d="M7 5.833L5.833 7V5.833H7zm-5.833 0h4.666V1.167H1.167v4.666zM0 0h7v7H0V0zm10.167 5.833h4.666V1.167h-4.666v4.666zM9 0h7v7H9V0zM7 14.833L5.833 16v-1.167H7zm-5.833 0h4.666v-4.666H1.167v4.666zM0 9h7v7H0V9z" fill-rule="nonzero"></path>
-                                                                            <path d="M2 2h3v3H2zm9 0h3v3h-3zm-9 9h3v3H2zm7-2h2v2H9zm4.375 0H16v7H9v-2.625h2.042v-.583h1.75v1.75h1.75v-1.75h-3.5v-1.75h2.333z"></path>
-                                                                        </g>
-                                                                    </svg>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="timesAndStationsContainer___2zGZA"><span class="times___3pG-p"><span class="departureColumn___2FH6w"><span data-e2e="departureTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>06:40</span></span>
-                                                                </span>
-                                                                </span><span class="duration___1lrZd" data-e2e="duration"><span class="separator___HwxsU"></span><span>3<span>ч</span>39</span><span class="separator___HwxsU"></span></span>
-                                                                </span><span class="arrivalColumn___2iJcq"><span data-e2e="arrivalTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>10:19</span></span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                            <div class="stations___21org"><span class="station___2Ru5P" data-e2e="departurePosition">Милан Centrale</span><span class="station___2Ru5P" data-e2e="arrivalPosition">Рим Termini</span></div>
-                                                        </div>
-                                                        <div class="stopsContainer___1upkn">
-                                                            <button type="button" class="button___3hiYb" data-e2e="numberOfChanges"><span class="stops___1mrFf"><span>0 пересадок</span></span><span class="icon___dH54l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 15"><path fill="currentColor" fill-rule="evenodd" d="M13 10.2L3.4.6c-.8-.8-2-.8-2.8 0-.8.8-.8 2 0 2.8l11 11c.4.4.9.6 1.4.6.5 0 1-.2 1.4-.6l11-11c.8-.8.8-2 0-2.8-.8-.8-2-.8-2.8 0L13 10.2z"></path></svg></span></button>
-                                                        </div>
-                                                        <div class="tripPriceContainer___2yEXL">
-                                                            <div class="price___1dv6u" data-e2e="priceWithCurrency"><span data-e2e="price"><span>4&nbsp;546&nbsp;₽</span></span><span class="priceClarification___g4HV_"></span></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="SrpAdUnit__StyledWrapper-g1yxy8-0 bMSqJU">
-                                        <div style="width: auto; height: auto;"></div>
-                                    </div>
-                                    <div data-e2e="resultCellWrapper" class="cell___16tDr">
-                                        <div class="Container_container_98308">
-                                            <a class="link___2H3sm" href="https://www.omio.ru/search-frontend/journey/train/52457481/ECC2D3235449B4DD59F51D8FC862DC459/-772661713197341971?locale=ru">
-                                                <div class="slimContainerSection___30GVK">
-                                                    <div class="container___msmDb" data-e2e="resultCell">
-                                                        <div class="indicators___U9uwV">
-                                                            <div class="tripFeatures___2rD-K">
-                                                                <div class="labelsContainer___2fv3m">
-                                                                    <ul class="sortLabels___AFigW">
-                                                                        <li class="labelRecommended___IscZd" data-e2e="resultLabel"><span> Самый дёшевый </span></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="companiesContainer___10R6U">
-                                                                    <div class="logos___L5Uuv">
-                                                                        <div class="logoContainer___1pUKz"><img src="./Omio_files/trenitaliaint.webp" height="15" alt="Intercity" data-e2e="provider" class="sc-AxjAm lmzjeI"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="iconsContainer___3os4q"></div>
-                                                        </div>
-                                                        <div class="timesAndStationsContainer___2zGZA"><span class="times___3pG-p"><span class="departureColumn___2FH6w"><span data-e2e="departureTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>06:50</span></span>
-                                                                </span>
-                                                                </span><span class="duration___1lrZd" data-e2e="duration"><span class="separator___HwxsU"></span><span>6<span>ч</span>32</span><span class="separator___HwxsU"></span></span>
-                                                                </span><span class="arrivalColumn___2iJcq"><span data-e2e="arrivalTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>13:22</span></span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                            <div class="stations___21org"><span class="station___2Ru5P" data-e2e="departurePosition">Милан Centrale</span><span class="station___2Ru5P" data-e2e="arrivalPosition">Рим Tiburtina</span></div>
-                                                        </div>
-                                                        <div class="stopsContainer___1upkn">
-                                                            <button type="button" class="button___3hiYb" data-e2e="numberOfChanges"><span class="stops___1mrFf"><span>0 пересадок</span></span><span class="icon___dH54l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 15"><path fill="currentColor" fill-rule="evenodd" d="M13 10.2L3.4.6c-.8-.8-2-.8-2.8 0-.8.8-.8 2 0 2.8l11 11c.4.4.9.6 1.4.6.5 0 1-.2 1.4-.6l11-11c.8-.8.8-2 0-2.8-.8-.8-2-.8-2.8 0L13 10.2z"></path></svg></span></button>
-                                                        </div>
-                                                        <div class="tripPriceContainer___2yEXL">
-                                                            <div class="price___1dv6u" data-e2e="priceWithCurrency"><span data-e2e="price"><span>2&nbsp;174&nbsp;₽</span></span><span class="priceClarification___g4HV_"></span></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div data-e2e="resultCellWrapper" class="cell___16tDr">
-                                        <div class="Container_container_98308">
-                                            <a class="link___2H3sm" href="https://www.omio.ru/search-frontend/journey/train/-359958894/ECC2D3235449B4DD59F51D8FC862DC459/-4656205052035048855?locale=ru">
-                                                <div class="slimContainerSection___30GVK">
-                                                    <div class="container___msmDb" data-e2e="resultCell">
-                                                        <div class="indicators___U9uwV">
-                                                            <div class="tripFeatures___2rD-K">
-                                                                <div class="labelsContainer___2fv3m">
-                                                                    <ul class="sortLabels___AFigW">
-                                                                        <li class="labelRecommended___IscZd" data-e2e="resultLabel"><span>2й Самый дёшевый </span></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="companiesContainer___10R6U">
-                                                                    <div class="logos___L5Uuv">
-                                                                        <div class="logoContainer___1pUKz"><img src="./Omio_files/trenitaliaint.webp" height="15" alt="Intercity" data-e2e="provider" class="sc-AxjAm lmzjeI"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="iconsContainer___3os4q"></div>
-                                                        </div>
-                                                        <div class="timesAndStationsContainer___2zGZA"><span class="times___3pG-p"><span class="departureColumn___2FH6w"><span data-e2e="departureTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>07:20</span></span>
-                                                                </span>
-                                                                </span><span class="duration___1lrZd" data-e2e="duration"><span class="separator___HwxsU"></span><span>9<span>ч</span>09</span><span class="separator___HwxsU"></span></span>
-                                                                </span><span class="arrivalColumn___2iJcq"><span data-e2e="arrivalTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>16:29</span></span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                            <div class="stations___21org"><span class="station___2Ru5P" data-e2e="departurePosition">Милан Centrale</span><span class="station___2Ru5P" data-e2e="arrivalPosition">Рим Tiburtina</span></div>
-                                                        </div>
-                                                        <div class="stopsContainer___1upkn">
-                                                            <button type="button" class="button___3hiYb" data-e2e="numberOfChanges"><span class="stops___1mrFf"><span>2 пересадки</span></span><span class="icon___dH54l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 15"><path fill="currentColor" fill-rule="evenodd" d="M13 10.2L3.4.6c-.8-.8-2-.8-2.8 0-.8.8-.8 2 0 2.8l11 11c.4.4.9.6 1.4.6.5 0 1-.2 1.4-.6l11-11c.8-.8.8-2 0-2.8-.8-.8-2-.8-2.8 0L13 10.2z"></path></svg></span></button>
-                                                        </div>
-                                                        <div class="tripPriceContainer___2yEXL">
-                                                            <div class="price___1dv6u" data-e2e="priceWithCurrency"><span data-e2e="price"><span>3&nbsp;493&nbsp;₽</span></span><span class="priceClarification___g4HV_"></span></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div data-e2e="resultCellWrapper" class="cell___16tDr">
-                                        <div class="Container_container_98308">
-                                            <a class="link___2H3sm" href="https://www.omio.ru/search-frontend/journey/train/-136491974/ECC2D3235449B4DD59F51D8FC862DC459/-4694655866969646555?locale=ru">
-                                                <div class="slimContainerSection___30GVK">
-                                                    <div class="container___msmDb" data-e2e="resultCell">
-                                                        <div class="indicators___U9uwV">
-                                                            <div class="tripFeatures___2rD-K">
-                                                                <div class="companiesContainer___10R6U">
-                                                                    <div class="logos___L5Uuv">
-                                                                        <div class="logoContainer___1pUKz"><img src="./Omio_files/trenitaliaint.webp" height="15" alt="Intercity" data-e2e="provider" class="sc-AxjAm lmzjeI"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="iconsContainer___3os4q"></div>
-                                                        </div>
-                                                        <div class="timesAndStationsContainer___2zGZA"><span class="times___3pG-p"><span class="departureColumn___2FH6w"><span data-e2e="departureTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>07:20</span></span>
-                                                                </span>
-                                                                </span><span class="duration___1lrZd" data-e2e="duration"><span class="separator___HwxsU"></span><span>9<span>ч</span>28</span><span class="separator___HwxsU"></span></span>
-                                                                </span><span class="arrivalColumn___2iJcq"><span data-e2e="arrivalTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>16:48</span></span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                            <div class="stations___21org"><span class="station___2Ru5P" data-e2e="departurePosition">Милан Centrale</span><span class="station___2Ru5P" data-e2e="arrivalPosition">Рим Tiburtina</span></div>
-                                                        </div>
-                                                        <div class="stopsContainer___1upkn">
-                                                            <button type="button" class="button___3hiYb" data-e2e="numberOfChanges"><span class="stops___1mrFf"><span>2 пересадки</span></span><span class="icon___dH54l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 15"><path fill="currentColor" fill-rule="evenodd" d="M13 10.2L3.4.6c-.8-.8-2-.8-2.8 0-.8.8-.8 2 0 2.8l11 11c.4.4.9.6 1.4.6.5 0 1-.2 1.4-.6l11-11c.8-.8.8-2 0-2.8-.8-.8-2-.8-2.8 0L13 10.2z"></path></svg></span></button>
-                                                        </div>
-                                                        <div class="tripPriceContainer___2yEXL">
-                                                            <div class="price___1dv6u" data-e2e="priceWithCurrency"><span data-e2e="price"><span>3&nbsp;967&nbsp;₽</span></span><span class="priceClarification___g4HV_"></span></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div data-e2e="resultCellWrapper" class="cell___16tDr">
-                                        <div class="Container_container_98308">
-                                            <a class="link___2H3sm" href="https://www.omio.ru/search-frontend/journey/train/1674769414/ECC2D3235449B4DD59F51D8FC862DC459/4609922442392198999?locale=ru">
-                                                <div class="slimContainerSection___30GVK">
-                                                    <div class="container___msmDb" data-e2e="resultCell">
-                                                        <div class="indicators___U9uwV">
-                                                            <div class="tripFeatures___2rD-K">
-                                                                <div class="companiesContainer___10R6U">
-                                                                    <div class="logos___L5Uuv">
-                                                                        <div class="logoContainer___1pUKz"><img src="./Omio_files/trenitaliareg.webp" height="15" alt="Regionale" data-e2e="provider" class="sc-AxjAm lmzjeI"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="iconsContainer___3os4q"></div>
-                                                        </div>
-                                                        <div class="timesAndStationsContainer___2zGZA"><span class="times___3pG-p"><span class="departureColumn___2FH6w"><span data-e2e="departureTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>07:20</span></span>
-                                                                </span>
-                                                                </span><span class="duration___1lrZd" data-e2e="duration"><span class="separator___HwxsU"></span><span>10<span>ч</span>27</span><span class="separator___HwxsU"></span></span>
-                                                                </span><span class="arrivalColumn___2iJcq"><span data-e2e="arrivalTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>17:47</span></span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                            <div class="stations___21org"><span class="station___2Ru5P" data-e2e="departurePosition">Милан Centrale</span><span class="station___2Ru5P" data-e2e="arrivalPosition">Рим Termini</span></div>
-                                                        </div>
-                                                        <div class="stopsContainer___1upkn">
-                                                            <button type="button" class="button___3hiYb" data-e2e="numberOfChanges"><span class="stops___1mrFf"><span>2 пересадки</span></span><span class="icon___dH54l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 15"><path fill="currentColor" fill-rule="evenodd" d="M13 10.2L3.4.6c-.8-.8-2-.8-2.8 0-.8.8-.8 2 0 2.8l11 11c.4.4.9.6 1.4.6.5 0 1-.2 1.4-.6l11-11c.8-.8.8-2 0-2.8-.8-.8-2-.8-2.8 0L13 10.2z"></path></svg></span></button>
-                                                        </div>
-                                                        <div class="tripPriceContainer___2yEXL">
-                                                            <div class="price___1dv6u" data-e2e="priceWithCurrency"><span data-e2e="price"><span>4&nbsp;209&nbsp;₽</span></span><span class="priceClarification___g4HV_"></span></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div data-e2e="resultCellWrapper" class="cell___16tDr"></div>
-                                    <div data-e2e="resultCellWrapper" class="cell___16tDr">
-                                        <div class="Container_container_98308">
-                                            <a class="link___2H3sm" href="https://www.omio.ru/search-frontend/journey/train/2018562979/ECC2D3235449B4DD59F51D8FC862DC459/6723664698528354914?locale=ru">
-                                                <div class="slimContainerSection___30GVK">
-                                                    <div class="container___msmDb" data-e2e="resultCell">
-                                                        <div class="indicators___U9uwV">
-                                                            <div class="tripFeatures___2rD-K">
-                                                                <div class="companiesContainer___10R6U">
-                                                                    <div class="logos___L5Uuv">
-                                                                        <div class="logoContainer___1pUKz"><img src="./Omio_files/frecciarossa.webp" height="15" alt="Frecciarossa" data-e2e="provider" class="sc-AxjAm lmzjeI"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="iconsContainer___3os4q"></div>
-                                                        </div>
-                                                        <div class="timesAndStationsContainer___2zGZA"><span class="times___3pG-p"><span class="departureColumn___2FH6w"><span data-e2e="departureTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>08:48</span></span>
-                                                                </span>
-                                                                </span><span class="duration___1lrZd" data-e2e="duration"><span class="separator___HwxsU"></span><span>3<span>ч</span>47</span><span class="separator___HwxsU"></span></span>
-                                                                </span><span class="arrivalColumn___2iJcq"><span data-e2e="arrivalTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>12:35</span></span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                            <div class="stations___21org"><span class="station___2Ru5P" data-e2e="departurePosition">Милан Porta Garibaldi</span><span class="station___2Ru5P" data-e2e="arrivalPosition">Рим Termini</span></div>
-                                                        </div>
-                                                        <div class="stopsContainer___1upkn">
-                                                            <button type="button" class="button___3hiYb" data-e2e="numberOfChanges"><span class="stops___1mrFf"><span>0 пересадок</span></span><span class="icon___dH54l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 15"><path fill="currentColor" fill-rule="evenodd" d="M13 10.2L3.4.6c-.8-.8-2-.8-2.8 0-.8.8-.8 2 0 2.8l11 11c.4.4.9.6 1.4.6.5 0 1-.2 1.4-.6l11-11c.8-.8.8-2 0-2.8-.8-.8-2-.8-2.8 0L13 10.2z"></path></svg></span></button>
-                                                        </div>
-                                                        <div class="tripPriceContainer___2yEXL">
-                                                            <div class="price___1dv6u" data-e2e="priceWithCurrency"><span data-e2e="price"><span>5&nbsp;685&nbsp;₽</span></span><span class="priceClarification___g4HV_"></span></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div data-e2e="resultCellWrapper" class="cell___16tDr">
-                                        <div class="Container_container_98308">
-                                            <a class="link___2H3sm" href="https://www.omio.ru/search-frontend/journey/train/180975390/ECC2D3235449B4DD59F51D8FC862DC459/7688886890914826633?locale=ru">
-                                                <div class="slimContainerSection___30GVK">
-                                                    <div class="container___msmDb" data-e2e="resultCell">
-                                                        <div class="indicators___U9uwV">
-                                                            <div class="tripFeatures___2rD-K">
-                                                                <div class="labelsContainer___2fv3m">
-                                                                    <ul class="sortLabels___AFigW">
-                                                                        <li class="labelRecommended___IscZd" data-e2e="resultLabel"><span>2й самый быстрый </span></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="companiesContainer___10R6U">
-                                                                    <div class="logos___L5Uuv">
-                                                                        <div class="logoContainer___1pUKz"><img src="./Omio_files/frecciarossa.webp" height="15" alt="Frecciarossa" data-e2e="provider" class="sc-AxjAm lmzjeI"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="iconsContainer___3os4q"></div>
-                                                        </div>
-                                                        <div class="timesAndStationsContainer___2zGZA"><span class="times___3pG-p"><span class="departureColumn___2FH6w"><span data-e2e="departureTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>09:10</span></span>
-                                                                </span>
-                                                                </span><span class="duration___1lrZd" data-e2e="duration"><span class="separator___HwxsU"></span><span>3<span>ч</span>39</span><span class="separator___HwxsU"></span></span>
-                                                                </span><span class="arrivalColumn___2iJcq"><span data-e2e="arrivalTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>12:49</span></span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                            <div class="stations___21org"><span class="station___2Ru5P" data-e2e="departurePosition">Милан Centrale</span><span class="station___2Ru5P" data-e2e="arrivalPosition">Рим Termini</span></div>
-                                                        </div>
-                                                        <div class="stopsContainer___1upkn">
-                                                            <button type="button" class="button___3hiYb" data-e2e="numberOfChanges"><span class="stops___1mrFf"><span>0 пересадок</span></span><span class="icon___dH54l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 15"><path fill="currentColor" fill-rule="evenodd" d="M13 10.2L3.4.6c-.8-.8-2-.8-2.8 0-.8.8-.8 2 0 2.8l11 11c.4.4.9.6 1.4.6.5 0 1-.2 1.4-.6l11-11c.8-.8.8-2 0-2.8-.8-.8-2-.8-2.8 0L13 10.2z"></path></svg></span></button>
-                                                        </div>
-                                                        <div class="tripPriceContainer___2yEXL">
-                                                            <div class="price___1dv6u" data-e2e="priceWithCurrency"><span data-e2e="price"><span>5&nbsp;685&nbsp;₽</span></span><span class="priceClarification___g4HV_"></span></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div data-e2e="resultCellWrapper" class="cell___16tDr">
-                                        <div class="Container_container_98308">
-                                            <a class="link___2H3sm" href="https://www.omio.ru/search-frontend/journey/train/1876743746/ECC2D3235449B4DD59F51D8FC862DC459/-5525603446535912193?locale=ru">
-                                                <div class="slimContainerSection___30GVK">
-                                                    <div class="container___msmDb" data-e2e="resultCell">
-                                                        <div class="indicators___U9uwV">
-                                                            <div class="tripFeatures___2rD-K">
-                                                                <div class="companiesContainer___10R6U">
-                                                                    <div class="logos___L5Uuv">
-                                                                        <div class="logoContainer___1pUKz"><img src="./Omio_files/frecciarossa.webp" height="15" alt="Frecciarossa" data-e2e="provider" class="sc-AxjAm lmzjeI"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="iconsContainer___3os4q"></div>
-                                                        </div>
-                                                        <div class="timesAndStationsContainer___2zGZA"><span class="times___3pG-p"><span class="departureColumn___2FH6w"><span data-e2e="departureTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>09:48</span></span>
-                                                                </span>
-                                                                </span><span class="duration___1lrZd" data-e2e="duration"><span class="separator___HwxsU"></span><span>3<span>ч</span>47</span><span class="separator___HwxsU"></span></span>
-                                                                </span><span class="arrivalColumn___2iJcq"><span data-e2e="arrivalTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>13:35</span></span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                            <div class="stations___21org"><span class="station___2Ru5P" data-e2e="departurePosition">Милан Porta Garibaldi</span><span class="station___2Ru5P" data-e2e="arrivalPosition">Рим Termini</span></div>
-                                                        </div>
-                                                        <div class="stopsContainer___1upkn">
-                                                            <button type="button" class="button___3hiYb" data-e2e="numberOfChanges"><span class="stops___1mrFf"><span>0 пересадок</span></span><span class="icon___dH54l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 15"><path fill="currentColor" fill-rule="evenodd" d="M13 10.2L3.4.6c-.8-.8-2-.8-2.8 0-.8.8-.8 2 0 2.8l11 11c.4.4.9.6 1.4.6.5 0 1-.2 1.4-.6l11-11c.8-.8.8-2 0-2.8-.8-.8-2-.8-2.8 0L13 10.2z"></path></svg></span></button>
-                                                        </div>
-                                                        <div class="tripPriceContainer___2yEXL">
-                                                            <div class="price___1dv6u" data-e2e="priceWithCurrency"><span data-e2e="price"><span>5&nbsp;305&nbsp;₽</span></span><span class="priceClarification___g4HV_"></span></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div data-e2e="resultCellWrapper" class="cell___16tDr"></div>
-                                    <div data-e2e="resultCellWrapper" class="cell___16tDr">
-                                        <div class="Container_container_98308">
-                                            <a class="link___2H3sm" href="https://www.omio.ru/search-frontend/journey/train/538332289/ECC2D3235449B4DD59F51D8FC862DC459/-2964798413104365619?locale=ru">
-                                                <div class="slimContainerSection___30GVK">
-                                                    <div class="container___msmDb" data-e2e="resultCell">
-                                                        <div class="indicators___U9uwV">
-                                                            <div class="tripFeatures___2rD-K">
-                                                                <div class="labelsContainer___2fv3m">
-                                                                    <ul class="sortLabels___AFigW">
-                                                                        <li class="labelRecommended___IscZd" data-e2e="resultLabel"><span>2й самый быстрый </span></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="companiesContainer___10R6U">
-                                                                    <div class="logos___L5Uuv">
-                                                                        <div class="logoContainer___1pUKz"><img src="./Omio_files/frecciarossa.webp" height="15" alt="Frecciarossa" data-e2e="provider" class="sc-AxjAm lmzjeI"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="iconsContainer___3os4q"></div>
-                                                        </div>
-                                                        <div class="timesAndStationsContainer___2zGZA"><span class="times___3pG-p"><span class="departureColumn___2FH6w"><span data-e2e="departureTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>11:10</span></span>
-                                                                </span>
-                                                                </span><span class="duration___1lrZd" data-e2e="duration"><span class="separator___HwxsU"></span><span>3<span>ч</span>39</span><span class="separator___HwxsU"></span></span>
-                                                                </span><span class="arrivalColumn___2iJcq"><span data-e2e="arrivalTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>14:49</span></span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                            <div class="stations___21org"><span class="station___2Ru5P" data-e2e="departurePosition">Милан Centrale</span><span class="station___2Ru5P" data-e2e="arrivalPosition">Рим Termini</span></div>
-                                                        </div>
-                                                        <div class="stopsContainer___1upkn">
-                                                            <button type="button" class="button___3hiYb" data-e2e="numberOfChanges"><span class="stops___1mrFf"><span>0 пересадок</span></span><span class="icon___dH54l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 15"><path fill="currentColor" fill-rule="evenodd" d="M13 10.2L3.4.6c-.8-.8-2-.8-2.8 0-.8.8-.8 2 0 2.8l11 11c.4.4.9.6 1.4.6.5 0 1-.2 1.4-.6l11-11c.8-.8.8-2 0-2.8-.8-.8-2-.8-2.8 0L13 10.2z"></path></svg></span></button>
-                                                        </div>
-                                                        <div class="tripPriceContainer___2yEXL">
-                                                            <div class="price___1dv6u" data-e2e="priceWithCurrency"><span data-e2e="price"><span>5&nbsp;685&nbsp;₽</span></span><span class="priceClarification___g4HV_"></span></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div data-e2e="resultCellWrapper" class="cell___16tDr">
-                                        <div class="Container_container_98308">
-                                            <a class="link___2H3sm" href="https://www.omio.ru/search-frontend/journey/train/-1341986064/ECC2D3235449B4DD59F51D8FC862DC459/-7484516482550811938?locale=ru">
-                                                <div class="slimContainerSection___30GVK">
-                                                    <div class="container___msmDb" data-e2e="resultCell">
-                                                        <div class="indicators___U9uwV">
-                                                            <div class="tripFeatures___2rD-K">
-                                                                <div class="labelsContainer___2fv3m">
-                                                                    <ul class="sortLabels___AFigW">
-                                                                        <li class="labelRecommended___IscZd" data-e2e="resultLabel"><span>2й самый быстрый </span></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="companiesContainer___10R6U">
-                                                                    <div class="logos___L5Uuv">
-                                                                        <div class="logoContainer___1pUKz"><img src="./Omio_files/frecciarossa.webp" height="15" alt="Frecciarossa" data-e2e="provider" class="sc-AxjAm lmzjeI"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="iconsContainer___3os4q"></div>
-                                                        </div>
-                                                        <div class="timesAndStationsContainer___2zGZA"><span class="times___3pG-p"><span class="departureColumn___2FH6w"><span data-e2e="departureTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>12:10</span></span>
-                                                                </span>
-                                                                </span><span class="duration___1lrZd" data-e2e="duration"><span class="separator___HwxsU"></span><span>3<span>ч</span>39</span><span class="separator___HwxsU"></span></span>
-                                                                </span><span class="arrivalColumn___2iJcq"><span data-e2e="arrivalTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>15:49</span></span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                            <div class="stations___21org"><span class="station___2Ru5P" data-e2e="departurePosition">Милан Centrale</span><span class="station___2Ru5P" data-e2e="arrivalPosition">Рим Termini</span></div>
-                                                        </div>
-                                                        <div class="stopsContainer___1upkn">
-                                                            <button type="button" class="button___3hiYb" data-e2e="numberOfChanges"><span class="stops___1mrFf"><span>0 пересадок</span></span><span class="icon___dH54l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 15"><path fill="currentColor" fill-rule="evenodd" d="M13 10.2L3.4.6c-.8-.8-2-.8-2.8 0-.8.8-.8 2 0 2.8l11 11c.4.4.9.6 1.4.6.5 0 1-.2 1.4-.6l11-11c.8-.8.8-2 0-2.8-.8-.8-2-.8-2.8 0L13 10.2z"></path></svg></span></button>
-                                                        </div>
-                                                        <div class="tripPriceContainer___2yEXL">
-                                                            <div class="price___1dv6u" data-e2e="priceWithCurrency"><span data-e2e="price"><span>5&nbsp;685&nbsp;₽</span></span><span class="priceClarification___g4HV_"></span></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div data-e2e="resultCellWrapper" class="cell___16tDr">
-                                        <div class="Container_container_98308">
-                                            <a class="link___2H3sm" href="https://www.omio.ru/search-frontend/journey/train/915299823/ECC2D3235449B4DD59F51D8FC862DC459/-8042438634250709540?locale=ru">
-                                                <div class="slimContainerSection___30GVK">
-                                                    <div class="container___msmDb" data-e2e="resultCell">
-                                                        <div class="indicators___U9uwV">
-                                                            <div class="tripFeatures___2rD-K">
-                                                                <div class="labelsContainer___2fv3m">
-                                                                    <ul class="sortLabels___AFigW">
-                                                                        <li class="labelRecommended___IscZd" data-e2e="resultLabel"><span>2й самый быстрый </span></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="companiesContainer___10R6U">
-                                                                    <div class="logos___L5Uuv">
-                                                                        <div class="logoContainer___1pUKz"><img src="./Omio_files/frecciarossa.webp" height="15" alt="Frecciarossa" data-e2e="provider" class="sc-AxjAm lmzjeI"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="iconsContainer___3os4q"></div>
-                                                        </div>
-                                                        <div class="timesAndStationsContainer___2zGZA"><span class="times___3pG-p"><span class="departureColumn___2FH6w"><span data-e2e="departureTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>14:10</span></span>
-                                                                </span>
-                                                                </span><span class="duration___1lrZd" data-e2e="duration"><span class="separator___HwxsU"></span><span>3<span>ч</span>39</span><span class="separator___HwxsU"></span></span>
-                                                                </span><span class="arrivalColumn___2iJcq"><span data-e2e="arrivalTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>17:49</span></span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                            <div class="stations___21org"><span class="station___2Ru5P" data-e2e="departurePosition">Милан Centrale</span><span class="station___2Ru5P" data-e2e="arrivalPosition">Рим Termini</span></div>
-                                                        </div>
-                                                        <div class="stopsContainer___1upkn">
-                                                            <button type="button" class="button___3hiYb" data-e2e="numberOfChanges"><span class="stops___1mrFf"><span>0 пересадок</span></span><span class="icon___dH54l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 15"><path fill="currentColor" fill-rule="evenodd" d="M13 10.2L3.4.6c-.8-.8-2-.8-2.8 0-.8.8-.8 2 0 2.8l11 11c.4.4.9.6 1.4.6.5 0 1-.2 1.4-.6l11-11c.8-.8.8-2 0-2.8-.8-.8-2-.8-2.8 0L13 10.2z"></path></svg></span></button>
-                                                        </div>
-                                                        <div class="tripPriceContainer___2yEXL">
-                                                            <div class="price___1dv6u" data-e2e="priceWithCurrency"><span data-e2e="price"><span>5&nbsp;970&nbsp;₽</span></span><span class="priceClarification___g4HV_"></span></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div data-e2e="resultCellWrapper" class="cell___16tDr">
-                                        <div class="Container_container_98308">
-                                            <a class="link___2H3sm" href="https://www.omio.ru/search-frontend/journey/train/-260434043/ECC2D3235449B4DD59F51D8FC862DC459/6816159153333638129?locale=ru">
-                                                <div class="slimContainerSection___30GVK">
-                                                    <div class="container___msmDb" data-e2e="resultCell">
-                                                        <div class="indicators___U9uwV">
-                                                            <div class="tripFeatures___2rD-K">
-                                                                <div class="labelsContainer___2fv3m">
-                                                                    <ul class="sortLabels___AFigW">
-                                                                        <li class="labelRecommended___IscZd" data-e2e="resultLabel"><span> самый быстрый </span></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="companiesContainer___10R6U">
-                                                                    <div class="logos___L5Uuv">
-                                                                        <div class="logoContainer___1pUKz"><img src="./Omio_files/frecciarossa.webp" height="15" alt="Frecciarossa" data-e2e="provider" class="sc-AxjAm lmzjeI"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="iconsContainer___3os4q"></div>
-                                                        </div>
-                                                        <div class="timesAndStationsContainer___2zGZA"><span class="times___3pG-p"><span class="departureColumn___2FH6w"><span data-e2e="departureTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>15:00</span></span>
-                                                                </span>
-                                                                </span><span class="duration___1lrZd" data-e2e="duration"><span class="separator___HwxsU"></span><span>3<span>ч</span>10</span><span class="separator___HwxsU"></span></span>
-                                                                </span><span class="arrivalColumn___2iJcq"><span data-e2e="arrivalTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>18:10</span></span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                            <div class="stations___21org"><span class="station___2Ru5P" data-e2e="departurePosition">Милан Centrale</span><span class="station___2Ru5P" data-e2e="arrivalPosition">Рим Termini</span></div>
-                                                        </div>
-                                                        <div class="stopsContainer___1upkn">
-                                                            <button type="button" class="button___3hiYb" data-e2e="numberOfChanges"><span class="stops___1mrFf"><span>0 пересадок</span></span><span class="icon___dH54l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 15"><path fill="currentColor" fill-rule="evenodd" d="M13 10.2L3.4.6c-.8-.8-2-.8-2.8 0-.8.8-.8 2 0 2.8l11 11c.4.4.9.6 1.4.6.5 0 1-.2 1.4-.6l11-11c.8-.8.8-2 0-2.8-.8-.8-2-.8-2.8 0L13 10.2z"></path></svg></span></button>
-                                                        </div>
-                                                        <div class="tripPriceContainer___2yEXL">
-                                                            <div class="price___1dv6u" data-e2e="priceWithCurrency"><span data-e2e="price"><span>5&nbsp;305&nbsp;₽</span></span><span class="priceClarification___g4HV_"></span></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div data-e2e="resultCellWrapper" class="cell___16tDr">
-                                        <div class="Container_container_98308">
-                                            <a class="link___2H3sm" href="https://www.omio.ru/search-frontend/journey/train/732556919/ECC2D3235449B4DD59F51D8FC862DC459/4807351247993831880?locale=ru">
-                                                <div class="slimContainerSection___30GVK">
-                                                    <div class="container___msmDb" data-e2e="resultCell">
-                                                        <div class="indicators___U9uwV">
-                                                            <div class="tripFeatures___2rD-K">
-                                                                <div class="labelsContainer___2fv3m">
-                                                                    <ul class="sortLabels___AFigW">
-                                                                        <li class="labelRecommended___IscZd" data-e2e="resultLabel"><span>2й самый быстрый </span></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="companiesContainer___10R6U">
-                                                                    <div class="logos___L5Uuv">
-                                                                        <div class="logoContainer___1pUKz"><img src="./Omio_files/frecciarossa.webp" height="15" alt="Frecciarossa" data-e2e="provider" class="sc-AxjAm lmzjeI"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="iconsContainer___3os4q"></div>
-                                                        </div>
-                                                        <div class="timesAndStationsContainer___2zGZA"><span class="times___3pG-p"><span class="departureColumn___2FH6w"><span data-e2e="departureTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>15:10</span></span>
-                                                                </span>
-                                                                </span><span class="duration___1lrZd" data-e2e="duration"><span class="separator___HwxsU"></span><span>3<span>ч</span>39</span><span class="separator___HwxsU"></span></span>
-                                                                </span><span class="arrivalColumn___2iJcq"><span data-e2e="arrivalTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>18:49</span></span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                            <div class="stations___21org"><span class="station___2Ru5P" data-e2e="departurePosition">Милан Centrale</span><span class="station___2Ru5P" data-e2e="arrivalPosition">Рим Termini</span></div>
-                                                        </div>
-                                                        <div class="stopsContainer___1upkn">
-                                                            <button type="button" class="button___3hiYb" data-e2e="numberOfChanges"><span class="stops___1mrFf"><span>0 пересадок</span></span><span class="icon___dH54l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 15"><path fill="currentColor" fill-rule="evenodd" d="M13 10.2L3.4.6c-.8-.8-2-.8-2.8 0-.8.8-.8 2 0 2.8l11 11c.4.4.9.6 1.4.6.5 0 1-.2 1.4-.6l11-11c.8-.8.8-2 0-2.8-.8-.8-2-.8-2.8 0L13 10.2z"></path></svg></span></button>
-                                                        </div>
-                                                        <div class="tripPriceContainer___2yEXL">
-                                                            <div class="price___1dv6u" data-e2e="priceWithCurrency"><span data-e2e="price"><span>5&nbsp;970&nbsp;₽</span></span><span class="priceClarification___g4HV_"></span></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div data-e2e="resultCellWrapper" class="cell___16tDr">
-                                        <div class="Container_container_98308">
-                                            <a class="link___2H3sm" href="https://www.omio.ru/search-frontend/journey/train/-1055045436/ECC2D3235449B4DD59F51D8FC862DC459/9055279746795304241?locale=ru">
-                                                <div class="slimContainerSection___30GVK">
-                                                    <div class="container___msmDb" data-e2e="resultCell">
-                                                        <div class="indicators___U9uwV">
-                                                            <div class="tripFeatures___2rD-K">
-                                                                <div class="labelsContainer___2fv3m">
-                                                                    <ul class="sortLabels___AFigW">
-                                                                        <li class="labelRecommended___IscZd" data-e2e="resultLabel"><span>2й самый быстрый </span></li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="companiesContainer___10R6U">
-                                                                    <div class="logos___L5Uuv">
-                                                                        <div class="logoContainer___1pUKz"><img src="./Omio_files/frecciarossa.webp" height="15" alt="Frecciarossa" data-e2e="provider" class="sc-AxjAm lmzjeI"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="iconsContainer___3os4q"></div>
-                                                        </div>
-                                                        <div class="timesAndStationsContainer___2zGZA"><span class="times___3pG-p"><span class="departureColumn___2FH6w"><span data-e2e="departureTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>16:10</span></span>
-                                                                </span>
-                                                                </span><span class="duration___1lrZd" data-e2e="duration"><span class="separator___HwxsU"></span><span>3<span>ч</span>39</span><span class="separator___HwxsU"></span></span>
-                                                                </span><span class="arrivalColumn___2iJcq"><span data-e2e="arrivalTime"><span class="tripTime___1UC_S"><span class="time___1NfGs" data-e2e="time"><span>19:49</span></span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                                </span>
-                                                            <div class="stations___21org"><span class="station___2Ru5P" data-e2e="departurePosition">Милан Centrale</span><span class="station___2Ru5P" data-e2e="arrivalPosition">Рим Termini</span></div>
-                                                        </div>
-                                                        <div class="stopsContainer___1upkn">
-                                                            <button type="button" class="button___3hiYb" data-e2e="numberOfChanges"><span class="stops___1mrFf"><span>0 пересадок</span></span><span class="icon___dH54l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 15"><path fill="currentColor" fill-rule="evenodd" d="M13 10.2L3.4.6c-.8-.8-2-.8-2.8 0-.8.8-.8 2 0 2.8l11 11c.4.4.9.6 1.4.6.5 0 1-.2 1.4-.6l11-11c.8-.8.8-2 0-2.8-.8-.8-2-.8-2.8 0L13 10.2z"></path></svg></span></button>
-                                                        </div>
-                                                        <div class="tripPriceContainer___2yEXL">
-                                                            <div class="price___1dv6u" data-e2e="priceWithCurrency"><span data-e2e="price"><span>5&nbsp;970&nbsp;₽</span></span><span class="priceClarification___g4HV_"></span></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="StyledProgAdsWrapper-sc-125bmqn-0 bdBizE">
-                                        <div class="SrpAdUnit__StyledWrapper-g1yxy8-0 bMSqJU">
-                                            <div style="width: 0px; height: 0px;"></div>
-                                        </div>
-                                        <div class="SrpAdUnit__StyledWrapper-g1yxy8-0 bMSqJU">
-                                            <div style="width: 320px; height: 50px;"></div>
-                                        </div>
-                                    </div>
-                                    <div class="wrapper___37cAb centered___ar-3D">
-                                        <p class="Typography_paragraphSmall_29545"><span><a target="_blank" href="https://www.omio.ru/legal">Сведения о компании</a>, <a target="_blank" href="https://www.omio.ru/terms-of-use">Условия использования</a> и <a target="_blank" href="https://www.omio.ru/privacy-policy">Политика конфиденциальности</a></span></p>
-                                    </div>
+
                                 </div>
                             </div>
                             <!-- Карта из правой части Omio-->
@@ -1173,13 +244,9 @@
                                 </div>
                             </aside>
                         </div>
-
                     </div>
-                    <header class="headerWrapper___25qIB" style="">
-                        <div class="header___2o5rn" data-e2e="header" style="
-    color: #ff7676;
-    background-color: rgb(199, 103, 103);
-">
+                    <header class="headerWrapper___25qIB" style="background-color: #1ab98d">
+                        <div class="header___2o5rn" data-e2e="header" style="color: #ff7676; background-color: #1ab98d">
                             <div class="Header_Header_b0dd0 Header_primaryTheme_b0dd0">
                                 <div class="HeaderWrapper_HeaderWrapper_4cc17 HeaderWrapper_WithIcon_4cc17">
                                     <div class="HeaderWrapper_IconBack_4cc17" role="button" tabindex="0" data-e2e="backButton">

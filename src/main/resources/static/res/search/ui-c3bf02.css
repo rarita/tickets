@@ -1051,7 +1051,7 @@
     -ms-grid-column: 1;
     -ms-grid-column-span: 4;
     grid-column: 1/5;
-    color: #425486;
+    color: #006c4c;
     -ms-grid-row-align: center;
     align-self: center;
     height: 24px
@@ -1067,7 +1067,7 @@
     -ms-grid-row: 1;
     -ms-grid-row-span: 2;
     grid-row: 1/3;
-    color: #132968;
+    color: #006c4b;
     font-size: 16px;
     font-weight: 600;
     display: none;
@@ -1098,7 +1098,7 @@
 }
 
 .price___183db {
-    color: #425486;
+    color: #00805c;
     font-size: 14px;
     -ms-flex-item-align: end;
     align-self: flex-end;
@@ -1841,7 +1841,7 @@
 
 .time___1NfGs {
     font-size: 18px;
-    color: #132968;
+    color: #00805c;
     font-weight: 700;
     white-space: nowrap
 }
@@ -1902,7 +1902,7 @@
     display: flex;
     font-size: 14px;
     line-height: 16px;
-    color: #425486
+    color: #00b17e
 }
 
 .station___2Ru5P {
@@ -1965,7 +1965,7 @@
 .button___3hiYb {
     border-radius: 11px;
     height: 24px;
-    background-color: #cde2f5;
+    /* background-color: #cde2f5; */
     border: none;
     outline: none;
     line-height: 16px;
@@ -1973,7 +1973,7 @@
     -ms-flex-align: center;
     align-items: center;
     padding: 0 12px;
-    color: #132968;
+    color: #016146;
     cursor: pointer;
     white-space: nowrap
 }
@@ -2015,7 +2015,7 @@
 .price___1dv6u,
 .priceDisabled___3k-xn {
     display: block;
-    color: #132968;
+    color: #00805c;
     font-size: 18px;
     font-weight: 700;
     text-align: right
@@ -4000,7 +4000,7 @@ a {
 #mw {
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
-    color: #425486;
+    color: #006549;
     font-family: GT Walsheim, Helvetica Neue, Helvetica, Arial, sans-serif;
     margin: 0;
     -webkit-box-sizing: border-box;
@@ -4039,4 +4039,12 @@ a {
 .map_float {
     /*position: absolute;
      top: calc(); */
+}
+
+.menu-tab-active span {
+    color: #fa6b6b;
+}
+
+.menu-tab-active svg {
+    color: #fa6b6b;
 }

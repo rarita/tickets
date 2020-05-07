@@ -1,7 +1,74 @@
 
 $(document).ready(function() {
     $(".left").append(renderItem());
+    initControls();
 });
+
+function initControls() {
+    // Деньги
+    $( "#price-slider" ).slider({
+        range: true,
+        min: 0,
+        max: 500,
+        values: [ 25, 500 ],
+        slide: function( event, ui ) {
+            $( "#amount" ).val( "₽" + ui.values[ 0 ]*100 + " - ₽" + ui.values[ 1 ]*100 );
+        }
+    });
+    $( "#amount" ).val( "₽" + $( "#price-slider" ).slider( "values", 0 )*100 +
+        " - ₽" + $( "#price-slider" ).slider( "values", 1 )*100 );
+    // Время
+    $( "#time-slider" ).slider({
+        range: true,
+        min: 0,
+        max: 143,
+        values: [ 0, 143 ],
+        slide: function( event, ui ) {
+            const timeStart = fractionToTime(ui.values[ 0 ]);
+            const timeEnd = fractionToTime(ui.values[ 1 ]);
+            $( "#amount-time" ).val( timeStart + " - " + timeEnd );
+        }
+    });
+    $( "#amount-time" ).val(fractionToTime($( "#time-slider" ).slider( "values", 0 )) +
+        " - " + fractionToTime($( "#time-slider" ).slider( "values", 1 )) );
+    // Время на борту
+    $( "#time-onboard-slider" ).slider({
+        range: true,
+        min: 0,
+        max: 143,
+        values: [ 0, 18 ],
+        slide: function( event, ui ) {
+            const timeStart = fractionToTime(ui.values[ 0 ]);
+            const timeEnd = fractionToTime(ui.values[ 1 ]);
+            $( "#amount-onboard-time" ).val( timeStart + " - " + timeEnd );
+        }
+    });
+    $( "#amount-onboard-time" ).val(fractionToTime($( "#time-onboard-slider" ).slider( "values", 0 )) +
+        " - " + fractionToTime($( "#time-onboard-slider" ).slider( "values", 1 )) );
+    // Мультимодальные параметры
+    $( ".modal-control-group" ).controlgroup({
+        "direction": "vertical"
+    });
+
+    // Вкладки меню сверху
+    $(".menu-tab").click(function() {
+        // Удаляем активный статус
+       $(".menu-tab-active").removeClass("menu-tab-active");
+       // Добавляем данной вкладке активный статус
+        $(this).addClass("menu-tab-active");
+        // Перемещаем полоску под него
+        const css_left = ($(".menu-tab").index($(this))*25) + "%";
+        $(".line___1F-Hx").css("left", css_left);
+    });
+}
+
+function fractionToTime(fraction) {
+    var hours = Math.floor(fraction / 6).toString();
+    if (hours.length < 2)
+        hours = "0" + hours;
+    var minutes = (fraction % 6).toString() + "0";
+    return hours + ":" + minutes;
+}
 
 // Вернет отрендеренный блок который можно приплюсовать к списку
 function renderItem() {
