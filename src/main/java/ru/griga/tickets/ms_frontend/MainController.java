@@ -7,8 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.griga.tickets.shared.model.SearchParams;
 
-import java.util.Map;
-
 @Controller
 @RequestMapping("/")
 public class MainController {
@@ -17,13 +15,13 @@ public class MainController {
 
     @GetMapping("/")
     public String getIndex() {
+        logger.info("Accessed /");
         return "frontpage/index";
     }
 
-    @PostMapping(
-            path = "/search")
-    public String getSearchPage(SearchParams rBody) {
-        logger.debug(rBody.toString());
+    @PostMapping("/search")
+    public String getSearchPage(SearchParams searchParams) {
+        logger.info("Accessed /search with searchParams=" + searchParams);
         return "search/search";
     }
 

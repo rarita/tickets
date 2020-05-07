@@ -1,0 +1,40 @@
+.marks-container {
+    width: 1200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    position: absolute;
+    top: 530px;
+    left: 170px;
+}
+
+.pic-mark {
+    width: 150px;
+    margin-right: 50px;
+}
+
+.tt-select {
+    font-size: 16px;
+}
+
+.ddown {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 210px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+
+    padding-top: 9px;
+}
+
+.horizontal {
+    display: inline-block;
+    width: 100%;
+    padding: 5px;
+}
+
+.horizontal input {
+    float: right;
+}
