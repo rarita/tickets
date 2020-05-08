@@ -4037,6 +4037,8 @@ a {
 }
 
 .map_float {
+    width: 400px;
+    height: 720px;
     /*position: absolute;
      top: calc(); */
 }

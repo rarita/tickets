@@ -30,6 +30,12 @@
     <script type="text/javascript" src="../../static/script/search_ajax.js"
             th:src="@{script/search_ajax.js}"></script>
 
+    <!-- Карты mapbox CDN -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css' rel='stylesheet' />
+
+
+
     <link rel="stylesheet" href="../../static/res/cyrillic-font-swap.css" th:href="@{res/cyrillic-font-swap.css}" media="all">
     <link rel="stylesheet" href="../../static/res/jquery-ui.min.css" th:href="@{res/jquery-ui.min.css}">
     <link href="../../static/res/search/GoEuroVendors-5d3c87.css" th:href="@{res/search/GoEuroVendors-5d3c87.css}" rel="stylesheet">
@@ -77,7 +83,7 @@
                                          <input type="checkbox" id="direct-flights" readonly style="border:0; color:#fa6b6b; font-weight:bold;">
                                      </p>
                                      <!-- Группа чекбоксов модальных маршрутов -->
-                                     <fieldset>
+                                     <fieldset id="multimodal-chkboxes" style="display: none;">
                                          <legend>Параметры мультимодальных перевозок</legend>
                                         <div class="modal-control-group" style="width: 50%; margin: 0 auto">
                                             <div style="height: 5px"></div>
@@ -239,9 +245,7 @@
                             </div>
                             <!-- Карта из правой части Omio-->
                             <aside class="right___3No3t" width="400px">
-                                <div class="map_float">
-                                    <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A606967a1b6c4fe82bf4a38978b8a0a3a1d0d7c71c0b6d7f7e66206e5939aa694&amp;source=constructor" width="400px" height="720px" frameborder="0"></iframe>
-                                </div>
+                                <div id="map_float" class="map_float"></div>
                             </aside>
                         </div>
                     </div>
@@ -287,6 +291,88 @@
 <link rel="preload" href="https://cdn-goeuro.com/static_content/web/content/font/gt-walsheim/GT-Walsheim-Pro-Bold.woff2" as="font" type="font/woff2" crossorigin="">
 <link rel="preload" href="https://cdn-goeuro.com/static_content/web/content/font/gt-walsheim/GT-Walsheim-Pro-Bold.woff" as="font" type="font/woff" crossorigin="">
 
+<!-- Mapbox token pk.eyJ1IjoicmFyaXRhIiwiYSI6ImNrOXk0dXM5azAybHAzbHFwZTRtZ2c1ODkifQ.2os3eiRgC265OXyKjihXQw -->
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoicmFyaXRhIiwiYSI6ImNrOXk0dXM5azAybHAzbHFwZTRtZ2c1ODkifQ.2os3eiRgC265OXyKjihXQw';
+    var map = new mapboxgl.Map({
+        container: 'map_float',
+        style: 'mapbox://styles/mapbox/streets-v9',
+        center: [37.617633, 55.755786],
+        zoom: 7
+    });
+
+    var x_markers = [];
+
+    // Так можно ебашить маркеры на карту
+    var marker = new mapboxgl.Marker({'color': '#006c4c'})
+        .setLngLat([37.617633, 55.755786])
+        .addTo(map);
+
+    x_markers.push(marker);
+
+    var x_data = {
+            'type': 'Feature',
+            'properties': {},
+            'geometry': {
+                'type': 'LineString',
+                'coordinates': [[30.3083, 59.806084], [20.586645, 54.882656]]
+            }
+        };
+
+    // Слой для полосок
+    map.on('load', function() {
+
+        map.addSource('route', {
+            'type': 'geojson',
+            'data': x_data
+        });
+
+        map.addLayer({
+            'id': 'route',
+            'type': 'line',
+            'source': 'route',
+            'layout': {
+                'line-join': 'round',
+                'line-cap': 'round'
+            },
+            'paint': {
+                'line-color': '#1ab98d',
+                'line-width': 8
+            }
+        });
+
+    });
+
+    function dbg() { // LED KRR KGD
+        var coords = [[30.3083, 59.806084], [39.139004, 45.034138], [20.586645, 54.882656]];
+
+        // Расставляем метки
+        for (var i = 0; i < x_markers.length; i++) {
+            x_markers[i].remove();
+        }
+        x_markers = [];
+
+        // Очищаем координаты в x_data
+        x_data.geometry.coordinates = [];
+
+        for (var j = 0; j < coords.length; j++) {
+            var marker = new mapboxgl.Marker({'color': '#006c4c'})
+                .setLngLat(coords[j])
+                .addTo(map);
+            x_markers.push(marker);
+
+            x_data.geometry.coordinates.push(coords[j]);
+        }
+
+        map.fitBounds([coords[0], coords[coords.length - 1]], {
+            padding: {top: 50, bottom:50, left: 50, right: 50}
+        });
+
+        map.getSource('route').setData(x_data);
+    }
+
+
+</script>
 
 </body>
 

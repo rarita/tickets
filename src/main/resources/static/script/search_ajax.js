@@ -56,9 +56,29 @@ function initControls() {
        $(".menu-tab-active").removeClass("menu-tab-active");
        // Добавляем данной вкладке активный статус
         $(this).addClass("menu-tab-active");
-        // Перемещаем полоску под него
-        const css_left = ($(".menu-tab").index($(this))*25) + "%";
+        // Перемещаем полоску под него multimodal-chkboxes
+        const tabId = $(".menu-tab").index($(this));
+        const css_left = (tabId*25) + "%";
         $(".line___1F-Hx").css("left", css_left);
+        if (tabId === 3) {
+            $("#multimodal-chkboxes").css("display", "block")
+        }
+        else {
+            $("#multimodal-chkboxes").css("display", "none")
+        }
+    });
+}
+
+function initMap() {
+    var myMap = new ymaps.Map("map_float", {
+        // Координаты центра карты.
+        // Порядок по умолчанию: «широта, долгота».
+        // Чтобы не определять координаты центра карты вручную,
+        // воспользуйтесь инструментом Определение координат.
+        center: [55.76, 37.64],
+        // Уровень масштабирования. Допустимые значения:
+        // от 0 (весь мир) до 19.
+        zoom: 7
     });
 }
 
@@ -74,7 +94,7 @@ function fractionToTime(fraction) {
 function renderItem() {
     var container = jQuery('<div/>', {'class': 'cell___16tDr'});
     var c2 = jQuery('<div/>', {'class': 'Container_container_98308'});
-    var link_c = jQuery('<a/>', {'class': 'link___2H3sm', 'href' : '../'});
+    var link_c = jQuery('<a/>', {'class': 'link___2H3sm'}); // тут был href ещё
 
     var c3_section = jQuery('<div/>', {'class': 'slimContainerSection___30GVK'});
     var c4_section = jQuery('<div/>', {'class': 'container___msmDb'});
