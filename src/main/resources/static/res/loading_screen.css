@@ -1,0 +1,38 @@
+.LockOn {
+    display: block;
+    visibility: visible;
+    position: absolute;
+    z-index: 999;
+    top: 0px;
+    left: 0px;
+    width: 105%;
+    height: 105%;
+    background-color:white;
+    vertical-align:bottom;
+    padding-top: 20%;
+    filter: alpha(opacity=75);
+    opacity: 0.75;
+    font-size:large;
+    color:blue;
+    font-style:italic;
+    font-weight:400;
+    /* background-image: url("../Common/loadingGIF.gif"); */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.loading {
+    position: absolute;
+    top: calc(50% - 340px);
+    left: calc(50% - 75px);
+    width: 149px;
+    height: 679px;
+    /* margin:-60px 0 0 -60px; */
+    -webkit-animation:spin 3s linear infinite;
+    -moz-animation:spin 3s linear infinite;
+    animation:spin 3s linear infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }

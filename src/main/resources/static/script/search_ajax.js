@@ -92,7 +92,7 @@ function fractionToTime(fraction) {
 
 // Вернет отрендеренный блок который можно приплюсовать к списку
 function renderItem() {
-    var container = jQuery('<div/>', {'class': 'cell___16tDr'});
+    var container = jQuery('<div/>', {'class': 'cell___16tDr'}); // есть вариант selected___3K41_
     var c2 = jQuery('<div/>', {'class': 'Container_container_98308'});
     var link_c = jQuery('<a/>', {'class': 'link___2H3sm'}); // тут был href ещё
 

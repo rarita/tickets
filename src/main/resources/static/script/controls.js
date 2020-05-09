@@ -73,10 +73,12 @@ function assignAutocomplete(target) {
         select: function (event, ui) {
             if (event.target.placeholder.startsWith('откуда:')) {
                 itemFrom = ui.item;
+                $("#src").val(ui.item.value);
                 $("#originCode").val(ui.item.id);
             }
             else {
                 itemWhere = ui.item;
+                $("#dst").val(ui.item.value);
                 $("#destinationCode").val(ui.item.id);
             }
 

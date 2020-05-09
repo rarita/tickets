@@ -13,7 +13,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
 public class MainController {
 
     private final PathMakerService pathMakerService;
