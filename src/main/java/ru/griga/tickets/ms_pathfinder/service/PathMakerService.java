@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import ru.griga.tickets.shared.model.SearchParams;
 import ru.griga.tickets.shared.repository.ItineraryRepository;
+import ru.griga.tickets.shared.repository.SkyPickerItineraryRepository;
 
 import java.io.IOException;
 import java.net.URI;
@@ -25,14 +26,17 @@ public class PathMakerService {
     private final PathDiscoveryService pathDiscoveryService;
     private final ItineraryRepository itineraryRepository;
     private final RestTemplate restTemplate;
+    private final SkyPickerItineraryRepository spir;
 
     public PathMakerService(PathDiscoveryService pathDiscoveryService,
                             ItineraryRepository itineraryRepository,
-                            @Autowired @LoadBalanced RestTemplate restTemplate) {
+                            @Autowired @LoadBalanced RestTemplate restTemplate,
+                            SkyPickerItineraryRepository spir) {
 
         this.pathDiscoveryService = pathDiscoveryService;
         this.itineraryRepository = itineraryRepository;
         this.restTemplate = restTemplate;
+        this.spir = spir;
 
     }
 

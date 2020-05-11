@@ -12,6 +12,7 @@ import ru.griga.tickets.ms_pathfinder.service.PathMakerService;
 import ru.griga.tickets.shared.model.ItineraryType;
 import ru.griga.tickets.shared.model.SearchParams;
 import ru.griga.tickets.shared.repository.ItineraryRepository;
+import ru.griga.tickets.shared.repository.SkyPickerItineraryRepository;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -23,7 +24,7 @@ import java.util.List;
 @SpringBootTest
 public class PathMakerServiceTest {
 
-    private final LocalDate targetDate = LocalDate.now().plusDays(5);
+    private final LocalDate targetDate = LocalDate.now().plusDays(4);
 
     private final SearchParams searchParams = new SearchParams(
             "RU",
@@ -45,10 +46,19 @@ public class PathMakerServiceTest {
     @Autowired
     private ItineraryRepository itineraryRepository;
 
+    @Autowired
+    private SkyPickerItineraryRepository spir;
+
     @Test
     public void testPathDiscovery() throws IOException {
         var res = pds.discoverPathsFrom("AMS", 2);
         assert res.get("status").equals("OK");
+    }
+
+    @Test
+    public void tw() {
+        var result = spir.findItinerariesBySearchParams(searchParams);
+        System.out.println(result);
     }
 
     @Test
@@ -66,6 +76,7 @@ public class PathMakerServiceTest {
         searchParams.setTypesAllowed(Collections.singletonList(ItineraryType.AIRCRAFT));
 
         var x = itineraryRepository.findItinerariesBySearchParams(searchParams);
+        var result = spir.findItinerariesBySearchParams(searchParams);
 
         System.out.println("wow");
     }

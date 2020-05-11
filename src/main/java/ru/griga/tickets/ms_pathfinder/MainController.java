@@ -1,5 +1,8 @@
 package ru.griga.tickets.ms_pathfinder;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.jsontype.BasicPolymorphicTypeValidator;
+import com.fasterxml.jackson.databind.jsontype.PolymorphicTypeValidator;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.griga.tickets.ms_pathfinder.service.PathMakerService;
@@ -18,16 +21,22 @@ public class MainController {
 
     private final PathMakerService pathMakerService;
     private final ItineraryRepository itineraryRepository;
+    private final ObjectMapper objectMapper;
 
-    public MainController(PathMakerService pathMakerService, ItineraryRepository itineraryRepository) {
+    public MainController(PathMakerService pathMakerService,
+                          ItineraryRepository itineraryRepository,
+                          ObjectMapper objectMapper) {
+
         this.pathMakerService = pathMakerService;
         this.itineraryRepository = itineraryRepository;
+        this.objectMapper = objectMapper;
+
     }
 
     @PostMapping("/paths_for")
     public ResponseEntity<?> getPathsFor(@RequestBody SearchParams searchParams) throws IOException {
         var response = pathMakerService.makePathsFor(searchParams);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(objectMapper.writeValueAsString(response));
     }
 
     @GetMapping("/autocomplete")

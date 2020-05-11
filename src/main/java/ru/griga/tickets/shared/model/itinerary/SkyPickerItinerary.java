@@ -1,6 +1,8 @@
 package ru.griga.tickets.shared.model.itinerary;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.neo4j.ogm.annotation.RelationshipEntity;
 import ru.griga.tickets.shared.model.ItineraryType;
@@ -10,9 +12,13 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 
+@Data
 @RelationshipEntity("CAN_GO")
 @EqualsAndHashCode(callSuper = true)
 public class SkyPickerItinerary extends Itinerary {
+
+    @JsonProperty
+    public static final long SERIAL_UID = 123568206894815930L;
 
     private ItineraryType type;
 

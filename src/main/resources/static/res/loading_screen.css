@@ -1,5 +1,5 @@
 .LockOn {
-    display: block;
+    display: none;
     visibility: visible;
     position: absolute;
     z-index: 999;

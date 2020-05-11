@@ -1,6 +1,7 @@
+// Данные из бэкэнда
+var g_data;
 
 $(document).ready(function() {
-    $(".left").append(renderItem());
     initControls();
 });
 
@@ -67,19 +68,45 @@ function initControls() {
             $("#multimodal-chkboxes").css("display", "none")
         }
     });
+
+    // Сортировка
+    $("#sort_by").on('change', function () {
+        $(".cell___16tDr").remove();
+        const items = sortDataOn(g_data, this.value).map(it => renderItem(it));
+        items.forEach(it => $(".left").append(it));
+    });
 }
 
-function initMap() {
-    var myMap = new ymaps.Map("map_float", {
-        // Координаты центра карты.
-        // Порядок по умолчанию: «широта, долгота».
-        // Чтобы не определять координаты центра карты вручную,
-        // воспользуйтесь инструментом Определение координат.
-        center: [55.76, 37.64],
-        // Уровень масштабирования. Допустимые значения:
-        // от 0 (весь мир) до 19.
-        zoom: 7
-    });
+/**
+ * сортирует данные по переданному принципу
+ */
+function sortDataOn(data, condition) {
+    switch (condition) {
+        case "price_asc":
+            return data.sort(function (a, b) {
+                return a.totalPrice - b.totalPrice;
+            });
+        case "price_desc":
+            return data.sort(function (a, b) {
+                return b.totalPrice - a.totalPrice;
+            });
+        case "duration_asc":
+            return data.sort(function (a, b) {
+                return a.totalDuration - b.totalDuration;
+            });
+        case "duration_desc":
+            return data.sort(function (a, b) {
+                return b.totalDuration - a.totalDuration;
+            });
+    }
+    return null; // не случится никогда
+}
+
+/**
+ * Фильтрует данные по состоянию объектов фильтров в DOM
+ */
+function filterDataOnDOM() {
+
 }
 
 function fractionToTime(fraction) {
@@ -90,8 +117,41 @@ function fractionToTime(fraction) {
     return hours + ":" + minutes;
 }
 
+/**
+ * разместить на экране полученные с сервера данные
+ * @param data то, что мы получаем ответом из бэкэнда
+ * Array of itin_data
+ */
+function setUpSearchResults(data) {
+    // Дебаг
+    console.dir(data);
+
+    // Подготавливаем дату для работы
+    data.forEach(d => {
+        d.totalPrice = d.itin.reduce(priceReduce, 0);
+
+        const o_dt_minutes = d.itin[0].departureTime[3]*60 + d.itin[0].departureTime[4];
+        const o_at_minutes = d.itin[d.itin.length - 1].arrivalTime[3]*60 + d.itin[d.itin.length - 1].arrivalTime[4];
+        d.totalDuration = o_at_minutes - o_dt_minutes;
+
+    });
+    // Сохраняем дату
+    g_data = data;
+    // Рендерим элементы для всех айтемов и дефолтно сортируем
+    const renderedItems = sortDataOn(data, $("#sort_by").val()).map(it => renderItem(it));
+    console.dir(renderedItems); // Пока что так
+    renderedItems.forEach(it => $(".left").append(it)); // И так
+}
+
+/**
+ * ну это чтобы редюситть тотал прайс
+ */
+function priceReduce(total, value, index, array) {
+    return total + value.cost;
+}
+
 // Вернет отрендеренный блок который можно приплюсовать к списку
-function renderItem() {
+function renderItem(itemData) {
     var container = jQuery('<div/>', {'class': 'cell___16tDr'}); // есть вариант selected___3K41_
     var c2 = jQuery('<div/>', {'class': 'Container_container_98308'});
     var link_c = jQuery('<a/>', {'class': 'link___2H3sm'}); // тут был href ещё
@@ -109,16 +169,21 @@ function renderItem() {
     var logoContainer = jQuery('<div/>', {'class': 'logoContainer___1pUKz'});
 
     // Картинки Авиакомпаний
-    const imgUrl = "https://images.kiwi.com/airlines/64x64/" + "S7" + ".png";
-    var airlineLogoImg = jQuery('<img/>', {
-        'src': imgUrl,
-        'class': 'sc-AxjAm lmzjeI',
-        'style': 'margin-right: 10px;'
+    itemData.itin.forEach(it => {
+        const carrierCode = it.carrierCode;
+        const imgUrl = "https://images.kiwi.com/airlines/64x64/" + carrierCode + ".png";
+        var airlineLogoImg = jQuery('<img/>', {
+            'src': imgUrl,
+            'class': 'sc-AxjAm lmzjeI',
+            'style': 'margin-right: 10px;'
+        });
+        airlineLogoImg.height("48px");
+
+        airlineLogoImg.appendTo(logoContainer);
     });
-    airlineLogoImg.height("48px");
+
 
     // Упаковка дивов
-    airlineLogoImg.appendTo(logoContainer);
     logoContainer.appendTo(logos);
     logos.appendTo(companies);
     companies.appendTo(tripFeatures);
@@ -135,11 +200,20 @@ function renderItem() {
     var tripTime = jQuery('<span/>', {'class': 'tripTime___1UC_S'});
     var time = jQuery('<span/>', {'class': 'time___1NfGs'});
     var actualTime = jQuery('<span/>');
-    actualTime.text("00:00");
+
+    // Заранее посчитаем затраченное время
+    durationString = Math.floor(itemData.totalDuration / 60) + "ч" + ((itemData.totalDuration % 60 > 9) ?
+        itemData.totalDuration % 60 : "0" + itemData.totalDuration % 60) + "м";
+
+    const depTimeData = itemData.itin[0].departureTime;
+    if (depTimeData[3].toString().length < 2)
+        depTimeData[3] = "0" + depTimeData[3];
+    if (depTimeData[4].toString().length < 2)
+        depTimeData[4] = "0" + depTimeData[4];
+    actualTime.text(depTimeData[3] + ":" + depTimeData[4]);
 
     var duration = jQuery('<span/>', {'class': 'duration___1lrZd'});
     duration.append(jQuery('<span/>', {'class': 'separator___HwxsU'}));
-    var durationString = "3" + "ч" + "10" + "м";
     var actualDuration = jQuery('<span/>');
     actualDuration.text(durationString);
     duration.append(actualDuration);
@@ -150,7 +224,12 @@ function renderItem() {
     var a_tripTime = jQuery('<span/>', {'class': 'tripTime___1UC_S'});
     var a_time = jQuery('<span/>', {'class': 'time___1NfGs'});
     var a_actualTime = jQuery('<span/>');
-    a_actualTime.text("23:59");
+    const arrTimeData = itemData.itin[itemData.itin.length - 1].arrivalTime;
+    if (arrTimeData[3].toString().length < 2)
+        arrTimeData[3] = "0" + arrTimeData[3];
+    if (arrTimeData[4].toString().length < 2)
+        arrTimeData[4] = "0" + arrTimeData[4];
+    a_actualTime.text(arrTimeData[3] + ":" + arrTimeData[4]);
 
     // Упаковка дивов времени
     actualTime.appendTo(time);
@@ -171,9 +250,13 @@ function renderItem() {
     // - Станции
     var stations = jQuery('<div/>', {'class': 'stations___21org'});
     var srcStation = jQuery('<span/>', {'class': 'station___2Ru5P'});
-    srcStation.text("Станция отпр.");
+    const srcStationData = ((itemData.src.name_RU) ? itemData.src.name_RU : itemData.src.name_EN) +
+    ", " + ((itemData.c_src.name_RU) ? itemData.c_src.name_RU : itemData.c_src.name_EN);
+    srcStation.text(srcStationData);
     var destStation = jQuery('<span/>', {'class': 'station___2Ru5P'});
-    destStation.text("Станция назн.");
+    const dstStationData = ((itemData.dst.name_RU) ? itemData.dst.name_RU : itemData.dst.name_EN) +
+        ", " + ((itemData.c_dst.name_RU) ? itemData.c_dst.name_RU : itemData.c_dst.name_EN);
+    destStation.text(dstStationData);
 
     // Упаковка дивов станций
     srcStation.appendTo(stations);
@@ -188,7 +271,8 @@ function renderItem() {
     var numberOfChanges = jQuery('<button/>', {'class': 'button___3hiYb', 'type': 'button', 'data-e2e': 'numberOfChanges'});
     var stopsText = jQuery('<span/>', {'class': 'stops___1mrFf'});
     var stopsActualText = jQuery('<span/>');
-    stopsActualText.text("N пересадок");
+    const switchesCount = itemData.itin.length - 1;
+    stopsActualText.text( switchesCount + " пересадок");
 
     var iconSpan = jQuery('<span/>', {'class': 'icon___dH54l'});
     var iconSvg = jQuery('<svg/>', {'xmlns': 'http://www.w3.org/2000/svg', 'viewBox': '0 0 26 15'});
@@ -209,7 +293,10 @@ function renderItem() {
     var tripPrice = jQuery('<div/>', {'class': 'tripPriceContainer___2yEXL'});
     var priceHolder = jQuery('<div/>', {'class': 'price___1dv6u'});
     var priceActualText = jQuery('<span/>');
-    priceActualText.text("1 111 Р");
+    // Правильная прайс дата
+    var priceData = 0;
+    itemData.itin.forEach(it => priceData += it.cost);
+    priceActualText.text(priceData + " Р");
 
     // Упаковка цен перелета
     priceActualText.appendTo(priceHolder);
