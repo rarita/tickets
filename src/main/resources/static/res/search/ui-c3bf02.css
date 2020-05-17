@@ -4059,3 +4059,60 @@ a {
 .menu-tab-active svg {
     color: #fa6b6b;
 }
+
+.modal-content {
+    background-color: #fefefe;
+    display: block;
+    z-index: -1;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.dot {
+    height: 15px;
+    width: 15px;
+    background-color: #00b17e;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+}
+
+.stripe {
+    width: 2px;
+    height: 50px;
+    background-color: #00b17e;
+    margin: 0 auto;
+}
+
+.dashed {
+    width: 2px;
+    height: 25px;
+    border-left: 2px dotted #00b17e;
+    margin: 0 auto;
+}
+
+.menu-tab {
+    min-width: 110px;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 1024px) {
+    .menu-tab {
+        min-width: 25%;
+        margin-bottom: 10px;
+    }
+    .aml_amn_1Kadm div {
+        flex-direction: column;
+        margin-left: 10px;
+    }
+}

@@ -85,7 +85,10 @@ function initControls() {
 
     // Фильтры WIP
 
-
+    // Модальное окно
+    $('#exampleModalCenter').on('show.bs.modal', function (event) {
+        //alert("ur momma gae");
+    });
 }
 
 /**
@@ -154,8 +157,11 @@ function setUpSearchResults(data) {
     renderedItems.forEach(it => $(".left").append(it)); // И так
 
     // Назначить клики
+
     // Клики по перелетам
     $(".cell___16tDr").click(onCellClick);
+    // Клики по трансферам
+    $(".button___3hiYb").click(onTransfersClick);
 }
 
 function onCellClick() {
@@ -175,6 +181,125 @@ function onCellClick() {
 
     console.dir(coords);
     updateMap(coords);
+}
+
+function tdWithText(text) {
+    var _td = jQuery('<td/>');
+    _td.text(text);
+    return _td;
+}
+
+// в минутах
+// dt2 > dt1
+function durationBetween(dt1, dt2) {
+    const o_dt_minutes = parseInt(dt1[3]*60) + parseInt(dt1[4]);
+    const o_at_minutes = parseInt(dt2[3]*60) + parseInt(dt2[4]);
+    return o_at_minutes - o_dt_minutes;
+}
+
+// 3ч55м
+function minutesToDurationString(minutes) {
+    return Math.floor(minutes / 60) + "ч" + ((minutes % 60 > 9) ?
+        minutes % 60 : "0" + minutes % 60) + "м";
+}
+
+function timeToTwoCharString(timeInt) {
+    timeInt = parseInt(timeInt);
+    if (timeInt > 9)
+        return timeInt.toString();
+    return "0" + timeInt;
+}
+
+function onTransfersClick() {
+    // Набить модальное окно говном и показать его
+    $('#exampleModalCenter').modal();
+
+    // Зачистить фекалии
+    $('.added').remove();
+
+    const idx = $(".cell___16tDr").index($(this).closest('.cell___16tDr'));
+    console.log("ontransfersclick idx = " + idx);
+
+    const itin = JSON.parse(JSON.stringify(g_data[idx].itin));
+
+    // Вся хуйня которую будем потом реюзать
+    var dotTD = jQuery('<td/>');
+    var dot = jQuery('<div/>', {'class' : 'dot'});
+    dotTD.append(dot);
+    var stripeTD = jQuery('<td/>');
+    var stripe = jQuery('<div/>', {'class' : 'stripe'});
+    stripeTD.append(stripe);
+    var dashedTD = jQuery('<td/>');
+    var dashed = jQuery('<div/>', {'class' : 'dashed'});
+    dashedTD.append(dashed);
+
+    for (var i = 0; i < itin.length; i++) {
+        const itinerary = g_data[idx].itin[i];
+        const dest = JSON.parse(JSON.stringify(itinerary)).destination;
+
+        // чекаем, была ли пересадка с прошлого перелета
+        if (i > 0) {
+            var dtBetween = durationBetween(itin[i - 1].arrivalTime, itin[i].departureTime);
+            if (dtBetween > 0) {
+                // Добавить пересадочный хуёк
+                var ttr = jQuery('<tr/>');
+                ttr.addClass("added");
+                ttr.append(jQuery('<td/>'));
+                ttr.append(dashedTD.clone());
+                // Считаем затраченное время
+                const tduration = durationBetween(itin[i].departureTime, itin[i].arrivalTime);
+
+                var ttext = "Пересадка ";
+                if (tduration < 59)
+                    ttext = ttext + tduration + " минут";
+                else
+                    ttext = ttext + Math.floor(tduration / 60) + " час " + tduration % 60 + " минут";
+
+                var ttwt = tdWithText(ttext);
+                ttwt.css({
+                    "color": "gray"
+                });
+                ttr.append(ttwt);
+                $("#itin-table tbody").append(ttr);
+
+            }
+
+        }
+
+        // Наша хуйня рабочая
+
+        var tr = jQuery('<tr/>');
+        tr.addClass("added");
+        tr.append(tdWithText(timeToTwoCharString(itin[i].departureTime[3]) + ":" + timeToTwoCharString(itin[i].departureTime[4])));
+        tr.append(dotTD.clone());
+        //var _source = JSON.parse(JSON.stringify(itin.source));
+        tr.append(tdWithText(itin[i].source.name_RU));
+        $("#itin-table tbody").append(tr);
+
+        // теперь палку
+        tr = jQuery('<tr/>');
+        tr.addClass("added");
+        tr.append(jQuery('<td/>'));
+        tr.append(stripeTD.clone());
+        // Считаем затраченное время
+        var duration = durationBetween(itin[i].departureTime, itin[i].arrivalTime);
+        var twt = tdWithText(minutesToDurationString(duration));
+        twt.css({
+            "color": "gray"
+        });
+        tr.append(twt);
+        $("#itin-table tbody").append(tr);
+
+        // назначение
+        tr = jQuery('<tr/>');
+        tr.addClass("added");
+        tr.append(tdWithText(timeToTwoCharString(itin[i].arrivalTime[3]) + ":" + timeToTwoCharString(itin[i].arrivalTime[4])));
+        tr.append(dotTD.clone());
+        tr.append(tdWithText(itin[i].destination.name_RU));
+        $("#itin-table tbody").append(tr);
+
+    }
+
 }
 
 /**

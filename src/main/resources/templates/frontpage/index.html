@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html lang="ru"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="../../static/res/style_main.css" th:href="@{res/style_main.css}">
+    <link rel="stylesheet" href="../../static/res/my_style.css" th:href="@{res/my_style.css}">
+    <link rel="stylesheet" href="../../static/res/jquery-ui.min.css" th:href="@{res/jquery-ui.min.css}">
+
+    <script type="text/javascript" src="../../static/script/jquery-3.5.0.min.js"
+            th:src="@{script/jquery-3.5.0.min.js}"></script>
+    <script type="text/javascript" src="../../static/script/jquery-ui.min.js"
+            th:src="@{script/jquery-ui.min.js}"></script>
+    <script type="text/javascript" src="../../static/script/controls.js"
+            th:src="@{script/controls.js}"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
+
+    <meta name="theme-color" content="#132968">
+
+    <link rel="icon" href="../../static/img/favicon.png">
+
+    <title>МОЙ ДИПЛОМ ЁБАНА</title>
+
+    <link href="https://fonts.googleapis.com/" rel="preconnect" crossorigin="anonymous">
+    <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin="anonymous">
+
+    <link href="../../static/res/cyrillic-font-swap.css" th:href="@{res/cyrillic-font-swap.css}" rel="stylesheet" as="style"><style data-styled="" data-styled-version="4.4.1">
+
+</style>
+</head>
+
+<body style="margin:0;">
+<div id="root">
+    <div id="Page-FontLoader">
+        <div></div>
+    </div>
+    <div id="Page-GoEuroLayout">
+        <div class="GoEuroLayout-mainGrid-2cVnm">
+            <div class="GoEuroLayout-mainGridElement-xaRa9">
+                <div class="Header-header-1zYRn Header-hasTransparentHeader-3NxU5">
+                    <a class="Header-logoContainer-1arPt Header-hasTransparentHeader-3NxU5" href="/" tabindex="0">
+                        <div class="Header-logo-2Ty--">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 117.1 388.9">
+                                <g xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="99" height="35" fill="none" stroke="none" pointer-events="all"/><path d="M 98.24 5.7 C 97.53 3.1 90.99 2.88 88.36 3.77 C 78.79 7 69.2 10.23 59.63 13.46 L 26.39 0 L 22.88 3.79 L 37.11 21.12 C 27.94 24.33 11.15 30.27 8.09 31.3 C 5.47 32.19 25.05 35 29.54 34.25 C 29.54 34.25 64.03 22.84 79.28 17.7 C 83.2 16.37 87.13 15.06 91.05 13.73 C 93.66 12.83 99 8.53 98.24 5.7 Z M 2.67 18.98 L 0 21.47 L 7.06 29.83 L 17.31 26.18 Z" fill="#d94154" stroke="none" pointer-events="all"/><rect x="39" y="20" width="60" height="20" fill="none" stroke="none" pointer-events="all"/><g transform="translate(-0.5 -0.5)"><switch><foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 58px; height: 1px; padding-top: 30px; margin-left: 40px;"><div style="box-sizing: border-box; font-size: 0; text-align: center; "><div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; "><b><font face="Tahoma" style="font-size: 14px" color="#fffde8">Time to Travel</font></b></div></div></div></foreignObject><text x="69" y="34" fill="#000000" font-family="Helvetica" font-size="12px" text-anchor="middle">Time to Tr...</text></switch></g></g>
+                            </svg>
+                        </div>
+                    </a>
+                    <div class="Header-headerLeft-2i5AA">
+                        <div class="Header-hamburger-2Tgm0 Header-hasTransparentHeader-3NxU5" role="button" tabindex="0" id="hamburgerMenu">
+                            <svg viewBox="0 0 20 14" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <defs>
+                                    <path fill="currentColor" d="M1 0h18a1 1 0 0 1 0 2H1a1 1 0 1 1 0-2zm0 6h18a1 1 0 0 1 0 2H1a1 1 0 1 1 0-2zm0 6h18a1 1 0 0 1 0 2H1a1 1 0 0 1 0-2z" id="hamburgera"></path>
+                                </defs>
+                                <use xlink:href="#hamburgera" fill-rule="evenodd"></use>
+                            </svg>
+                        </div>
+                        <div class="Header-headerRegionContainer-H_YV3">
+                            <div class="Header-headerRegion-1bGjH">
+                                <div id="Header-LpsHeaderContainer">
+                                    <div class="b_e_3toRh">
+                                        <div class="b_g_2gF0J b_i_38lFl">
+                                            <div id="LpsHeaderLeft-NamedLinkboxeyJ0eXBlIjoiTmFtZWRMaW5rYm94IiwiYmFzaWNDb250ZW50Ijp0cnVlLCJwYXJhbWV0ZXJzIjp7ImxpbmtCb3hUeXBlIjoiaGVhZGVyX25hbWVkX2xpbmtib3gifX0">
+                                                <div class="p2_0_2siBB">
+                                                    <span class="p2_p4_2mH7P">
+                                                        <div class="aj6_0_2DT4T"><a class="aj6_akc_2fV2j" href="https://www.omio.ru/trains"><div class="aj6_akf_88MKN aj6_akh_1OT7S" id="Поезда">Поезда</div></a>
+                                                            <div class="aj6_kt_3Npxf">
+                                                                <div class="akn_0_3MOws">
+                                                                </div>
+										                    </div>
+									                    </div>
+									                </span>
+                                                    <span class="p2_p4_2mH7P">
+                                                        <div class="aj6_0_2DT4T">
+                                                            <a class="aj6_akc_2fV2j" href="https://www.omio.ru/buses">
+                                                                <div class="aj6_akf_88MKN aj6_akh_1OT7S" id="Автобусы">Автобусы</div>
+                                                            </a> <div class="aj6_kt_3Npxf">
+					                                            </div>
+				                                        </div>
+                                                    </span>
+                                                    <span class="p2_p4_2mH7P">
+                                                        <div class="aj6_0_2DT4T">
+                                                            <a class="aj6_akc_2fV2j" href="https://www.omio.ru/flights">
+                                                                <div class="aj6_akf_88MKN aj6_akh_1OT7S" id="Самолеты">Самолеты
+                                                                </div>
+                                                            </a>
+                                                            <div class="aj6_kt_3Npxf">
+                                                                <div class="akn_0_3MOws">
+		                                                        <div class="akn_gp_HbqEP"></div>
+                                                                </div>
+	                                                        </div>
+	                                                    </div>
+	                                                </span>
+                                                    <span class="p2_p4_2mH7P">
+                                                        <div class="aj6_0_2DT4T">
+                                                            <a class="aj6_akc_2fV2j" href="https://www.omio.ru/flights">
+                                                                <div class="aj6_akf_88MKN aj6_akh_1OT7S" id="Смешанный">Смешанный
+                                                                </div>
+                                                            </a>
+                                                            <div class="aj6_kt_3Npxf">
+                                                                <div class="akn_0_3MOws">
+		                                                        <div class="akn_gp_HbqEP"></div>
+                                                                </div>
+	                                                        </div>
+	                                                    </div>
+	                                                </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="b_g_2gF0J">
+                                            <div id="LpsHeaderRight-CurrencySwitchereyJ0eXBlIjoiQ3VycmVuY3lTd2l0Y2hlciIsImJhc2ljQ29udGVudCI6dHJ1ZX0">
+                                                <div class="am3_0_3Mc9-">
+                                                    <div class="sc-eKZiaR cVEaGZ">
+                                                        <a class="sc-drMfKT lnhdcO">
+                                                            <div class="sc-gpHHfC hJBYYB">
+                                                                <div class="sc-fgfRvd sc-hIVACf iWzEes">
+                                                                    <div class="sc-hjRWVT fWyTjh">
+                                                                        <div class="am3_am5_1fJcA">
+                                                                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                                                <path d="M10.707 16a5.51 5.51 0 0 0 2.13 3H3.5a1.5 1.5 0 0 1 0-3h7.207zm1.05-5a5.475 5.475 0 0 0-1.235 3H3.5a1.5 1.5 0 0 1 0-3h8.257zM3.5 9a1.5 1.5 0 0 1 0-3h11a1.5 1.5 0 0 1 0 3h-11zM17 19a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z" fill="currentColor" fill-rule="evenodd"></path>
+                                                                            </svg>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="sc-gVyKpa drPLfW">
+                                                                        <div class="sc-eXNvrr kQItUW">
+                                                                            <div class="sc-kQsIoO iHggIW"><span>Валюта</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="sc-iybRtq cLnhAe"><span class="sc-fHxwqH QmxZF">RUB</span>
+                                                                    </div>
+                                                                    <div class="sc-cEvuZC jHoTCP">
+                                                                        <svg version="1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+                                                                            <path d="M190.3 79c-10.5 5.3-15.6 13.5-15.6 25 0 12.7-4.7 7.4 94.1 106.2l89.7 89.8-89.7 89.7c-99 99.1-94.1 93.5-94.1 106.5 0 11.2 5.2 19.5 15.7 25.1 5.9 3.1 19.3 3.1 25.1 0 2.3-1.3 46-44.2 105.1-103.5 90.5-90.6 101.4-101.8 103-106.3 2.2-6 2.4-15.1.5-22-1.3-4.8-6.3-9.9-103-106.8C258.7 120.1 218 80.1 215.5 78.8c-2.7-1.4-6.5-2.3-11.5-2.5-6.9-.4-8-.2-13.7 2.7z" fill="currentColor" fill-rule="evenodd"></path>
+                                                                        </svg>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="am3_kt_2MDnv"></div>
+                                                </div>
+                                            </div>
+                                            <div id="LpsHeaderRight-YourBookings">
+                                                <div class="ag_ai_1UjPt"><a class="ag_ak_jo-HK ag_am_27v87" href="https://www.omio.ru/ui/your-bookings?locale=ru" target="_blank"> <span> Вход в личный кабинет</span> </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="GoEuroLayout-mainGridElement-xaRa9">
+                <div id="Hero-LpsHeroContainer">
+                    <div class="mr_mt_2S0Di">
+                        <div id="LpsHero-MainContenteyJ0eXBlIjoiTWFpbkNvbnRlbnQiLCJiYXNpY0NvbnRlbnQiOnRydWV9">
+                            <div>
+                                <div>
+                                    <div class="q5_q_N6vig">
+                                        <div class="q5_rg_wcCYI" style="background-image:url(../../static/img/Trio3.jpg)"
+                                             th:style="'background-image:url('+ @{img/Trio3.jpg} +');'">
+                                            <div class="q5_q9_2vKR5">
+                                                <div class="ux_0_1pykh">
+                                                    <div class="u1_u3_13djN">
+                                                        <div class="u5_gh_1op5D u5_vy_3_zC4 u5_w3_2N4u5">
+                                                            <div class="q5_rb_191GR">
+                                                                <h1 class="q5_f8_3kOtN" data-headline-type="main">Путешествуй с Time to Travel</h1>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ux_0_1pykh">
+                                            <div class="q5_re_2lIIA">
+                                                <div class="qp_qr_29vrN qp_qt_HSqs_">
+                                                    <div>
+                                                        <div class="aml_0_2gA8-">
+                                                            <form id="lpsFerret" method="post" action="http://192.168.0.4:4444/search" target="_self" autocomplete="nope">
+                                                                <div class="kn_am9_3aDCU kn_uz_1wIxy aoh_l8_3v9GM vertical" id="holder">
+                                                                    <div class="aoh_u3_1BKYy">
+                                                                        <div class="aml_amn_1Kadm">
+                                                                            <div data-e2e="tripTypeDropdown" class="tripTypeDropdown">
+                                                                                <div class="arq_0_QPGTT arq_aj8_IkGHe">
+                                                                                    <button type="button" class="arq_apo_r5kXh" id="tripTypeDropdown">
+                                                                                        <select id="trip-type" class="tt-select">
+                                                                                            <option value="1-way">В одну сторону</option>
+                                                                                            <option value="round">Туда и обратно</option>
+                                                                                            <option value="compound">Сложный маршрут</option>
+                                                                                        </select>
+                                                                                    </button>
+                                                                                    <div class="arq_kt_3ILM7 arq_aj8_IkGHe">
+                                                                                        <div class="arq_ars_3QptR">
+                                                                                            <div data-e2e="tripTypeDropdownList">
+                                                                                                <div class="apu_0_3TC6O">
+                                                                                                    <div class="apu_aof_PrMUb apu_gl_1f1mP" data-e2e="item">
+                                                                                                        <div class="apu_ab_2nO7X apu_gl_1f1mP">
+                                                                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                                                                                <g fill="none" fill-rule="evenodd">
+                                                                                                                    <path d="M0 0h20v20H0z"></path>
+                                                                                                                    <path fill="currentColor" d="M8.543 12.076l6.484-6.484 1.44 1.44-7.924 7.925-.72-.72L3.5 9.914l1.44-1.44 3.603 3.602z"></path>
+                                                                                                                </g>
+                                                                                                            </svg>
+                                                                                                        </div>
+                                                                                                        <div class="apu_ae_3BpPH">В одну сторону</div>
+                                                                                                    </div>
+                                                                                                    <div class="apu_aof_PrMUb" data-e2e="item">
+                                                                                                        <div class="apu_ab_2nO7X">
+                                                                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                                                                                                <g fill="none" fill-rule="evenodd">
+                                                                                                                    <path d="M0 0h20v20H0z"></path>
+                                                                                                                    <path fill="currentColor" d="M8.543 12.076l6.484-6.484 1.44 1.44-7.924 7.925-.72-.72L3.5 9.914l1.44-1.44 3.603 3.602z"></path>
+                                                                                                                </g>
+                                                                                                            </svg>
+                                                                                                        </div>
+                                                                                                        <div class="apu_ae_3BpPH">Туда и обратно</div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="aor_f6_3jx99" data-e2e="passengerDropDownButton">
+                                                                                <button type="button" class="aj6_apo_10ZKj" onclick="showDropdown()">
+                                                                                    <div class="aj6_akf_n1ijk"> <span>Количество пассажиров</span>
+                                                                                        <div class="ddown">
+                                                                                            <div class="horizontal">
+                                                                                                <span style="float:left;">Взрослые:</span>
+                                                                                                <input id="spinner_a" name="adults" style="float:right; width: 25px;">
+                                                                                            </div><br/>
+                                                                                            <div class="horizontal">
+                                                                                                <span style="float:left;">Дети:</span>
+                                                                                                <input id="spinner_c" name="children" style="float:right; width: 25px;">
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="aj6_akj_2UdO_">
+                                                                                        <div class="aj6_apq_3TlYQ">
+                                                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 15">
+                                                                                                <path fill="currentColor" fill-rule="evenodd" d="M13 10.2L3.4.6c-.8-.8-2-.8-2.8 0-.8.8-.8 2 0 2.8l11 11c.4.4.9.6 1.4.6.5 0 1-.2 1.4-.6l11-11c.8-.8.8-2 0-2.8-.8-.8-2-.8-2.8 0L13 10.2z"></path>
+                                                                                            </svg>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="aoh_u3_1BKYy m_form" id="form-origin">
+                                                                        <div class="kn_am9_3aDCU kn_uz_1wIxy aoh_gh_3axnH" style="flex-grow:3">
+                                                                            <div class="kn_ang_1BfoP">
+                                                                                <div class="aqf_aqr_3vMcw">
+                                                                                    <div style="width:24px;height:24px;color:#ccc;transform:undefined;transform-origin:center;float:undefined;display:undefined;position:undefined;margin:undefined;right:undefined;top:undefined;cursor:undefined" class="aru_ar2_2gmpS" width="24" height="24" color="#ccc">
+                                                                                        <svg viewBox="0 0 16 16" version="1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                                                            <defs>
+                                                                                                <path fill="currentColor" d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0 4A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" id="pin2a"></path>
+                                                                                            </defs>
+                                                                                            <use xlink:href="#pin2a"></use>
+                                                                                        </svg>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <input type="text" autocomplete="none" class="aqf_aqh_29PUo aqf_aqj_3yW3J" data-e2e="departurePositionInput" data-id="departurePosition" placeholder="откуда: Город, станция или аэропорт" value="" id="">
+                                                                                <div class="aqf_aqt_1-q5b">
+                                                                                    <div class="apw_apy_1UuQ-"></div>
+                                                                                    <div class="aqf_aqv_1_add">
+                                                                                        <div width="20" height="20" color="#5E90CC" transform="rotate(90deg)" style="width: 20px; height: 20px; color: rgb(11, 158, 139); transform: rotate(90deg); transform-origin: center center;">
+                                                                                            <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                                                                <defs>
+                                                                                                    <path fill="currentColor" d="M5.63 3.76l-2.87 3.2a.98.98 0 0 1-1.46 0 1.21 1.21 0 0 1 0-1.62l4.5-5a1 1 0 0 1 1.49 0l4.4 4.89a1.21 1.21 0 0 1-.08 1.7.98.98 0 0 1-1.38-.08L7.65 3.98V15a1 1 0 0 1-1 1h-.02a1 1 0 0 1-1-1V3.76zm11.02 12.26l2.58-2.86a.98.98 0 0 1 1.46 0 1.2 1.2 0 0 1 0 1.61l-4.4 4.9a1 1 0 0 1-1.49 0l-4.5-5.01a1.21 1.21 0 0 1 0-1.62.98.98 0 0 1 1.46 0l2.87 3.2V5.01a1 1 0 0 1 1-1h.02a1 1 0 0 1 1 1v11.01z" id="swapper2a"></path>
+                                                                                                </defs>
+                                                                                                <use xlink:href="#swapper2a" transform="translate(-1)" fill-rule="evenodd"></use>
+                                                                                            </svg>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="kn_am9_3aDCU kn_uz_1wIxy aoh_gh_3axnH" style="flex-grow:3">
+                                                                            <div class="kn_ang_1BfoP">
+                                                                                <div class="aqf_aqr_3vMcw">
+                                                                                    <div style="width:24px;height:24px;color:#ccc;transform:undefined;transform-origin:center;float:undefined;display:undefined;position:undefined;margin:undefined;right:undefined;top:undefined;cursor:undefined" class="aru_ar2_2gmpS" width="24" height="24" color="#ccc">
+                                                                                        <svg viewBox="0 0 16 20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                                                            <defs>
+                                                                                                <path fill="currentColor" d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM0 8a8 8 0 1 1 16 0c0 1.84-1.18 4.05-3.53 6.64L8 20l-4.47-5.36C1.18 12.05 0 9.84 0 8z" id="destinationPina"></path>
+                                                                                            </defs>
+                                                                                            <use xlink:href="#destinationPina"></use>
+                                                                                        </svg>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <input type="text" autocomplete="none" class="aqf_aqh_29PUo aqf_aqj_3yW3J" data-e2e="arrivalPositionInput" data-id="arrivalPosition" placeholder="куда: Город, станция или аэропорт" value="" id="">
+                                                                                <div class="aqf_aqt_1-q5b">
+                                                                                    <div class="apw_apy_1UuQ-"></div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="kn_am9_3aDCU kn_uz_1wIxy aoh_gh_3axnH" style="flex-grow:4">
+                                                                            <div style="position:relative" class="datepicker-1">
+                                                                                <div class="asv_asx_2VMwQ asv_as3_15YCY asv_as1_39TGB asv_g5_19ONa" tabindex="0" role="button" data-e2e="buttonDepartureDate" id="buttonDepartureDate">
+                                                                                    <div class="asv_ap0_tdZiX">
+                                                                                        <div style="width:20px;height:18px;color:#A1A9C3;transform:undefined;transform-origin:center;float:undefined;display:undefined;position:undefined;margin:undefined;right:undefined;top:undefined;cursor:undefined" class="aru_ar2_2gmpS" width="20" height="18" color="#A1A9C3">
+                                                                                            <svg viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                                                                <defs>
+                                                                                                    <path fill="currentColor" d="M16 2h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h2V1a1 1 0 1 1 2 0v1h8V1a1 1 0 0 1 2 0v1zM3 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H3z" id="calendar2a"></path>
+                                                                                                </defs>
+                                                                                                <use xlink:href="#calendar2a" fill-rule="evenodd"></use>
+                                                                                            </svg>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <input class="ar4_ast_2Xr6l"/>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div style="position:relative" class="datepicker-2">
+                                                                                <div class="asv_asx_2VMwQ asv_as1_39TGB asv_g5_19ONa asv_as5_5odDg oneWayReturn" tabindex="0" role="button" data-e2e="buttonReturnDate" id="buttonReturnDate">
+                                                                                    <div class="asv_ap0_tdZiX"></div>
+                                                                                    <input class="ar4_ast_2Xr6l"/>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="kn_am9_3aDCU kn_uz_1wIxy aoh_gh_3axnH" style="flex-grow:2">
+                                                                            <button type="submit" class="Button_button_6a0ab Button_primary_6a0ab Button_medium_6a0ab" data-e2e="buttonSearch">
+                                                                                <div class="Button_contents_6a0ab"><span>Найти</span>
+                                                                                </div>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <input type="hidden" id="src" name="src" value="">
+                                                                <input type="hidden" id="dst" name="dst" value="">
+                                                                <input type="hidden" name="countryCode" value="RU">
+                                                                <input type="hidden" name="currencyCode" value="RUB">
+                                                                <input type="hidden" name="locale" value="ru-RU">
+                                                                <input type="hidden" id="originCode" name="originCode" value="???">
+                                                                <input type="hidden" id="destinationCode" name="destinationCode" value="???">
+                                                                <input type="hidden" id="outboundDateFrom" name="outboundDateFrom" value="???">
+                                                                <input type="hidden" id="outboundDateTo" name="outboundDateTo" value="???">
+                                                                <input type="hidden" id="adultsCount" name="adultsCount" value="1">
+                                                                <input type="hidden" id="childrenCount" name="childrenCount" value="0">
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="MainHeroUsps-Usps">
+                                        <div>
+                                            <section class="sh_sj_vh1px">
+                                                <div class="ux_0_1pykh">
+                                                    <div class="u1_u3_13djN">
+                                                        <div class="u5_gh_1op5D u5_vi_1_xLU u5_wv_TJbnM">
+                                                            <div class="sh_sl_3AWxT">
+                                                                <div class="sh_sn_2wDxa">
+                                                                    <img src="../../static/img/herat.png" th:src="@{img/herat.png}" alt="" height="40" width="48" >
+                                                                </div>
+                                                                    <div class="sh_f8_25fWW"><span>Выбери направление - Time to travel спланирует твой маршрут за тебя</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                    <div id="UserRecentSearches-UserRecentSearches"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="GoEuroLayout-mainGridElement-xaRa9 GoEuroLayout-content-pGIws">
+                <div id="Content-FooterEmailSubscription"></div>
+                <a class="Header-logoContainer-1arPt Header-hasTransparentHeader-3NxU5" href="/" tabindex="0">
+                    <div class="picn mark_img">
+                        <img src="../../static/img/newyork.png" th:src="@{img/newyork.png}" alt="" height="190" width="148">
+                    </div>
+                    <div class="picm mark_img">
+                        <img src="../../static/img/moscow.png" th:src="@{img/moscow.png}" alt="" height="190" width="148">
+                    </div>
+                    <div class="picl mark_img">
+                        <img src="../../static/img/london.png" th:src="@{img/london.png}" alt="" height="190" width="148">
+                    </div>
+                    <div class="picp mark_img">
+                        <img src="../../static/img/prague.jpg" th:src="@{img/prague.jpg}" alt="" height="190" width="148">
+                    </div>
+                    <div class="picb mark_img">
+                        <img src="../../static/img/berlin.jpg" th:src="@{img/berlin.jpg}" alt="" height="190" width="148">
+                    </div>
+                    <div class="pict mark_img">
+                        <img src="../../static/img/tokyo.png" th:src="@{img/tokyo.png}" alt="" height="190" width="148">
+                    </div>
+
+                </a>
+            </div>
+        </div>
+    </div>
+    <div id="Page-Head">
+        <div></div>
+    </div>
+</div>
+</body>
+</html>

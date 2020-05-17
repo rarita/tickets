@@ -38,3 +38,13 @@
 .horizontal input {
     float: right;
 }
+
+@media (max-width: 1024px) {
+    .aml_amn_1Kadm {
+        flex-direction: column;
+        margin-left: 10px;
+    }
+    .tripTypeDropdown {
+        margin-bottom: 5px;
+    }
+}
