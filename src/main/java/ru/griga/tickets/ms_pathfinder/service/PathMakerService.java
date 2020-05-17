@@ -86,8 +86,7 @@ public class PathMakerService {
         }
 
         // Если данных на запрос нет - запрос не посылаем
-        if (dataToQuery.isEmpty())
-            return true;
+        if (dataToQuery.isEmpty()) return true;
 
         // Закидываем на обработку в соседний микросервис
         var request = RequestEntity.method(HttpMethod.POST, URI.create(MS_GATHERER_URL + "/load/itineraries"))
@@ -144,4 +143,5 @@ public class PathMakerService {
         return itineraries;
 
     }
+
 }

@@ -1,10 +1,12 @@
 package ru.griga.tickets.shared.model.place.base;
 
 import lombok.*;
+import ru.griga.tickets.shared.model.place.Airport;
 
 /**
  * Класс Place с известным местоположением
  */
+@Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class GeoPlace extends Place {

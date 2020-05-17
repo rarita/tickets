@@ -2,6 +2,10 @@
 var g_data;
 
 $(document).ready(function() {
+
+    // Заглушка
+    $(".price___183db").remove();
+
     initControls();
 });
 
@@ -10,8 +14,8 @@ function initControls() {
     $( "#price-slider" ).slider({
         range: true,
         min: 0,
-        max: 500,
-        values: [ 25, 500 ],
+        max: 1000,
+        values: [ 25, 1000 ],
         slide: function( event, ui ) {
             $( "#amount" ).val( "₽" + ui.values[ 0 ]*100 + " - ₽" + ui.values[ 1 ]*100 );
         }
@@ -74,7 +78,14 @@ function initControls() {
         $(".cell___16tDr").remove();
         const items = sortDataOn(g_data, this.value).map(it => renderItem(it));
         items.forEach(it => $(".left").append(it));
+
+        // Клики по добавленным перелетам
+        $(".cell___16tDr").click(onCellClick);
     });
+
+    // Фильтры WIP
+
+
 }
 
 /**
@@ -141,6 +152,29 @@ function setUpSearchResults(data) {
     const renderedItems = sortDataOn(data, $("#sort_by").val()).map(it => renderItem(it));
     console.dir(renderedItems); // Пока что так
     renderedItems.forEach(it => $(".left").append(it)); // И так
+
+    // Назначить клики
+    // Клики по перелетам
+    $(".cell___16tDr").click(onCellClick);
+}
+
+function onCellClick() {
+    const idx = $(".cell___16tDr").index($(this));
+    console.dir(idx);
+    // make coords array
+    coords = [];
+    coords.push([g_data[idx].src.longitude, g_data[idx].src.latitude]);
+    for (var i = 0; i < g_data[idx].itin.length; i++) {
+        const itinerary = g_data[idx].itin[i];
+        const dest = JSON.parse(JSON.stringify(itinerary)).destination;
+
+        const long = dest["longitude"];
+        const lat = dest["latitude"];
+        coords.push([long, lat]);
+    }
+
+    console.dir(coords);
+    updateMap(coords);
 }
 
 /**
