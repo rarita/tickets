@@ -1,6 +1,7 @@
 package ru.griga.tickets.shared.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
@@ -64,9 +65,15 @@ public class JacksonConfig {
 
     @Bean
     public ObjectMapper provideObjectMapper(@Qualifier("deser-module") SimpleModule module) {
-        return new ObjectMapper()
-                .registerModule(module)
-                .registerModule(new JavaTimeModule());
+
+        var om = new ObjectMapper()
+                    .registerModule(module)
+                    .registerModule(new JavaTimeModule());
+
+        om.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+
+        return om;
+
     }
 
 }

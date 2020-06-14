@@ -1,10 +1,13 @@
 package ru.griga.tickets.ms_pathfinder.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.griga.tickets.shared.repository.ItineraryRepository;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -18,6 +21,7 @@ public class PathDiscoveryService {
 
     private final ItineraryRepository itineraryRepository;
     private final TravelPayoutsPopularDirectionsService tppds;
+    private static final Logger logger = LoggerFactory.getLogger(PathDiscoveryService.class);
 
     public PathDiscoveryService(ItineraryRepository itineraryRepository, TravelPayoutsPopularDirectionsService tppds) {
         this.itineraryRepository = itineraryRepository;
@@ -48,7 +52,14 @@ public class PathDiscoveryService {
                 if (itineraryRepository.countPossibleWaysFrom(targetCode) >= 10)
                     continue;
 
-                Map<String, BigDecimal> waysFromTarget = tppds.getPopularDirectionsFromPlace(targetCode);
+                Map<String, BigDecimal> waysFromTarget;
+                try {
+                    waysFromTarget = tppds.getPopularDirectionsFromPlace(targetCode);
+                }
+                catch (IOException exc) {
+                    logger.error("Caught exception while accessing TravelPayouts popular directions: " + exc.getMessage());
+                    waysFromTarget = Collections.emptyMap();
+                }
                 rqCount ++;
 
                 for (Map.Entry<String, BigDecimal> destEntry : waysFromTarget.entrySet()) {

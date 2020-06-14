@@ -1,6 +1,5 @@
 package ru.griga.tickets.shared.repository;
 
-import io.micrometer.core.instrument.search.Search;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.stereotype.Repository;
@@ -44,7 +43,7 @@ public interface ItineraryRepository extends Neo4jRepository<Itinerary, Long> {
 
     @Query("match (p:City {code: $0}),(b:City {code: $1}) " +
             "RETURN EXISTS( (p)-[:HAS_WAY]-(b) )")
-    boolean hasWay(String sourcePlaceCode, String destPlaceCode);
+    Boolean hasWay(String sourcePlaceCode, String destPlaceCode);
 
     @Query("match ()-[e:HAS_WAY]-() where e.id=$0 delete e;")
     void deleteWay(long wayID);
@@ -61,16 +60,23 @@ public interface ItineraryRepository extends Neo4jRepository<Itinerary, Long> {
 
     // Передаем searchParams и получаем доступ наподобие $searchParams.prop
     // НЕ используем local-datetime так как у нас все должно быть в UTC-0
-    @Query("match p=(c_src:City {code: $searchParams.originCode})<-[:IS_IN]-(src:Airport)-[itin:CAN_GO*..3]->(dst:Airport)-[:IS_IN]->(c_dst:City) " +
-            "where last(nodes(p)).code = $searchParams.destinationCode and none(idx in range(0, size(itin) - 2) " +
-            "where datetime(itin[idx].arrivalTime) >= datetime(itin[idx+1].departureTime)) " +
-            "and all(i in itin " +
-            "where i.type in $searchParams.typesAllowed and " + // and
-            "(date(datetime(i.departureTime)) >= date($searchParams.outboundDateFrom) " +
-            "and date(datetime(i.departureTime)) <= date($searchParams.outboundDateTo))" + // тут про дату
-            ") " +
-            "return c_src, src, itin, dst, c_dst;")
+    @Query("match (air_src:Airport), (air_dst:Airport),(c_src:City {code: $searchParams.originCode}),(c_dst:City {code: $searchParams.destinationCode}),\n" +
+            "path = (c_src)<-[src_in:IS_IN]-(air_src)-[itin:CAN_GO*..2]-(air_dst)-[dst_in:IS_IN]->(c_dst)\n" +
+            "where none(idx in range(0, size(itin) - 2) where datetime(itin[idx].arrivalTime) >= datetime(itin[idx+1].departureTime))\n" +
+            "and all(i in itin where i.type in $searchParams.typesAllowed and (date(datetime(i.departureTime)) >= date($searchParams.outboundDateFrom) " +
+            "and date(datetime(i.departureTime)) <= date($searchParams.outboundDateTo)))\n" +
+            "return c_src, c_dst, itin, air_src as src, air_dst as dst, path;")
     List<Map<?, ?>> findItinerariesBySearchParams(SearchParams searchParams);
+
+    // Передаем searchParams и получаем доступ наподобие $searchParams.prop
+    // НЕ используем local-datetime так как у нас все должно быть в UTC-0
+    @Query("match (air_src:Airport), (air_dst:Airport),(c_src:City {code: $searchParams.originCode}),(c_dst:City {code: $searchParams.destinationCode}),\n" +
+            "path = (c_src)<-[src_in:IS_IN]-(air_src)-[itin:CAN_GO*..2]-(air_dst)-[dst_in:IS_IN]->(c_dst)\n" +
+            "where none(idx in range(0, size(itin) - 2) where datetime(itin[idx].arrivalTime) >= datetime(itin[idx+1].departureTime))\n" +
+            "and all(i in itin where i.type in $searchParams.typesAllowed and (date(datetime(i.departureTime)) >= date($searchParams.outboundDateFrom) " +
+            "and date(datetime(i.departureTime)) <= date($searchParams.outboundDateTo)))\n" +
+            "return path;")
+    List<Map<?, ?>> findItinerariesBySearchParams_tst(SearchParams searchParams);
 
     @Query("match ()-[e:CAN_GO]-() return date(datetime(e.departureTime)), $searchParams.outboundDateFrom, " +
             "date($searchParams.outboundDateFrom), date(datetime(e.departureTime)) >= date($searchParams.outboundDateFrom)  limit 1;")

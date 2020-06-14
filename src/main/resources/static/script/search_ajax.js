@@ -1,5 +1,6 @@
 // Данные из бэкэнда
 var g_data;
+var filt_data = {}; // Глобал значения фильтров
 
 $(document).ready(function() {
 
@@ -10,6 +11,22 @@ $(document).ready(function() {
 });
 
 function initControls() {
+
+    filt_data.price = {
+        'low': 0,
+        'high': 100000
+    };
+    filt_data.time = {
+        'low': 0,
+        'high': 143
+    };
+    filt_data.on_board = {
+        'low': 0,
+        'high': 287
+    };
+    filt_data.direct = false;
+    filt_data.traveltypes = ["AIRCRAFT"]; // AIRCRAFT, BUS, TRAIN
+
     // Деньги
     $( "#price-slider" ).slider({
         range: true,
@@ -17,6 +34,8 @@ function initControls() {
         max: 1000,
         values: [ 25, 1000 ],
         slide: function( event, ui ) {
+            filt_data.price.low = ui.values[ 0 ]*100;
+            filt_data.price.high = ui.values[ 1 ]*100;
             $( "#amount" ).val( "₽" + ui.values[ 0 ]*100 + " - ₽" + ui.values[ 1 ]*100 );
         }
     });
@@ -31,6 +50,8 @@ function initControls() {
         slide: function( event, ui ) {
             const timeStart = fractionToTime(ui.values[ 0 ]);
             const timeEnd = fractionToTime(ui.values[ 1 ]);
+            filt_data.time.low = ui.values[0];
+            filt_data.time.high = ui.values[1];
             $( "#amount-time" ).val( timeStart + " - " + timeEnd );
         }
     });
@@ -40,11 +61,13 @@ function initControls() {
     $( "#time-onboard-slider" ).slider({
         range: true,
         min: 0,
-        max: 143,
-        values: [ 0, 18 ],
+        max: 287,
+        values: [ 0, 287 ],
         slide: function( event, ui ) {
             const timeStart = fractionToTime(ui.values[ 0 ]);
             const timeEnd = fractionToTime(ui.values[ 1 ]);
+            filt_data.on_board.low = ui.values[0];
+            filt_data.on_board.high = ui.values[1];
             $( "#amount-onboard-time" ).val( timeStart + " - " + timeEnd );
         }
     });
@@ -61,6 +84,20 @@ function initControls() {
        $(".menu-tab-active").removeClass("menu-tab-active");
        // Добавляем данной вкладке активный статус
         $(this).addClass("menu-tab-active");
+        console.log($(this).find("span").text() + " --"); // принимаемые значения: Автобусы Поезда Смешанный Самолеты
+        switch ($(this).find("span").text()) {
+            case "Автобусы":
+                filt_data.traveltypes = ["BUS"];
+                break;
+            case "Поезда":
+                filt_data.traveltypes = ["TRAIN"];
+                break;
+            case "Самолёты":
+                filt_data.traveltypes = ["AIRCRAFT"];
+                break;
+            default:
+                onTravelTypeCheckboxClick();
+        }
         // Перемещаем полоску под него multimodal-chkboxes
         const tabId = $(".menu-tab").index($(this));
         const css_left = (tabId*25) + "%";
@@ -87,8 +124,32 @@ function initControls() {
 
     // Модальное окно
     $('#exampleModalCenter').on('show.bs.modal', function (event) {
-        //alert("ur momma gae");
+
     });
+
+    // Кнопки travel type
+    $(':checkbox').change(onTravelTypeCheckboxClick);
+}
+
+function onTravelTypeCheckboxClick(event) {
+    console.log('onTravelTypeCheckboxClick triggered');
+
+    // Заполнение из активных значений чекбоксов
+    if (!event || event.target.id !== 'direct-flights') {
+        filt_data.traveltypes = [];
+        if ($("#train").prop("checked"))
+            filt_data.traveltypes.push("TRAIN");
+        if ($("#air").prop("checked"))
+            filt_data.traveltypes.push("AIRCRAFT");
+        if ($("#bus").prop("checked"))
+            filt_data.traveltypes.push("BUS");
+
+        return;
+    }
+
+    // Ещё проверим чекбокс прямых прямых перелетов
+    filt_data.direct = $("#direct-flights").prop("checked");
+
 }
 
 /**
@@ -120,7 +181,7 @@ function sortDataOn(data, condition) {
  * Фильтрует данные по состоянию объектов фильтров в DOM
  */
 function filterDataOnDOM() {
-
+    console.log($( "#price-slider" ).val())
 }
 
 function fractionToTime(fraction) {
@@ -161,7 +222,7 @@ function setUpSearchResults(data) {
     // Клики по перелетам
     $(".cell___16tDr").click(onCellClick);
     // Клики по трансферам
-    $(".button___3hiYb").click(onTransfersClick);
+    $(".button___trnsf").click(onTransfersClick);
 }
 
 function onCellClick() {
@@ -427,11 +488,28 @@ function renderItem(itemData) {
 
     // Остановки (плейсхолдер)
     var stops = jQuery('<div/>', {'class': 'stopsContainer___1upkn'});
-    var numberOfChanges = jQuery('<button/>', {'class': 'button___3hiYb', 'type': 'button', 'data-e2e': 'numberOfChanges'});
+    var numberOfChanges = jQuery('<button/>', {'class': 'button___3hiYb button___trnsf', 'type': 'button', 'data-e2e': 'numberOfChanges'});
     var stopsText = jQuery('<span/>', {'class': 'stops___1mrFf'});
     var stopsActualText = jQuery('<span/>');
     const switchesCount = itemData.itin.length - 1;
     stopsActualText.text( switchesCount + " пересадок");
+
+    // Кнопка "Купить"
+    var b_numberOfChanges = jQuery('<button/>', {'class': 'button___3hiYb', 'type': 'button', 'data-e2e': 'numberOfChanges'});
+    b_numberOfChanges.css({
+        "margin-left": "20px",
+        "background": "#1ab98d",
+        "color": "white"
+    });
+    b_numberOfChanges.click(function () {
+        window.open(
+            itemData.itin[0].bookingLink,
+            '_blank'
+        );
+    })
+    var b_stopsText = jQuery('<span/>', {'class': 'stops___1mrFf'});
+    var b_stopsActualText = jQuery('<span/>');
+    b_stopsActualText.text("Купить...");
 
     var iconSpan = jQuery('<span/>', {'class': 'icon___dH54l'});
     var iconSvg = jQuery('<svg/>', {'xmlns': 'http://www.w3.org/2000/svg', 'viewBox': '0 0 26 15'});
@@ -447,6 +525,12 @@ function renderItem(itemData) {
     iconSpan.appendTo(numberOfChanges);
 
     numberOfChanges.appendTo(stops);
+    b_numberOfChanges.appendTo(stops);
+
+    // Упаковка кнопки "Купить"
+    b_stopsActualText.appendTo(b_stopsText);
+    b_stopsText.appendTo(b_numberOfChanges);
+    iconSpan.appendTo(b_numberOfChanges);
 
     // Цена перелета
     var tripPrice = jQuery('<div/>', {'class': 'tripPriceContainer___2yEXL'});

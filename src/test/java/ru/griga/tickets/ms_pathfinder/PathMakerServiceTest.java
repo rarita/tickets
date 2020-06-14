@@ -16,6 +16,7 @@ import ru.griga.tickets.shared.repository.SkyPickerItineraryRepository;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,14 +25,14 @@ import java.util.List;
 @SpringBootTest
 public class PathMakerServiceTest {
 
-    private final LocalDate targetDate = LocalDate.now().plusDays(4);
+    private final LocalDate targetDate = LocalDate.of(2020, Month.AUGUST, 13);
 
     private final SearchParams searchParams = new SearchParams(
             "RU",
             "RUB",
             "ru-RU",
             "LED",
-            "KGD",
+            "PAR",
             targetDate,
             targetDate, //.plusDays(1),
             1, 0, 0,
@@ -57,7 +58,7 @@ public class PathMakerServiceTest {
 
     @Test
     public void tw() {
-        var result = spir.findItinerariesBySearchParams(searchParams);
+        var result = itineraryRepository.findItinerariesBySearchParams_tst(searchParams);
         System.out.println(result);
     }
 

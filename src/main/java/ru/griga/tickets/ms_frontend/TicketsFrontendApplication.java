@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
+import ru.griga.tickets.discovery_server.ServiceRegistrationServer;
 
 import javax.annotation.PostConstruct;
 import java.util.TimeZone;

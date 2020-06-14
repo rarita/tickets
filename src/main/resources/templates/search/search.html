@@ -145,7 +145,7 @@
                                      <div id="time-onboard-slider"></div>
                                      <!-- Чекбокс им. прямых перелетов -->
                                      <p>
-                                         <label for="amount-time">Только прямые рейсы</label>
+                                         <label for="amount-time" style="margin-top: 10px;">Только прямые рейсы</label>
                                          <input type="checkbox" id="direct-flights" readonly style="border:0; color:#fa6b6b; font-weight:bold;">
                                      </p>
                                      <!-- Группа чекбоксов модальных маршрутов -->
@@ -392,7 +392,7 @@
 
         var saveData = $.ajax({
             type: 'POST',
-            url: "http://192.168.0.4:3333/paths_for",
+            url: "http://192.168.0.3:3333/paths_for",
             data: JSON.stringify(req),
             contentType:"application/json; charset=utf-8",
             dataType:"json",
