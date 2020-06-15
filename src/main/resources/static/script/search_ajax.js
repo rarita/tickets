@@ -37,6 +37,9 @@ function initControls() {
             filt_data.price.low = ui.values[ 0 ]*100;
             filt_data.price.high = ui.values[ 1 ]*100;
             $( "#amount" ).val( "₽" + ui.values[ 0 ]*100 + " - ₽" + ui.values[ 1 ]*100 );
+        },
+        change: function (event, ui) {
+            applyDOMFilters();
         }
     });
     $( "#amount" ).val( "₽" + $( "#price-slider" ).slider( "values", 0 )*100 +
@@ -53,6 +56,9 @@ function initControls() {
             filt_data.time.low = ui.values[0];
             filt_data.time.high = ui.values[1];
             $( "#amount-time" ).val( timeStart + " - " + timeEnd );
+        },
+        change: function (event, ui) {
+            applyDOMFilters();
         }
     });
     $( "#amount-time" ).val(fractionToTime($( "#time-slider" ).slider( "values", 0 )) +
@@ -69,6 +75,9 @@ function initControls() {
             filt_data.on_board.low = ui.values[0];
             filt_data.on_board.high = ui.values[1];
             $( "#amount-onboard-time" ).val( timeStart + " - " + timeEnd );
+        },
+        change: function (event, ui) {
+            applyDOMFilters();
         }
     });
     $( "#amount-onboard-time" ).val(fractionToTime($( "#time-onboard-slider" ).slider( "values", 0 )) +
@@ -108,16 +117,24 @@ function initControls() {
         else {
             $("#multimodal-chkboxes").css("display", "none")
         }
+        // trigger filter update
+        applyDOMFilters();
     });
 
     // Сортировка
     $("#sort_by").on('change', function () {
+        /*
         $(".cell___16tDr").remove();
         const items = sortDataOn(g_data, this.value).map(it => renderItem(it));
         items.forEach(it => $(".left").append(it));
 
         // Клики по добавленным перелетам
         $(".cell___16tDr").click(onCellClick);
+
+        // Клики по трансферам
+        $(".button___trnsf").click(onTransfersClick);
+         */
+        applyDOMFilters();
     });
 
     // Фильтры WIP
@@ -144,12 +161,17 @@ function onTravelTypeCheckboxClick(event) {
         if ($("#bus").prop("checked"))
             filt_data.traveltypes.push("BUS");
 
+        // trigger filter update
+        applyDOMFilters();
+
         return;
     }
 
     // Ещё проверим чекбокс прямых прямых перелетов
     filt_data.direct = $("#direct-flights").prop("checked");
 
+    // trigger filter update
+    applyDOMFilters();
 }
 
 /**
@@ -241,12 +263,16 @@ function applyDOMFilters() {
     console.log("--- applying filters");
 
     $(".cell___16tDr").remove();
-    const items = g_data.filter(filterEachOnDOM).map(it => renderItem(it));
+
+    const sortValue = $("#sort_by").val();
+    const items = sortDataOn(g_data.filter(filterEachOnDOM), sortValue).map(it => renderItem(it));
     items.forEach(it => $(".left").append(it));
 
     // Клики по добавленным перелетам
     $(".cell___16tDr").click(onCellClick);
 
+    // Клики по трансферам
+    $(".button___trnsf").click(onTransfersClick);
 }
 
 function fractionToTime(fraction) {
