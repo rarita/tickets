@@ -177,11 +177,76 @@ function sortDataOn(data, condition) {
     return null; // не случится никогда
 }
 
+function itemFailedDBG(item, cause) {
+    console.log("Item failed on " + cause + ' check');
+    console.dir(item);
+}
+
+/**
+ * Для передачи в качестве параметра для filter
+ * @return true, если запись проходит по DOM-фильтру
+ * false - если не проходит
+ */
+function filterEachOnDOM(item) {
+    // direct flights
+    if (filt_data.direct && item.itin.length > 1) {
+        itemFailedDBG(item, 'direct flights');
+        return false;
+    }
+
+
+    // price range
+    if (item.totalPrice > filt_data.price.high || item.totalPrice < filt_data.price.low) {
+        itemFailedDBG(item, 'price range');
+        return false;
+    }
+
+    // departure time range
+    const dtime = item.itin[0].departureTime;
+    const dtimeMinutes = parseInt(dtime[3]) * 60 + parseInt(dtime[4]);
+    if (dtimeMinutes > filt_data.time.high * 10 || dtimeMinutes < filt_data.time.low * 10){
+        itemFailedDBG(item, 'departure time range');
+        return false;
+    }
+
+    // onboard time range
+    if (item.totalDuration > parseInt(filt_data.on_board.high) * 10 ||
+        item.totalDuration < parseInt(filt_data.on_board.low) * 10) {
+        itemFailedDBG(item, 'price range');
+        return false;
+    }
+
+    // travel types
+    if (!item.itin.every(it => filt_data.traveltypes.includes(it.type))) {
+        itemFailedDBG(item, 'available travel types');
+        return false;
+    }
+
+    return true;
+
+}
+
+/**
+ * Применяет к data значения DOM-фильтров,
+ * хранимые в filt_data и возвращает полученный массив перелетов.
+ */
+function filterDataOnDOM(data) {
+    return data;
+}
+
 /**
  * Фильтрует данные по состоянию объектов фильтров в DOM
  */
-function filterDataOnDOM() {
-    console.log($( "#price-slider" ).val())
+function applyDOMFilters() {
+    console.log("--- applying filters");
+
+    $(".cell___16tDr").remove();
+    const items = g_data.filter(filterEachOnDOM).map(it => renderItem(it));
+    items.forEach(it => $(".left").append(it));
+
+    // Клики по добавленным перелетам
+    $(".cell___16tDr").click(onCellClick);
+
 }
 
 function fractionToTime(fraction) {
