@@ -1,5 +1,6 @@
 // Данные из бэкэнда
 var g_data;
+var f_data = [];
 var filt_data = {}; // Глобал значения фильтров
 
 $(document).ready(function() {
@@ -123,17 +124,6 @@ function initControls() {
 
     // Сортировка
     $("#sort_by").on('change', function () {
-        /*
-        $(".cell___16tDr").remove();
-        const items = sortDataOn(g_data, this.value).map(it => renderItem(it));
-        items.forEach(it => $(".left").append(it));
-
-        // Клики по добавленным перелетам
-        $(".cell___16tDr").click(onCellClick);
-
-        // Клики по трансферам
-        $(".button___trnsf").click(onTransfersClick);
-         */
         applyDOMFilters();
     });
 
@@ -234,7 +224,7 @@ function filterEachOnDOM(item) {
     // onboard time range
     if (item.totalDuration > parseInt(filt_data.on_board.high) * 10 ||
         item.totalDuration < parseInt(filt_data.on_board.low) * 10) {
-        itemFailedDBG(item, 'price range');
+        itemFailedDBG(item, 'onboard time range');
         return false;
     }
 
@@ -265,7 +255,8 @@ function applyDOMFilters() {
     $(".cell___16tDr").remove();
 
     const sortValue = $("#sort_by").val();
-    const items = sortDataOn(g_data.filter(filterEachOnDOM), sortValue).map(it => renderItem(it));
+    f_data = sortDataOn(g_data.filter(filterEachOnDOM), sortValue);
+    const items = f_data.map(it => renderItem(it));
     items.forEach(it => $(".left").append(it));
 
     // Клики по добавленным перелетам
@@ -296,15 +287,19 @@ function setUpSearchResults(data) {
     data.forEach(d => {
         d.totalPrice = d.itin.reduce(priceReduce, 0);
 
-        const o_dt_minutes = d.itin[0].departureTime[3]*60 + d.itin[0].departureTime[4];
-        const o_at_minutes = d.itin[d.itin.length - 1].arrivalTime[3]*60 + d.itin[d.itin.length - 1].arrivalTime[4];
+        const dep_date = d.itin[0].departureTime;
+        const arr_date = d.itin[d.itin.length - 1].arrivalTime;
+
+        const o_dt_minutes = parseInt(dep_date[2])*60*24 + parseInt(dep_date[3])*60 + parseInt(dep_date[4]);
+        const o_at_minutes = parseInt(arr_date[2])*60*24 + parseInt(arr_date[3])*60 + parseInt(arr_date[4]);
         d.totalDuration = o_at_minutes - o_dt_minutes;
 
     });
     // Сохраняем дату
     g_data = data;
     // Рендерим элементы для всех айтемов и дефолтно сортируем
-    const renderedItems = sortDataOn(data, $("#sort_by").val()).map(it => renderItem(it));
+    f_data = sortDataOn(data, $("#sort_by").val());
+    const renderedItems = f_data.map(it => renderItem(it));
     console.dir(renderedItems); // Пока что так
     renderedItems.forEach(it => $(".left").append(it)); // И так
 
@@ -321,9 +316,9 @@ function onCellClick() {
     console.dir(idx);
     // make coords array
     coords = [];
-    coords.push([g_data[idx].src.longitude, g_data[idx].src.latitude]);
-    for (var i = 0; i < g_data[idx].itin.length; i++) {
-        const itinerary = g_data[idx].itin[i];
+    coords.push([f_data[idx].src.longitude, f_data[idx].src.latitude]);
+    for (var i = 0; i < f_data[idx].itin.length; i++) {
+        const itinerary = f_data[idx].itin[i];
         const dest = JSON.parse(JSON.stringify(itinerary)).destination;
 
         const long = dest["longitude"];
@@ -344,8 +339,8 @@ function tdWithText(text) {
 // в минутах
 // dt2 > dt1
 function durationBetween(dt1, dt2) {
-    const o_dt_minutes = parseInt(dt1[3]*60) + parseInt(dt1[4]);
-    const o_at_minutes = parseInt(dt2[3]*60) + parseInt(dt2[4]);
+    const o_dt_minutes = parseInt(dt1[2]*60*24) + parseInt(dt1[3]*60) + parseInt(dt1[4]);
+    const o_at_minutes = parseInt(dt2[2]*60*24) + parseInt(dt2[3]*60) + parseInt(dt2[4]);
     return o_at_minutes - o_dt_minutes;
 }
 
@@ -399,7 +394,7 @@ function onTransfersClick() {
                 ttr.append(jQuery('<td/>'));
                 ttr.append(dashedTD.clone());
                 // Считаем затраченное время
-                const tduration = durationBetween(itin[i].departureTime, itin[i].arrivalTime);
+                const tduration = durationBetween(itin[i - 1].arrivalTime, itin[i].departureTime);
 
                 var ttext = "Пересадка ";
                 if (tduration < 59)

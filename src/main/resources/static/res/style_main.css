@@ -113,27 +113,34 @@
     padding-top: 8px;
     outline: 0;
 }
-.picn{
+
+.popular-directions-container {
+    position: absolute;
+    top: 530px;
+    left: 170px;
+}
+
+.picn {
     position: absolute;
     top: 530px; left: 170px;
 }
-.picm{
+.picm {
     position: absolute;
     top: 530px; left: 370px;
 }
-.picl{
+.picl {
     position: absolute;
     top: 530px; left: 570px;
 }
-.picp{
+.picp {
     position: absolute;
     top: 530px; left: 770px;
 }
-.picb{
+.picb {
     position: absolute;
     top: 530px; left: 970px;
 }
-.pict{
+.pict {
     position: absolute;
     top: 530px; left: 1170px;
 }
